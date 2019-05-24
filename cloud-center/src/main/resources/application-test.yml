@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: test #对应maven多环境配置 打包：clean install -Ptest
+  security:
+    basic:
+      enabled: true
+    user:
+      name: admin             #配置注册中心账户
+      password: 123456        #配置注册中心密码
+
+server:
+  port: 8500
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/  #服务注册中心地址，http://账号:密码@主机名称:端口/Eureka/
