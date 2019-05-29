@@ -5,10 +5,10 @@ spring:
     name: cloud-center  #服务名称
 
 server:
-  port: 8600 #默认端口，子配置端口会覆盖此端口
-  enable-self-preservation: false #是否开启自我保护模式
-  eviction-interval-timer-in-ms: 5000 #间隔多久去拉取服务注册信息, 清理无效节点,默认60*1000毫秒,即60秒
-  #renewalPercentThreshold: 0.5  #设置心跳正常的阀值，默认为1，测试时可以调低
+  port: 8600    #默认端口，子配置端口会覆盖此端口
+  enable-self-preservation: false    #是否开启自我保护模式
+  eviction-interval-timer-in-ms: 5000    #间隔多久去拉取服务注册信息, 清理无效节点,默认60*1000毫秒,即60秒
+  #renewalPercentThreshold: 0.5    #设置心跳正常的阀值，默认为1，测试时可以调低
 
 eureka:
   client:

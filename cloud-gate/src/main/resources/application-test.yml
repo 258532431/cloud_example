@@ -7,7 +7,7 @@ spring:
     active: test #对应maven多环境配置 打包：clean install -Pdev
   security:
     basic:
-      enabled: true
+      enabled: false
     user:
       name: admin             #配置注册中心账户
       password: 123456        #配置注册中心密码

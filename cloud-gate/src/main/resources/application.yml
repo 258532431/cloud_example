@@ -2,13 +2,14 @@ spring:
   profiles:
     active: #spring.profiles.active#
   application:
-    name: cloud-gate  #��������
+    name: cloud-gate  #服务名称
 
 server:
-  port: 8610 #Ĭ�϶˿ڣ������ö˿ڻḲ�Ǵ˶˿�
+  port: 8610 #默认端口，子配置端口会覆盖此端口
 
 eureka:
   instance:
-    statusPageUrlPath: /info
-    healthCheckUrlPath: /health    #�������
-    leaseRenewalIntervalInSeconds: 5    #����������server�˵�Ƶ��, server��5��û���յ�client����������ժ����instance
+    statusPageUrlPath: /info         #获取此实例状态页的URL路径，然后构造出主机名，安全端口等，默认为/info
+    healthCheckUrlPath: /health      #获取此实例的相对健康检查URL路径，默认为/health
+    lease-renewal-interval-in-seconds: 5   #每间隔5s，向服务端发送一次心跳，证明自己依然存活
+    lease-expiration-duration-in-seconds: 5   #告诉服务端，如果我5s之内没有给你发心跳，就代表我死了，将我踢出掉。
