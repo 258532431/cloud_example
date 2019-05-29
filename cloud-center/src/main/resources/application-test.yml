@@ -1,3 +1,7 @@
+#测试环境
+server:
+  port: 8500
+
 spring:
   profiles:
     active: test #对应maven多环境配置 打包：clean install -Ptest
@@ -6,10 +10,7 @@ spring:
       enabled: true
     user:
       name: admin             #配置注册中心账户
-      password: 123456        #配置注册中心密码
-
-server:
-  port: 8500
+      password: 94d8b47a-cd18-4028-9357-be9f2f7b2148        #配置注册中心密码
 
 eureka:
   instance:
