@@ -15,7 +15,7 @@ spring:
 eureka:
   port: 8500
   instance:
-    hostname: 127.0.0.1              #服务的IP地址
+    hostname: 127.0.0.1              #设置当前实例的主机名称
     prefer-ip-address: true         #是否将IP注册到服务注册中心
   client:
     serviceUrl:
