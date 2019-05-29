@@ -5,5 +5,5 @@
 4、maven的settings.xml文件在项目根目录
 
 # git忽略提交target文件夹
-git rm -r --cached target
-git push origin master
+1、git rm -r --cached target   
+2、git push origin master
