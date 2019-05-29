@@ -1,0 +1,20 @@
+#生产环境
+server:
+  port: 8600
+
+spring:
+  profiles:
+    active: prod #对应maven多环境配置 打包：clean install -Pprod
+  security:
+    basic:
+      enabled: true
+    user:
+      name: admin             #配置注册中心账户
+      password: 94d8b47a-cd18-4028-9357-be9f2f7b2148        #配置注册中心密码
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/  #服务注册中心地址，http://账号:密码@主机名称:端口/Eureka/
