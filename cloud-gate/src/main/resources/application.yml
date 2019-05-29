@@ -6,3 +6,9 @@ spring:
 
 server:
   port: 8610 #默认端口，子配置端口会覆盖此端口
+
+eureka:
+  instance:
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health    #健康检查
+    leaseRenewalIntervalInSeconds: 5    #发送心跳给server端的频率, server端5秒没有收到client的心跳，则将摘除该instance
