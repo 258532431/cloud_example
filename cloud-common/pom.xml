@@ -12,7 +12,7 @@
     <artifactId>cloud-common</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>cloud-common</name>
-    <description>Demo project for Spring Boot</description>
+    <description>公共组件项目</description>
 
     <!-- 编码格式、jdk版本 -->
     <properties>

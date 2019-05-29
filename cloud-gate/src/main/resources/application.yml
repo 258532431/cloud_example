@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: #spring.profiles.active#
+  application:
+    name: cloud-gate  #服务名称
+
+server:
+  port: 8610 #默认端口，子配置端口会覆盖此端口

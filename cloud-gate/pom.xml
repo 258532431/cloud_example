@@ -9,11 +9,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.cloud.center</groupId>
-    <artifactId>cloud-center</artifactId>
+    <groupId>com.cloud.gate</groupId>
+    <artifactId>cloud-gate</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>cloud-center</name>
-    <description>注册中心</description>
+    <name>cloud-gate</name>
+    <description>网关路由</description>
 
     <!-- 编码格式、jdk版本 -->
     <properties>
@@ -28,26 +28,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--Eureka服务端模块-->
+        <!-- zuul路由 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
-        <!-- 健康监控 -->
+        <!-- Eureka客户端模块 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <!-- HTTP basic用户认证模块 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <!-- tomcat支持 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
         </dependency>
         <!-- 热部署 -->
         <dependency>
@@ -55,6 +49,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

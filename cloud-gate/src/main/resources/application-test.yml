@@ -1,0 +1,23 @@
+#测试环境
+server:
+  port: 8510
+
+spring:
+  profiles:
+    active: test #对应maven多环境配置 打包：clean install -Pdev
+  security:
+    basic:
+      enabled: true
+    user:
+      name: admin             #配置注册中心账户
+      password: 123456        #配置注册中心密码
+
+eureka:
+  port: 8500
+  instance:
+    hostname: 127.0.0.1              #服务的IP地址
+    prefer-ip-address: true         #是否将IP注册到服务注册中心
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${eureka.port}/eureka/  #服务注册中心地址
+
