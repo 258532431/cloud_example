@@ -7,7 +7,7 @@ spring:
     active: prod #对应maven多环境配置 打包：clean install -Pdev
   security:
     basic:
-      enabled: false
+      path: /actuator
     user:
       name: admin             #配置注册中心账户
       password: 123456        #配置注册中心密码
@@ -17,6 +17,8 @@ eureka:
   instance:
     hostname: 127.0.0.1              #设置当前实例的主机名称
     prefer-ip-address: true         #是否将IP注册到服务注册中心
+    status-page-url: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${eureka.port}/actuator/info         #状态页面的URL，绝对路径
+    health-check-url: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${eureka.port}/actuator/health      #健康检查页面的URL，绝对路径
   client:
     serviceUrl:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${eureka.port}/eureka/  #服务注册中心地址
