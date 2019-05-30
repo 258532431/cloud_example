@@ -9,7 +9,7 @@ server:
 
 eureka:
   instance:
-    status-page-url-path: /info         #获取此实例状态页的URL路径，然后构造出主机名，安全端口等，默认为/info
-    health-check-url-path: /health      #获取此实例的相对健康检查URL路径，默认为/health
-    lease-renewal-interval-in-seconds: 5   #每间隔5s，向服务端发送一次心跳，证明自己依然存活
-    lease-expiration-duration-in-seconds: 5   #告诉服务端，如果我5s之内没有给你发心跳，就代表我死了，将我踢出掉。
+    status-page-url-path: /info         #状态页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
+    health-check-url-path: /health      #健康检查页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
+    lease-renewal-interval-in-seconds: 5   #定义服务续约任务（心跳）的调用间隔，单位：秒
+    lease-expiration-duration-in-seconds: 7   #定义服务失效的时间，单位：秒

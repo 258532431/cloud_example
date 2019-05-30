@@ -7,10 +7,13 @@ spring:
 server:
   port: 8600    #默认端口，子配置端口会覆盖此端口
   enable-self-preservation: false    #是否开启自我保护模式
-  eviction-interval-timer-in-ms: 5000    #间隔多久去拉取服务注册信息, 清理无效节点,默认60*1000毫秒,即60秒
-  #renewalPercentThreshold: 0.5    #设置心跳正常的阀值，默认为1，测试时可以调低
+  eviction-interval-timer-in-ms: 5000    #定时移除已失效的服务信息（单位：毫秒，默认60000毫秒）
+  #renewal-percent-threshold: 0.5    #设置心跳正常的阀值，默认为1，测试时可以调低
 
 eureka:
   client:
-    registerWithEureka: false #禁止注册自身
-    fetchRegistry: false  #因为该服务没有注册到其他注册中心，所以关闭从注册中心拉取服务列表, 如果是服务注册中心集群，需要开启，开启就是去掉该配置，采用默认配置即可
+    register-with-eureka: false   #禁止注册自身
+    fetch-registery: false   #因为该服务没有注册到其他注册中心，所以关闭从注册中心拉取服务列表, 如果是服务注册中心集群，需要开启
+    #registery-fetch-interval-seconds: 30   #从Eureka服务器端获取注册信息的间隔时间，单位：秒，默认30
+    #eureka-server-total-connections: 200   #从Eureka 客户端到所有Eureka服务端的连接总数，默认200
+    #eureka-server-total-connections-per-host: 50  #从Eureka客户端到每个Eureka服务主机的连接总数，默认50
