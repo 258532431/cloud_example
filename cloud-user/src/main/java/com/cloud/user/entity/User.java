@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
+@Data   //get、set方法等
+@NoArgsConstructor //无参构造方法
 @ApiModel(value = "用户")
 public class User implements Serializable {
 
