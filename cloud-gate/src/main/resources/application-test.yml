@@ -23,3 +23,5 @@ eureka:
     serviceUrl:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${eureka.port}/eureka/  #服务注册中心地址
 
+swagger:
+  enabled: true   #swagger开关

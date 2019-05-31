@@ -7,7 +7,7 @@ spring:
     active: dev #对应maven多环境配置 打包：clean install -Pdev
   security:
     basic:
-      path: /actuator   #多个的话以逗号分隔，默认为[/**]
+      path: /actuator,/swagger-ui.html   #多个的话以逗号分隔，默认为[/**]
     user:
       name: admin             #配置注册中心账户
       password: 123456        #配置注册中心密码
@@ -22,3 +22,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${eureka.port}/eureka/  #服务注册中心地址
+
+swagger:
+  enabled: true   #swagger开关
