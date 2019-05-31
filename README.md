@@ -8,7 +8,7 @@
 1、git rm -r --cached target   
 2、git push origin master
 
-#lombock
+#lombock说明    
 @Data 注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了equals、canEqual、hashCode、toString 方法    
 @Setter ：注解在属性上；为属性提供 setting 方法    
 @Getter ：注解在属性上；为属性提供 getting 方法    
