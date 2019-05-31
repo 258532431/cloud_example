@@ -32,7 +32,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("用户服务API管理")
                 .description("用户服务API管理")
-                .termsOfServiceUrl("258532431@qq.com")
+                .termsOfServiceUrl("http://www.baidu.com")
                 .contact("wilson")
                 .version("1.0")
                 .build();

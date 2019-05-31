@@ -13,3 +13,13 @@ eureka:
     #health-check-url-path: /actuator/health      #健康检查页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
     lease-renewal-interval-in-seconds: 5   #定义服务续约任务（心跳）的调用间隔，单位：秒
     lease-expiration-duration-in-seconds: 10   #定义服务失效的时间，单位：秒
+
+#ZUUL反向代理设置
+zuul:
+  routes:
+    gate-api:  #gate服务路由名称，自定义
+      path: /gate/**
+      service-id: cloud-gate   #服务注册到eureka的服务名
+    user-api:  #user服务路由名称，自定义
+      path: /user/**
+      service-id: cloud-user

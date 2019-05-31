@@ -42,7 +42,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("授权API管理")
                 .description("授权API管理")
-                .termsOfServiceUrl("http://localhost:8081")
+                .termsOfServiceUrl("http://www.baidu.com")
                 .contact(new Contact("wilson", "", "258532431@qq.com"))
                 .version("1.0")
                 .build();

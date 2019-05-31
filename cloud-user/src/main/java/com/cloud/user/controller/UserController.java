@@ -29,10 +29,10 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "根据ID获取用户", notes = "测试")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "Id", dataType = "Long", paramType = "query", required = true)
+            @ApiImplicitParam(name = "id", value = "Id", dataType = "String", paramType = "query", required = true)
     })
-    public User get(Long id) {
-        return this.userService.selectByPrimaryKey(id);
+    public User get(String id) {
+        return this.userService.selectByPrimaryKey(Long.valueOf(id));
     }
 
 }
