@@ -7,7 +7,7 @@ spring:
     active: dev #对应maven多环境配置 打包：clean install -Pdev
   security:
     basic:
-      path: /actuator,/swagger-ui.html   #多个的话以逗号分隔，默认为[/**]
+      path: /actuator   #多个的话以逗号分隔，默认为[/**]
     user:
       name: admin             #配置注册中心账户
       password: 123456        #配置注册中心密码

@@ -40,8 +40,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("调试授权API管理")
-                .description("调试授权API管理")
+                .title("授权API管理")
+                .description("授权API管理")
                 .termsOfServiceUrl("http://localhost:8081")
                 .contact(new Contact("wilson", "", "258532431@qq.com"))
                 .version("1.0")
