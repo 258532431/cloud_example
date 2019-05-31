@@ -23,6 +23,17 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <dependencies>
+        <!-- 自动生成get、set方法，日志引用等 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- 此标签可以实现统一版本管理，子项目引入此标签里面的jar不需加版本号 -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -38,28 +49,22 @@
                 <artifactId>fastjson</artifactId>
                 <version>1.2.9</version>
             </dependency>
-            <!-- 数据库连接池 -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>1.1.9</version>
-            </dependency>
+            <!-- 常用工具类 -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.5</version>
             </dependency>
-            <!-- feign跨服务接口调用 -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-feign</artifactId>
-                <version>2.0.0.M2</version>
-            </dependency>
             <!-- swagger api展示 -->
             <dependency>
-                <groupId>com.battcn</groupId>
-                <artifactId>spring-boot-starter-swagger</artifactId>
-                <version>1.4.4-RELEASE</version>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>2.9.0</version>
             </dependency>
             <!-- 分页插件 -->
             <dependency>
@@ -67,14 +72,6 @@
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>1.2.5</version>
             </dependency>
-            <!-- 自动生成get、set方法，日志引用等 -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.8</version>
-                <scope>provided</scope>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 

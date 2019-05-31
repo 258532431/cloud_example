@@ -5,6 +5,13 @@ server:
 spring:
   profiles:
     active: dev #对应maven多环境配置 打包：clean install -Pdev
+  datasource:
+    name: test
+    url: jdbc:mysql://127.0.0.1:3306/cloud_example_user?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource   # 使用druid数据源
+    driver-class-name: com.mysql.jdbc.Driver
   security:
     basic:
       path: /actuator   #多个的话以逗号分隔，默认为[/**]

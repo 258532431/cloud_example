@@ -13,3 +13,7 @@ eureka:
     #health-check-url-path: /actuator/health      #健康检查页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
     lease-renewal-interval-in-seconds: 5   #定义服务续约任务（心跳）的调用间隔，单位：秒
     lease-expiration-duration-in-seconds: 10   #定义服务失效的时间，单位：秒
+
+# 配置数据库映射文件路径
+mybatis:
+  mapper-locations: "classpath*:mapper/*.xml"
