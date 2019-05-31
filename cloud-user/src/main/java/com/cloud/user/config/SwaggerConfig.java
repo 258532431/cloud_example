@@ -30,8 +30,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("用户服务API管理")
-                .description("用户服务API管理")
+                .title("用户服务API")
+                .description("用户服务API")
                 .termsOfServiceUrl("http://www.baidu.com")
                 .contact("wilson")
                 .version("1.0")

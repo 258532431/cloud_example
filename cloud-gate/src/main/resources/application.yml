@@ -16,6 +16,9 @@ eureka:
 
 #ZUUL反向代理设置
 zuul:
+  host:
+    socket-timeout-millis: 600000   #超时设置
+    connect-timeout-millis: 600000  #超时设置
   routes:
     gate-api:  #gate服务路由名称，自定义
       path: /gate/**

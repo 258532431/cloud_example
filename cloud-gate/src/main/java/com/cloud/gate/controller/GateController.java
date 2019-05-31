@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @author: yangchenglong
  * @create: 2019-05-31 17:52
  */
-@Api(tags = "网关")
 @RestController
 @RequestMapping("/gate")
+@Api(tags = "网关", description = "网关授权API调用")
 public class GateController {
 
     @RequestMapping(value = "/acessApi", method = RequestMethod.POST)

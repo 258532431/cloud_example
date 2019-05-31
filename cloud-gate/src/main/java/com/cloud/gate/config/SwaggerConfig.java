@@ -12,7 +12,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
@@ -40,18 +39,18 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("授权API管理")
-                .description("授权API管理")
+                .title("网关授权API")
+                .description("网关授权API")
                 .termsOfServiceUrl("http://www.baidu.com")
                 .contact(new Contact("wilson", "", "258532431@qq.com"))
                 .version("1.0")
                 .build();
     }
 
-    @Bean
+    /*@Bean
     UiConfiguration uiConfig() {
         return new UiConfiguration(null, "list", "alpha", "schema",
                 UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS, false, true, 60000L);
-    }
+    }*/
 
 }

@@ -20,8 +20,8 @@ public class SwaggerDocumentConfig implements SwaggerResourcesProvider {
     @Override
     public List<SwaggerResource> get() {
         List resources = new ArrayList<>();
-        resources.add(swaggerResource("授权api接口", "/gate/v2/api-docs", "1.0"));
-        resources.add(swaggerResource("用户api接口", "/user/rest/api/doc", "1.0"));
+        resources.add(swaggerResource("网关授权API", "/gate/v2/api-docs", "1.0"));
+        resources.add(swaggerResource("用户服务API", "/user/rest/api/doc", "1.0"));
         /* 自动映射API
         List<SwaggerResource> resources = new ArrayList<>();
         List<Route> routes = routeLocator.getRoutes();
