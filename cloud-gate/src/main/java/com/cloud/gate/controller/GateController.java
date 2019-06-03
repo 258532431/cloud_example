@@ -22,9 +22,9 @@ public class GateController {
     @RequestMapping(value = "/acessApi", method = RequestMethod.POST)
     @ApiOperation(value = "授权API调试", notes = "密码通过RSA加密传输")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "授权码", value = "authCode", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "用户名", value = "username", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "密码", value = "password", dataType = "String", paramType = "query", required = true)
+            @ApiImplicitParam(name = "authCode", value = "授权码", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
     })
     public void acessApi(String authCode, String username, String password) {
         System.out.println("acessApi : "+authCode+", "+username+", "+password);
