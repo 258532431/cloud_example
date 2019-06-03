@@ -11,7 +11,7 @@ spring:
       password: 123456        #配置注册中心密码
 
 #不需要拦截的路径，多个的话以逗号分隔
-permit-path: /actuator/**,/swagger-resources/**,/webjars/**,/v2/**,/swagger-ui.html/**
+permit-path: permit-path: /actuator/**,/swagger-resources/**,/webjars/**,/**/v2/**,/**/rest/api/doc/**,/swagger-ui.html/**
 
 eureka:
   port: 8500
