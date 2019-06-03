@@ -18,23 +18,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${permit-path}")
-    private String permitPath;
+    private String permitPath;//不需要校验的路径处理
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-            .formLogin();
+        http.csrf().disable();
+        this.permitAll(http);
     }
 
     //不需要校验的路径处理
     private void permitAll(HttpSecurity http) throws Exception {
         if(!StringUtils.isBlank(permitPath)){
-            for(String url : permitPath.split(",")){
-                http.authorizeRequests().antMatchers(url).permitAll();
-            }
             http.authorizeRequests()
-                .anyRequest().authenticated()
-                .and();
+                    .antMatchers(permitPath.split(",")).permitAll()
+                    .anyRequest().authenticated();
         }
     }
 
