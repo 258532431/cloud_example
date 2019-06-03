@@ -6,11 +6,12 @@ spring:
   profiles:
     active: test #对应maven多环境配置 打包：clean install -Pdev
   security:
-    basic:
-      path: /actuator   #多个的话以逗号分隔，默认为[/**]
     user:
       name: admin             #配置注册中心账户
       password: 123456        #配置注册中心密码
+
+#不需要拦截的路径，多个的话以逗号分隔
+permit-path: /actuator,/swagger-resources/**,/webjars/**,/v2/**,/swagger-ui.html/**
 
 eureka:
   port: 8500
