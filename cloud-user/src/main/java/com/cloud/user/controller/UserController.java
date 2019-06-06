@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,10 +30,10 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "根据ID获取用户", notes = "测试")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键Id", dataType = "String", paramType = "query", required = true)
+            @ApiImplicitParam(name = "id", value = "主键Id", dataType = "Long", paramType = "path", required = true)
     })
-    public User get(String id) {
-        return this.userService.selectByPrimaryKey(Long.valueOf(id));
+    public User get(@PathVariable Long id) {
+        return this.userService.selectByPrimaryKey(id);
     }
 
 }
