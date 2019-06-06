@@ -13,6 +13,7 @@ public class CloudCenterApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CloudCenterApplication.class, args);
+
     }
 
     @EnableWebSecurity
