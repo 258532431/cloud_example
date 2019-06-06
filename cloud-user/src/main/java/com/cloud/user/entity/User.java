@@ -2,6 +2,7 @@ package com.cloud.user.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 
 @Data   //get、set方法等
 @NoArgsConstructor //无参构造方法
+@AllArgsConstructor //有参构造方法
 @ApiModel(value = "用户")
 public class User implements Serializable {
 
@@ -29,7 +31,7 @@ public class User implements Serializable {
     private Date createTime;
 
     @ApiModelProperty(value = "状态 0-正常 1-冻结")
-    private Byte status;
+    private Integer status;
 
     @ApiModelProperty(value = "备注")
     private String remark;

@@ -12,4 +12,6 @@ public interface UserService {
 
     User selectByPrimaryKey(Long id);
 
+    int insertSelective(User user);
+
 }

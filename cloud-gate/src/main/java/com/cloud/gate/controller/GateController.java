@@ -15,19 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @create: 2019-05-31 17:52
  */
 @RestController
-//@RequestMapping("/gate")
-@Api(tags = "网关", description = "网关授权API调用")
+@RequestMapping("/base")
+@Api(tags = "网关", description = "网关授权rest接口")
 public class GateController {
 
-    @RequestMapping(value = "/acessApi", method = RequestMethod.POST)
+    @RequestMapping(value = "/acess", method = RequestMethod.POST)
     @ApiOperation(value = "授权API调试", notes = "密码通过RSA加密传输")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "authCode", value = "授权码", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
     })
-    public void acessApi(String authCode, String username, String password) {
-        System.out.println("acessApi : "+authCode+", "+username+", "+password);
+    public void acess(String authCode, String username, String password) {
+        System.out.println("acess : "+authCode+", "+username+", "+password);
     }
 
 }

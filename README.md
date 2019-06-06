@@ -4,6 +4,9 @@
 3、运行项目需要安装redis、rabbitmq  
 4、maven的settings.xml文件在项目根目录  
 
+# 跨域请求       
+注解：@CrossOrigin
+
 # git忽略提交target文件夹
 1、git rm -r --cached target   
 2、git push origin master

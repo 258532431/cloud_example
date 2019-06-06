@@ -6,6 +6,8 @@ import com.cloud.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * @program: cloud_example
@@ -22,5 +24,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User selectByPrimaryKey(Long id) {
         return this.userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int insertSelective(User user) {
+        user.setUserCode(UUID.randomUUID().toString());
+        user.setCreateTime(new Date());
+        user.setStatus(0);
+        return this.userMapper.insertSelective(user);
     }
 }
