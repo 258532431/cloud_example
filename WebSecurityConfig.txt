@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * @program: cloud_example
- * @description: 配置Security拦截路径
+ * @description: 配置Security拦截路径 - 备份
  * @author: yangchenglong
  * @create: 2019-05-31 21:26
  */
