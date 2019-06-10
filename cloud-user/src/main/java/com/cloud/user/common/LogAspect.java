@@ -2,10 +2,12 @@ package com.cloud.user.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -64,10 +66,14 @@ public class LogAspect {
             String targetClassName = joinPoint.getTarget().getClass().getName();//目标类名
             String targetMethodName = joinPoint.getSignature().getName();//目标方法名
 
+            Signature signature = joinPoint.getSignature();
+            MethodSignature methodSignature = (MethodSignature) signature;
+            //2.最关键的一步:通过这获取到方法的所有参数名称的字符串数组
+            String[] parameterNames = methodSignature.getParameterNames();//目标参数
             Object[] arguments = joinPoint.getArgs();//目标参数值
             StringBuilder params = new StringBuilder();
-            for(Object arg : arguments){
-                params.append(arg);
+            for(int i=0; i<parameterNames.length; i++){
+                params.append(parameterNames[i]+"="+arguments[i]);
                 params.append("&");
             }
             if(params.length()>0){
