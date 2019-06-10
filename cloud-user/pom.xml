@@ -94,6 +94,12 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+        <!--引用AOP注解功能开始-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--引用AOP注解功能结束-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
