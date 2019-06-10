@@ -1,6 +1,5 @@
 package com.cloud.user.service.impl;
 
-import com.cloud.user.common.LogBiz;
 import com.cloud.user.entity.User;
 import com.cloud.user.mapper.UserMapper;
 import com.cloud.user.service.UserService;
@@ -22,13 +21,11 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
-    @LogBiz(operator = "风叔叔", operatingModule = LogBiz.OperatingModule.USER)
     @Override
     public User selectByPrimaryKey(Long id) {
         return this.userMapper.selectByPrimaryKey(id);
     }
 
-    @LogBiz(operator = "风叔叔", operatingModule = LogBiz.OperatingModule.USER)
     @Override
     public int insertSelective(User user) {
         user.setUserCode(UUID.randomUUID().toString());
@@ -36,4 +33,5 @@ public class UserServiceImpl implements UserService {
         user.setStatus(0);
         return this.userMapper.insertSelective(user);
     }
+
 }

@@ -26,6 +26,12 @@ public @interface LogBiz {
 
     /**
      * @Author: yangchenglong on 2019/6/10
+     * @Description: 操作描述
+     */
+    public String description();
+
+    /**
+     * @Author: yangchenglong on 2019/6/10
      * @Description: 日志级别
      */
     public LogType level() default LogType.INFO;
@@ -35,7 +41,7 @@ public @interface LogBiz {
     }
 
     public enum OperatingModule{
-        USER("user", "用户");
+        USER("user", "用户"), ORDER("order", "订单");
 
         private final String code;
         private final String name;

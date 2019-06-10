@@ -44,7 +44,7 @@ public class LogAspect {
      */
     @Before("entryPoint()")
     public void doBefore(JoinPoint joinPoint){
-        log.info("------- 在目标调用前处理 ---------");
+        log.info("------- 在目标调用前处理 start ---------");
         try {
 
         } catch (Exception e) {
@@ -61,16 +61,14 @@ public class LogAspect {
      */
     @After("entryPoint()")
     public void doAfter(JoinPoint joinPoint){
-        log.info("------- 在目标调用后处理 ---------");
+        log.info("------- 在目标调用后处理 start ---------");
         try {
             String targetClassName = joinPoint.getTarget().getClass().getName();//目标类名
-            String targetMethodName = joinPoint.getSignature().getName();//目标方法名
-
-            Signature signature = joinPoint.getSignature();
+            Signature signature = joinPoint.getSignature();//获取封装了署名信息的对象,在该对象中可以获取到目标方法名,所属类的Class等信息
+            String targetMethodName = signature.getName();//目标方法名
             MethodSignature methodSignature = (MethodSignature) signature;
-            //2.最关键的一步:通过这获取到方法的所有参数名称的字符串数组
-            String[] parameterNames = methodSignature.getParameterNames();//目标参数
-            Object[] arguments = joinPoint.getArgs();//目标参数值
+            String[] parameterNames = methodSignature.getParameterNames();//目标参数名列表
+            Object[] arguments = joinPoint.getArgs();//目标参数值列表
             StringBuilder params = new StringBuilder();
             for(int i=0; i<parameterNames.length; i++){
                 params.append(parameterNames[i]+"="+arguments[i]);
@@ -84,20 +82,21 @@ public class LogAspect {
             Method[] methods = targetClass.getMethods();//目标类方法
             String operator = "";//操作人
             LogBiz.OperatingModule operatingModule = null;//操作模块
+            String description = "";//操作描述
             LogBiz.LogType logType = null;//日志级别
             for(Method method : methods){
                 if(method.getName().equals(targetMethodName)){
-                    Class<?>[] clazzs = method.getParameterTypes();
-                    if (clazzs.length == arguments.length) {
+                    if(method.isAnnotationPresent(LogBiz.class)){
                         operator = method.getAnnotation(LogBiz.class).operator();// 操作人
                         operatingModule = method.getAnnotation(LogBiz.class).operatingModule();// 操作模块
+                        description = method.getAnnotation(LogBiz.class).description();// 操作描述
                         logType = method.getAnnotation(LogBiz.class).level();// 日志级别
                     }
                 }
             }
 
             log.info("执行 目标类名："+targetClassName+", 目标方法名："+targetMethodName+", 目标参数值："+params.toString());
-            log.info("业务 操作人："+operator+", 操作模块："+operatingModule.getName()+", 日志级别："+logType.name());
+            log.info("业务 操作人："+operator+", 操作模块："+operatingModule.getName()+", 操作描述："+description+", 日志级别："+logType.name());
         } catch (Exception e) {
             log.error("在目标调用后处理异常：", e);
         }
