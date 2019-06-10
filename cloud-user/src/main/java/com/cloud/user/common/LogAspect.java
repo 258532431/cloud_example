@@ -87,10 +87,11 @@ public class LogAspect {
             for(Method method : methods){
                 if(method.getName().equals(targetMethodName)){
                     if(method.isAnnotationPresent(LogBiz.class)){
-                        operator = method.getAnnotation(LogBiz.class).operator();// 操作人
-                        operatingModule = method.getAnnotation(LogBiz.class).operatingModule();// 操作模块
-                        description = method.getAnnotation(LogBiz.class).description();// 操作描述
-                        logType = method.getAnnotation(LogBiz.class).level();// 日志级别
+                        LogBiz logBiz = method.getAnnotation(LogBiz.class);
+                        operator = logBiz.operator();// 操作人
+                        operatingModule = logBiz.operatingModule();// 操作模块
+                        description = logBiz.description();// 操作描述
+                        logType = logBiz.level();// 日志级别
                     }
                 }
             }
