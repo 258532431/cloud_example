@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,7 @@ public class GateController {
             @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
     })
-    public void acess(HttpServletRequest request, String authCode, String username, String password) {
+    public void acess(HttpServletRequest request, @RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
         System.out.println("acess : "+authCode+", "+username+", "+password);
 
         HttpSession session = request.getSession();
