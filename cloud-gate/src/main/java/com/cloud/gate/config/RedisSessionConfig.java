@@ -16,7 +16,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * @create: 2019-06-11 15:29
  */
 @Configuration
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60)  //启用redis session，设置session过期时间，默认1800秒，注意这个时间redis会缓存
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 3600)  //启用redis session，设置session过期时间，默认1800秒，注意这个时间redis会缓存
 public class RedisSessionConfig {
 
     @Value("${spring.redis.host}")
