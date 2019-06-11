@@ -22,3 +22,13 @@ mybatis:
 logging:
   level:
     com.cloud: DEBUG
+
+# 跨域请求配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"

@@ -53,6 +53,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>-->
+        <!-- redis支持 -->
+        <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-data-redis</artifactId>
+         </dependency>
+        <!-- 分布式session -->
+         <dependency>
+             <groupId>org.springframework.session</groupId>
+             <artifactId>spring-session-data-redis</artifactId>
+         </dependency>
+        <!-- 公共资源池。我们可以根据它来快速的建立一个自己的对象池 -->
+        <dependency>
+             <groupId>org.apache.commons</groupId>
+             <artifactId>commons-pool2</artifactId>
+         </dependency>
         <!-- swagger api展示 -->
         <dependency>
             <groupId>io.springfox</groupId>

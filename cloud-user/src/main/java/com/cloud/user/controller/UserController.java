@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,13 @@ public class UserController extends BaseController{
 
     @Resource
     private UserService userService;
+
+    @RequestMapping(value = "/getSessionUser", method = RequestMethod.GET)
+    @ApiOperation(value = "获取当前登录用户", notes = "")
+    public void getSessionUser(){
+        HttpSession session = request.getSession();
+        System.out.println("UserController session : "+session.getAttribute("authCode")+", "+session.getAttribute("username"));
+    }
 
     @LogBiz(operator = "操作人", operatingModule = LogBiz.OperatingModule.USER, description = "操作描述")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
