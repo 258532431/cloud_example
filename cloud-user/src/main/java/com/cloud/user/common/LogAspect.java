@@ -78,8 +78,8 @@ public class LogAspect {
                 params.replace(params.lastIndexOf("&"), params.length(), "");
             }
 
-            Class<?> targetClass = Class.forName(targetClassName);//目标类
-            Method[] methods = targetClass.getMethods();//目标类方法
+            Class<?> targetClass = Class.forName(targetClassName);//创建目标类对象
+            Method[] methods = targetClass.getMethods();//目标类方法集合
             String operator = "";//操作人
             LogBiz.OperatingModule operatingModule = null;//操作模块
             String description = "";//操作描述
