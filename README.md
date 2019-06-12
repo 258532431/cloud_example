@@ -27,3 +27,6 @@
 @toString：注解在类上；为类提供toString方法（可以添加排除和依赖）；      
 官方文档https://projectlombok.org/features/index.html
 
+#  spring redis session 问题      
+前端使用vue axios 进行ajax请求需配置：        
+axios.defaults.withCredentials = true   //解决跨域造成的每次sessionId不一样     
