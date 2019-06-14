@@ -1,5 +1,7 @@
 package com.cloud.gate.controller;
 
+import com.cloud.gate.entiy.User;
+import com.cloud.gate.feign.UserFeign;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +25,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/base")
 @Api(tags = "网关", description = "网关授权rest接口")
 public class GateController {
+
+    @Resource
+    private UserFeign userFeign;
 
     @RequestMapping(value = "/acess", method = RequestMethod.POST)
     @ApiOperation(value = "授权API调试", notes = "密码通过RSA加密传输")
@@ -38,6 +44,25 @@ public class GateController {
         session.setAttribute("username", username);
 
         System.out.println("session : "+session.getAttribute("authCode")+", "+session.getAttribute("username"));
+    }
+
+    @RequestMapping(value = "/debugLogin", method = RequestMethod.POST)
+    @ApiOperation(value = "调试用登录", notes = "密码通过RSA加密传输")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "authCode", value = "授权码", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
+    })
+    public void debugLogin(HttpServletRequest request, @RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
+        System.out.println("acess : "+authCode+", "+username+", "+password);
+        User user = (User) userFeign.login(username, password);
+
+        System.out.println("user : "+user.toString());
+
+        HttpSession session = request.getSession();
+        String sessionUser = (String) session.getAttribute("User");
+
+        System.out.println("session User: "+sessionUser);
     }
 
 }

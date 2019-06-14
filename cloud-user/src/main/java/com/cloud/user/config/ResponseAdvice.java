@@ -10,7 +10,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
@@ -31,9 +30,30 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     @Autowired
     public HttpServletRequest request;
 
+    /**
+     * 排除过滤的URI
+     */
+    private final static String[] exclude = {
+            "/v2/api-docs","/swagger"
+    };
+
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        return methodParameter.hasMethodAnnotation(ResponseBody.class);
+//        return methodParameter.hasMethodAnnotation(ResponseBody.class);
+        String uri = request.getRequestURI();
+        if (isExclude(uri)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isExclude(String uri){
+        for(String s : exclude){
+            if(uri.startsWith(s)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

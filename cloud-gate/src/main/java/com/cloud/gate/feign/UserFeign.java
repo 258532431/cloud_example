@@ -1,8 +1,13 @@
 package com.cloud.gate.feign;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: yangchenglong on 2019/6/14
@@ -13,15 +18,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserFeign {
 
     @RequestMapping("/base/login")
-    public Object loginForPwd(@RequestParam("username") String username, @RequestParam("password") String password);
+    public Object login(@RequestParam("username") String username, @RequestParam("password") String password);
 
-    class UserFeignCallBack {
+    @Component
+    class UserFeignCallBack implements UserFeign{
 
-        public Object fallback() {
-//            return JSONObject.toJSONString(new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100500.getCode(), "用户服务异常"));
-            return null;
+        @Override
+        public Object login(String username, String password) {
+            return fallback();
         }
 
+        public Object fallback() {
+            Map<String, String> map = new HashMap<>();
+            map.put("code", "100500");
+            map.put("msg", "用户服务异常");
+            return JSONObject.toJSONString(map);
+        }
     }
 
 }

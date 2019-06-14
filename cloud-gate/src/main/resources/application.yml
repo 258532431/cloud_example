@@ -40,3 +40,8 @@ management:
       cors:
         allowed-origins: "*"
         allowed-methods: "*"
+
+# 开启hystrix熔断机制
+feign:
+  hystrix:
+    enabled: true
