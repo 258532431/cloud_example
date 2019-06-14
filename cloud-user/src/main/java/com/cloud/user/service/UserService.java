@@ -14,4 +14,8 @@ public interface UserService {
 
     int insertSelective(User user);
 
+    User selectByUsername(String username);
+
+    User login(String username, String password);
+
 }

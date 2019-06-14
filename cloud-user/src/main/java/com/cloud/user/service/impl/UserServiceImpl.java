@@ -1,6 +1,8 @@
 package com.cloud.user.service.impl;
 
+import com.cloud.user.config.GlobalException;
 import com.cloud.user.entity.User;
+import com.cloud.user.enums.ResponseCodeEnum;
 import com.cloud.user.mapper.UserMapper;
 import com.cloud.user.service.UserService;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User selectByPrimaryKey(Long id) {
-        return this.userMapper.selectByPrimaryKey(id);
+        return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -31,7 +33,28 @@ public class UserServiceImpl implements UserService {
         user.setUserCode(UUID.randomUUID().toString());
         user.setCreateTime(new Date());
         user.setStatus(0);
-        return this.userMapper.insertSelective(user);
+        return userMapper.insertSelective(user);
     }
+
+    @Override
+    public User selectByUsername(String username) {
+        return userMapper.selectByUsername(username);
+    }
+
+    @Override
+    public User login(String username, String password) {
+        User user = this.selectByUsername(username);
+        if(user != null){
+            if(!user.getPassword().equals(password)){
+                throw new GlobalException(ResponseCodeEnum.RETURN_CODE_101001);
+            }
+            if(user.getStatus() != 1) {
+                throw new GlobalException(ResponseCodeEnum.RETURN_CODE_101004);
+            }
+        }
+
+        return user;
+    }
+
 
 }

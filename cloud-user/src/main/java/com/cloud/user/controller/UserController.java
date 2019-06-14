@@ -1,5 +1,6 @@
 package com.cloud.user.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.cloud.user.common.LogBiz;
 import com.cloud.user.common.LogUtils;
 import com.cloud.user.entity.User;
@@ -40,6 +41,21 @@ public class UserController extends BaseController{
         System.out.println("UserController session : "+session.getAttribute("authCode")+", "+session.getAttribute("username"));
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ApiOperation(value = "用户登录", notes = "登录密码通过RSA加密传输")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
+    })
+    public User login(String username, String password){
+        User user = userService.login(username, password);
+        if(user != null){
+            HttpSession session = request.getSession();
+            session.setAttribute("User", JSON.toJSONString(user));
+        }
+        return user;
+    }
+
     @LogBiz(operator = "操作人", operatingModule = LogBiz.OperatingModule.USER, description = "操作描述")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "根据ID获取用户", notes = "")
@@ -53,7 +69,7 @@ public class UserController extends BaseController{
         fieldValues.put("description", "根据ID获取用户");
         LogUtils.setAnnotationValue(UserController.class, "get", fieldValues, Long.class);
 
-        return this.userService.selectByPrimaryKey(id);
+        return userService.selectByPrimaryKey(id);
     }
 
     @LogBiz(operator = "操作人", operatingModule = LogBiz.OperatingModule.USER, description = "操作描述")
@@ -71,7 +87,7 @@ public class UserController extends BaseController{
         fieldValues.put("description", "新增用户");
         LogUtils.setAnnotationValue(UserController.class, "insertSelective", fieldValues, User.class);
 
-        return this.userService.insertSelective(user);
+        return userService.insertSelective(user);
     }
 
 }
