@@ -60,6 +60,28 @@ public @interface LogBiz {
         }
     }
 
+    enum VisitDeviceType {
+        Default("Unkown", "未知"),
+        PC("PC", "PC"),
+        MOBILE("MOBILE", "移动端");
+
+        private final String code;
+        private final String name;
+
+        VisitDeviceType(String code, String name) {
+            this.code = code;
+            this.name = name;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
 }
 
 
