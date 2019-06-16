@@ -93,17 +93,17 @@
     </build>
 
     <!--用于发布到nexus仓库的-->
-    <!--<distributionManagement>
+    <distributionManagement>
         <repository>
-            <id>sy-releases</id>
+            <id>nexus-releases</id>
             <name>Internal Releases</name>
-            <url>http://nexus.seewintech.net/repository/maven-releases/</url>
+            <url>http://47.107.45.197:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>sy-snapshot</id>
+            <id>nexus-snapshots</id>
             <name>Internal Snapshots</name>
-            <url>http://nexus.seewintech.net/repository/maven-snapshots/</url>
+            <url>http://47.107.45.197:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
-    </distributionManagement>-->
+    </distributionManagement>
 
 </project>
