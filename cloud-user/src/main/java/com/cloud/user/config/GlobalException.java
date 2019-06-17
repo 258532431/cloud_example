@@ -1,6 +1,6 @@
 package com.cloud.user.config;
 
-import com.cloud.user.enums.ResponseCodeEnum;
+import com.cloud.common.enums.ResponseCodeEnum;
 
 /**
  * @Author: yangchenglong on 2019/6/14

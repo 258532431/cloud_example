@@ -1,8 +1,8 @@
 package com.cloud.user.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cloud.user.entity.ResponseMessage;
-import com.cloud.user.enums.ResponseCodeEnum;
+import com.cloud.common.enums.ResponseCodeEnum;
+import com.cloud.common.entity.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

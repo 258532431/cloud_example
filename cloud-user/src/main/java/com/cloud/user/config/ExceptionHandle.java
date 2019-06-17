@@ -1,8 +1,8 @@
 package com.cloud.user.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cloud.user.entity.ResponseMessage;
-import com.cloud.user.enums.ResponseCodeEnum;
+import com.cloud.common.enums.ResponseCodeEnum;
+import com.cloud.common.entity.ResponseMessage;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

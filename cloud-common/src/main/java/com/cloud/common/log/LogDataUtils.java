@@ -1,4 +1,4 @@
-package com.cloud.user.common;
+package com.cloud.common.log;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,14 +15,24 @@ import java.util.List;
 @Slf4j
 public class LogDataUtils {
 
-    //获取功能模块数据列表
+    //获取操作模块数据列表
+    public static List<LogData> getOperateModules () {
+        return getEnumDatas(EnableBizLog.OperateModule.class);
+    }
+
+    //获取操作类型数据列表
+    public static List<LogData> getLogLevels () {
+        return getEnumDatas(EnableBizLog.LogLevel.class);
+    }
+
+    //获取操作类型数据列表
     public static List<LogData> getOperateTypes () {
-        return getEnumDatas(LogBiz.OperatingModule.class);
+        return getEnumDatas(EnableBizLog.OperateType.class);
     }
 
     //获取访问设备数据列表
     public static List<LogData> getVisitDeviceTypes () {
-        return getEnumDatas(LogBiz.VisitDeviceType.class);
+        return getEnumDatas(EnableBizLog.VisitDeviceType.class);
     }
 
     private static List<LogData> getEnumDatas (Class<?> clz){

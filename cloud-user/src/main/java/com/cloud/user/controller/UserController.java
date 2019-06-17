@@ -1,8 +1,6 @@
 package com.cloud.user.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.cloud.user.common.LogBiz;
-import com.cloud.user.common.LogUtils;
 import com.cloud.user.entity.User;
 import com.cloud.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -14,8 +12,6 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @program: cloud_example
@@ -53,23 +49,15 @@ public class UserController extends BaseController{
         return user;
     }
 
-    @LogBiz(operator = "操作人", operatingModule = LogBiz.OperatingModule.USER, description = "操作描述")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "根据ID获取用户", notes = "")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键Id", dataType = "Long", paramType = "path", example = "0", required = true)
     })
     public User get(@PathVariable Long id){
-        //记录业务日志
-        Map fieldValues = new HashMap();
-        fieldValues.put("operator", "wilson");
-        fieldValues.put("description", "根据ID获取用户");
-        LogUtils.setAnnotationValue(UserController.class, "get", fieldValues, Long.class);
-
         return userService.selectByPrimaryKey(id);
     }
 
-    @LogBiz(operator = "操作人", operatingModule = LogBiz.OperatingModule.USER, description = "操作描述")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "新增用户", notes = "密码通过RSA加密传输")
     @ApiImplicitParams({
@@ -78,12 +66,6 @@ public class UserController extends BaseController{
             @ApiImplicitParam(name = "remark", value = "备注", dataType = "String", paramType = "query")
     })
     public int insertSelective(@ApiIgnore User user){
-        //记录业务日志
-        Map fieldValues = new HashMap();
-        fieldValues.put("operator", "风叔叔");
-        fieldValues.put("description", "新增用户");
-        LogUtils.setAnnotationValue(UserController.class, "insertSelective", fieldValues, User.class);
-
         return userService.insertSelective(user);
     }
 

@@ -1,6 +1,6 @@
-package com.cloud.user.entity;
+package com.cloud.common.entity;
 
-import com.cloud.user.enums.ResponseCodeEnum;
+import com.cloud.common.enums.ResponseCodeEnum;
 import lombok.Data;
 
 import java.io.Serializable;

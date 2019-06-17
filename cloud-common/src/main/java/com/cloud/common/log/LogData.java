@@ -1,4 +1,4 @@
-package com.cloud.user.common;
+package com.cloud.common.log;
 
 import lombok.Data;
 

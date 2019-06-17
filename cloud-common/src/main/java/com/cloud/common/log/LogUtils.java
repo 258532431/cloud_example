@@ -1,5 +1,8 @@
 package com.cloud.common.log;
 
+import org.apache.commons.lang3.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -24,7 +27,7 @@ public class LogUtils {
     public static void setAnnotationValue(Class<?> clz, String methodName, Map<String, Object> fieldValues, Class<?> paramTypes){
         try {
             Method method = clz.getMethod(methodName, paramTypes);////获取业务方法
-            LogBiz logBiz = method.getAnnotation(LogBiz.class);////获取此业务方法上的注解实例
+            EnableBizLog logBiz = method.getAnnotation(EnableBizLog.class);////获取此业务方法上的注解实例
             InvocationHandler invocationHandler = Proxy.getInvocationHandler(logBiz);//获取这个代理实例所持有的 InvocationHandler
             Field declaredField = invocationHandler.getClass().getDeclaredField("memberValues");
             declaredField.setAccessible(true);//如果是private final 修饰，要打开权限
@@ -36,6 +39,38 @@ public class LogUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //获取IP地址
+    public static String getRemoteHost(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
+    }
+
+    //判断是PC还是移动端访问
+    public static boolean isMobileDevice(HttpServletRequest request){
+        //android : 所有android设备, mac os : iphone ipad , windows phone: windows系统的手机
+        String[] deviceArray = new String[]{"android","mac os","windows phone"};
+        String requestHeader = request.getHeader("user-agent");
+        if(StringUtils.isBlank(requestHeader)){
+            return false;
+        }
+        requestHeader = requestHeader.toLowerCase();
+        for(int i=0; i<deviceArray.length; i++){
+            if(requestHeader.indexOf(deviceArray[i]) > 0){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
