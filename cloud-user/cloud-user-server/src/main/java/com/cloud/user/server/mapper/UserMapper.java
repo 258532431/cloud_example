@@ -1,4 +1,4 @@
-package com.cloud.user.mapper;
+package com.cloud.user.server.mapper;
 
 import com.cloud.user.entity.User;
 

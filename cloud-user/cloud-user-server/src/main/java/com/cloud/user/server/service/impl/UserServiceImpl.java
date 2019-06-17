@@ -1,9 +1,10 @@
-package com.cloud.user.service.impl;
+package com.cloud.user.server.service.impl;
 
-import com.cloud.user.config.GlobalException;
+import com.cloud.common.enums.ResponseCodeEnum;
 import com.cloud.user.entity.User;
-import com.cloud.user.mapper.UserMapper;
-import com.cloud.user.service.UserService;
+import com.cloud.user.server.config.GlobalException;
+import com.cloud.user.server.mapper.UserMapper;
+import com.cloud.user.server.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

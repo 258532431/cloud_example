@@ -1,4 +1,4 @@
-package com.cloud.user.config;
+package com.cloud.user.server.config;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;

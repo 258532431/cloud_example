@@ -1,8 +1,8 @@
-package com.cloud.user.controller;
+package com.cloud.user.server.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.cloud.user.entity.User;
-import com.cloud.user.service.UserService;
+import com.cloud.user.server.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

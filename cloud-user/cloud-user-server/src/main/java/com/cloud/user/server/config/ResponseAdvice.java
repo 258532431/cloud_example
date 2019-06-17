@@ -1,4 +1,4 @@
-package com.cloud.user.config;
+package com.cloud.user.server.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.common.enums.ResponseCodeEnum;

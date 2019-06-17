@@ -1,4 +1,4 @@
-package com.cloud.user.controller;
+package com.cloud.user.server.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

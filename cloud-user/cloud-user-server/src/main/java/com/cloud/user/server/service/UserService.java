@@ -1,4 +1,4 @@
-package com.cloud.user.service;
+package com.cloud.user.server.service;
 
 import com.cloud.user.entity.User;
 
