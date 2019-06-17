@@ -21,7 +21,7 @@ public class LogUtils {
      * @Param: clz 业务类、methodName 业务类方法名、fieldValues  Map<注解字段名, 注解的值>、paramTypes 业务方法的参数类型
      * @return:
      */
-    public static void setAnnotationValue(Class<?> clz, String methodName, Map<String, Object> fieldValues, Class<?> paramTypes){
+    public static void setAnnotationValue(Class<?> clz, String methodName, Map<String, Object> fieldValues, Class<?>... paramTypes){
         try {
             Method method = clz.getMethod(methodName, paramTypes);////获取业务方法
             LogBiz logBiz = method.getAnnotation(LogBiz.class);////获取此业务方法上的注解实例
