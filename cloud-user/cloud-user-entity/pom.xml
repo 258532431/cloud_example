@@ -68,6 +68,7 @@
                 </executions>
             </plugin>
         </plugins>
+        <finalName>cloud-user-entity</finalName>
     </build>
 
     <!--用于发布到nexus仓库的-->

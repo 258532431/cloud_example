@@ -18,7 +18,7 @@ import java.util.Map;
 public interface UserFeign {
 
     @RequestMapping("/base/login")
-    public Object login(@RequestParam("username") String username, @RequestParam("password") String password);
+    Object login(@RequestParam("username") String username, @RequestParam("password") String password);
 
     @Component
     class UserFeignCallBack implements UserFeign{

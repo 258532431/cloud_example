@@ -1,7 +1,7 @@
 package com.cloud.gate.controller;
 
-import com.cloud.gate.entiy.User;
 import com.cloud.gate.feign.UserFeign;
+import com.cloud.user.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

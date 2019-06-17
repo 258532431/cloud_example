@@ -20,6 +20,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+
+        <cloud.user.entity>1.0.0-SNAPSHOT</cloud.user.entity>
+        <cloud.common>1.0.0-SNAPSHOT</cloud.common>
     </properties>
 
     <dependencies>
@@ -103,6 +106,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!-- 用户实体 -->
+        <dependency>
+            <groupId>com.cloud.user</groupId>
+            <artifactId>cloud-user-entity</artifactId>
+            <version>${cloud.user.entity}</version>
+        </dependency>
+        <!-- 公共组件 -->
+        <dependency>
+            <groupId>com.cloud.common</groupId>
+            <artifactId>cloud-common</artifactId>
+            <version>${cloud.common}</version>
         </dependency>
 
         <dependency>
