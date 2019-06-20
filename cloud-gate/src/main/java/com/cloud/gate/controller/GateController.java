@@ -1,5 +1,6 @@
 package com.cloud.gate.controller;
 
+import com.cloud.common.entity.ResponseMessage;
 import com.cloud.gate.feign.UserFeign;
 import com.cloud.user.entity.User;
 import io.swagger.annotations.Api;
@@ -55,8 +56,9 @@ public class GateController {
     })
     public void debugLogin(HttpServletRequest request, @RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
         System.out.println("acess : "+authCode+", "+username+", "+password);
-        User user = (User) userFeign.login(username, password);
+        ResponseMessage<User> message = userFeign.login(username, password);
 
+        User user = message.getData();
         System.out.println("user : "+user.toString());
 
         HttpSession session = request.getSession();

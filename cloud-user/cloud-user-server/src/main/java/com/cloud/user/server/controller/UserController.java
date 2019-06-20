@@ -1,6 +1,7 @@
 package com.cloud.user.server.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.cloud.common.entity.ResponseMessage;
 import com.cloud.user.entity.User;
 import com.cloud.user.server.service.UserService;
 import io.swagger.annotations.Api;

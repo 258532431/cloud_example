@@ -17,6 +17,8 @@ public enum ResponseCodeEnum {
     RETURN_CODE_100002("100002", "参数不允许为空"),
     RETURN_CODE_100003("100003", "入参格式或类型错误"),
 
+    RETURN_CODE_101000("101000", "服务异常"),
+
     //用户相关
     RETURN_CODE_101001("101001", "用户名或密码错误"),
     RETURN_CODE_101002("101002", "短信验证码错误"),

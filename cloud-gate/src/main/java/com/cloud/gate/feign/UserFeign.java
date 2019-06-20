@@ -1,9 +1,14 @@
 package com.cloud.gate.feign;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cloud.common.entity.ResponseMessage;
+import com.cloud.common.enums.ResponseCodeEnum;
+import com.cloud.gate.config.FeignFallbackConfig;
+import com.cloud.user.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
@@ -14,26 +19,10 @@ import java.util.Map;
  * @Description: 用户服务接口
  * update by:
  */
-@FeignClient(value = "cloud-user", fallback = UserFeign.UserFeignCallBack.class)
+@FeignClient(value = "cloud-user", fallbackFactory = FeignFallbackConfig.class)
 public interface UserFeign {
 
-    @RequestMapping("/base/login")
-    Object login(@RequestParam("username") String username, @RequestParam("password") String password);
-
-    @Component
-    class UserFeignCallBack implements UserFeign{
-
-        @Override
-        public Object login(String username, String password) {
-            return fallback();
-        }
-
-        public Object fallback() {
-            Map<String, String> map = new HashMap<>();
-            map.put("code", "100500");
-            map.put("msg", "用户服务异常");
-            return JSONObject.toJSONString(map);
-        }
-    }
+    @RequestMapping(value = "/base/login", method = RequestMethod.POST)
+    ResponseMessage<User> login(@RequestParam("username") String username, @RequestParam("password") String password);
 
 }

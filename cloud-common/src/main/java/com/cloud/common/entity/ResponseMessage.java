@@ -11,16 +11,16 @@ import java.io.Serializable;
  * update by:
  */
 @Data
-public class ResponseMessage implements Serializable{
+public class ResponseMessage<T> implements Serializable{
 
 	private boolean success;//是否成功
 	private String errorCode;//错误代码
 	private String msg;//返回信息
-	private Object data;//封装返回数据
+	private T data;//封装返回数据
 
-	public ResponseMessage(ResponseCodeEnum responseCodeEnum, Object object){
+	public ResponseMessage(ResponseCodeEnum responseCodeEnum, T data){
 		this.errorCode = responseCodeEnum.getCode();
-		this.data = object;
+		this.data = data;
 		this.msg = responseCodeEnum.getMsg();
 		if(this.errorCode.equals(ResponseCodeEnum.RETURN_CODE_100200.getCode())){
 			this.success = true;
