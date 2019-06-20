@@ -1,8 +1,17 @@
-# cloud_example
-1、此项目为cloud微服务框架项目  
-2、数据库使用mysql  
+# cloud_example 项目介绍        
+1、此项目为cloud微服务框架项目      
+2、数据库使用mysql, 数据库文件在sql文件夹       
 3、运行项目需要安装redis、rabbitmq  
-4、maven的settings.xml文件在项目根目录  
+4、maven的settings.xml文件在项目根目录        
+
+# 项目技术点        
+1、用户鉴权使用spring-session-data-redis        
+2、rabbitmq消息中间件(rabbitmq集群暂未配置)       
+3、redis缓存（redis集群暂未配置）      
+4、zuul路由转发      
+5、feign服务接口调用，hystrix熔断机制，ribbon负载均衡（暂未配置）      
+6、swagger api接口展示       
+7、LCN解决分布式事务（暂未配置）      
 
 # 跨域请求       
 注解：@CrossOrigin
