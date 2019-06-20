@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@MapperScan({"com.cloud.user.mapper"})
+@MapperScan({"com.cloud.user.server.mapper"})
 @Slf4j
 public class CloudUserServerApplication {
 

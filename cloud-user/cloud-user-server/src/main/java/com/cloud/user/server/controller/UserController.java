@@ -44,7 +44,7 @@ public class UserController extends BaseController{
         User user = userService.login(username, password);
         if(user != null){
             HttpSession session = request.getSession();
-            session.setAttribute("User", JSON.toJSONString(user));
+            session.setAttribute("userInfo", user);
         }
         return user;
     }

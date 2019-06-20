@@ -60,7 +60,7 @@ public class GateController {
         System.out.println("user : "+user.toString());
 
         HttpSession session = request.getSession();
-        String sessionUser = (String) session.getAttribute("User");
+        String sessionUser = (String) session.getAttribute("userInfo");
 
         System.out.println("session User: "+sessionUser);
     }
