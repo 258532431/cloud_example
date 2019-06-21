@@ -40,7 +40,7 @@ public class ExceptionHandle {
 
     public static void print(Object object) throws IOException {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = requestAttributes.getRequest();
+//        HttpServletRequest request = requestAttributes.getRequest();
         HttpServletResponse response = requestAttributes.getResponse();
         response.addHeader("Cache-Control", "no-cache");
         response.setContentType("application/json;charset=utf-8");

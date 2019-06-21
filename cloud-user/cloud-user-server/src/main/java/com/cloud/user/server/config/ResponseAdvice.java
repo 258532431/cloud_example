@@ -24,7 +24,7 @@ import java.io.PrintWriter;
  * @Description: response全局响应代理
  * update by:
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Autowired

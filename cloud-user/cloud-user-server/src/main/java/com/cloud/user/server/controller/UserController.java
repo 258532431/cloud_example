@@ -32,7 +32,8 @@ public class UserController extends BaseController{
     @ApiOperation(value = "获取当前登录用户", notes = "")
     public void getSessionUser(){
         HttpSession session = request.getSession();
-        System.out.println("UserController session : "+session.getAttribute("authCode")+", "+session.getAttribute("username"));
+        User sessionUser = (User) session.getAttribute("userInfo");
+        System.out.println("session User: "+sessionUser);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

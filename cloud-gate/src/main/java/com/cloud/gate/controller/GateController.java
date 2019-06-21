@@ -56,13 +56,12 @@ public class GateController {
     })
     public void debugLogin(HttpServletRequest request, @RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
         System.out.println("acess : "+authCode+", "+username+", "+password);
-        ResponseMessage<User> message = userFeign.login(username, password);
+        User user = userFeign.login(username, password);
 
-        User user = message.getData();
         System.out.println("user : "+user.toString());
 
         HttpSession session = request.getSession();
-        String sessionUser = (String) session.getAttribute("userInfo");
+        User sessionUser = (User) session.getAttribute("userInfo");
 
         System.out.println("session User: "+sessionUser);
     }

@@ -23,6 +23,6 @@ import java.util.Map;
 public interface UserFeign {
 
     @RequestMapping(value = "/base/login", method = RequestMethod.POST)
-    ResponseMessage<User> login(@RequestParam("username") String username, @RequestParam("password") String password);
+    User login(@RequestParam("username") String username, @RequestParam("password") String password);
 
 }
