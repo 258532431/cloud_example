@@ -5,9 +5,11 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableTransactionManagement   //启用注解事务管理
 @MapperScan({"com.cloud.user.server.mapper"})
 @Slf4j
 public class CloudUserServerApplication {

@@ -32,7 +32,8 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .enable(swaggerEnabled)
-                .select().apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .select()
+//                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .apis(RequestHandlerSelectors.basePackage("com.cloud.gate.controller"))
                 .paths(PathSelectors.any())
                 .build();
