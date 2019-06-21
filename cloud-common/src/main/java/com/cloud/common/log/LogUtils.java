@@ -53,6 +53,9 @@ public class LogUtils {
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
+        if(!StringUtils.isBlank(ip)){
+            ip = ip.split(",")[0];
+        }
         return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
     }
 

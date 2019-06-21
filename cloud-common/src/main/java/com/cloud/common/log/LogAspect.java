@@ -11,10 +11,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponseWrapper;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.lang.reflect.Method;
 import java.util.Date;
 
@@ -70,7 +67,8 @@ public class LogAspect {
             StringBuilder params = new StringBuilder();
             for(int i=0; i<parameterNames.length; i++){
                 //排除response, request类型参数转json报错
-                if(!(arguments[i] instanceof HttpServletResponseWrapper) && !(arguments[i] instanceof HttpServletRequestWrapper)){
+                if(!(arguments[i] instanceof HttpServletResponseWrapper) && !(arguments[i] instanceof HttpServletRequestWrapper) &&
+                        !(arguments[i] instanceof HttpServletResponse) && !(arguments[i] instanceof HttpServletRequest)){
                     params.append(parameterNames[i]+"="+ JSON.toJSONString(arguments[i]));
                     params.append("&");
                 }
@@ -122,7 +120,7 @@ public class LogAspect {
 
             //导入操作，操作内容简化记录
             if(EnableBizLog.OperateType.IMPORT.getCode().equals(operateType.getCode())){
-                operateParams = "excel-file";
+                operateParams = "excel-file/image";
             }
 
             BizLog bizLog = new BizLog();
