@@ -30,21 +30,12 @@ public class GateController {
     @Resource
     private UserFeign userFeign;
 
-    @RequestMapping(value = "/acess", method = RequestMethod.POST)
-    @ApiOperation(value = "授权API调试", notes = "密码通过RSA加密传输")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "authCode", value = "授权码", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
-    })
-    public void acess(HttpServletRequest request, @RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
-        System.out.println("acess : "+authCode+", "+username+", "+password);
-
+    @RequestMapping(value = "/testSessionUser", method = RequestMethod.POST)
+    @ApiOperation(value = "session测试", notes = "")
+    public void testSessionUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.setAttribute("authCode", authCode);
-        session.setAttribute("username", username);
-
-        System.out.println("session : "+session.getAttribute("authCode")+", "+session.getAttribute("username"));
+        User sessionUser = (User) session.getAttribute("userInfo");
+        System.out.println("session User: "+sessionUser);
     }
 
     @RequestMapping(value = "/debugLogin", method = RequestMethod.POST)
@@ -59,11 +50,6 @@ public class GateController {
         User user = userFeign.login(username, password);
 
         System.out.println("user : "+user.toString());
-
-        HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("userInfo");
-
-        System.out.println("session User: "+sessionUser);
     }
 
 }

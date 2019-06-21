@@ -1,4 +1,4 @@
-package com.cloud.gate.config;
+package com.cloud.user.server.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
