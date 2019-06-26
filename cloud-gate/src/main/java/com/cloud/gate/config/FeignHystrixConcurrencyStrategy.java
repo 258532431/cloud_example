@@ -11,6 +11,7 @@ import com.netflix.hystrix.strategy.executionhook.HystrixCommandExecutionHook;
 import com.netflix.hystrix.strategy.metrics.HystrixMetricsPublisher;
 import com.netflix.hystrix.strategy.properties.HystrixPropertiesStrategy;
 import com.netflix.hystrix.strategy.properties.HystrixProperty;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -20,8 +21,15 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-//Hystrix 并发策略 实现类
+/**
+ * @Author: yangchenglong on 2019/6/26
+ * @Description: 自定义Feign的隔离策略
+ *  在转发Feign的请求头的时候，如果开启了Hystrix，Hystrix的默认隔离策略是Thread(线程隔离策略)，因此转发拦截器内是无法获取到请求的请求头信息的，
+ *  思路是将现有的并发策略作为新并发策略的成员变量,在新并发策略中，返回现有并发策略的线程池、Queue；将策略加到Spring容器即可；
+ *
+ */
 @Component
+@Slf4j
 public class FeignHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy {
 
     private HystrixConcurrencyStrategy delegate;
@@ -47,6 +55,7 @@ public class FeignHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy 
             HystrixPlugins.getInstance().registerMetricsPublisher(metricsPublisher);
             HystrixPlugins.getInstance().registerPropertiesStrategy(propertiesStrategy);
         } catch (Exception e) {
+            log.error("Failed to register Sleuth Hystrix Concurrency Strategy", e);
         }
     }
 
