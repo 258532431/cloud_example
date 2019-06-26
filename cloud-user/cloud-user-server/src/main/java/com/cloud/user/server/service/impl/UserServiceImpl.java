@@ -2,7 +2,6 @@ package com.cloud.user.server.service.impl;
 
 import com.cloud.common.enums.ResponseCodeEnum;
 import com.cloud.user.entity.User;
-import com.cloud.user.server.config.GlobalException;
 import com.cloud.user.server.mapper.UserMapper;
 import com.cloud.user.server.service.UserService;
 import org.springframework.stereotype.Service;

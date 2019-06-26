@@ -1,4 +1,4 @@
-package com.cloud.gate.config;
+package com.cloud.common.config;
 
 import com.cloud.common.enums.ResponseCodeEnum;
 

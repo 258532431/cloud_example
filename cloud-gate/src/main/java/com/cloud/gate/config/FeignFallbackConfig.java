@@ -1,5 +1,6 @@
 package com.cloud.gate.config;
 
+import com.cloud.common.config.GlobalException;
 import com.cloud.common.enums.ResponseCodeEnum;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;

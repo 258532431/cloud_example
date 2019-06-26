@@ -12,6 +12,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
+/**
+ * @Author: yangchenglong on 2019/6/26
+ * @Description: 启用自定义Feign的隔离策略
+ */
 @Configuration
 @EnableFeignClients(basePackages = "com.cloud.gate.feign")
 public class FeignClientsConfigurationCustom implements RequestInterceptor {
