@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/base")
 @Api(tags = "网关", description = "网关授权rest接口")
-public class GateController {
+public class GateController extends BaseController{
 
     @Resource
     private UserFeign userFeign;
@@ -33,12 +33,8 @@ public class GateController {
     @RequestMapping(value = "/testSessionUser", method = RequestMethod.POST)
     @ApiOperation(value = "session测试", notes = "")
     public void testSessionUser(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("userInfo");
-        System.out.println("session User: "+sessionUser);
-
-        String username = (String) session.getAttribute("username");
-        System.out.println("session username: "+username);
+        User sessionUser = getUserSession();
+        System.out.println("gate session User: "+sessionUser);
     }
 
     @RequestMapping(value = "/debugLogin", method = RequestMethod.POST)
@@ -49,21 +45,8 @@ public class GateController {
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
     })
     public void debugLogin(HttpServletRequest request, @RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
-        System.out.println("acess : "+authCode+", "+username+", "+password);
         User user = userFeign.login(username, password);
-
         System.out.println("user : "+user.toString());
-    }
-
-    @RequestMapping(value = "/gateSession", method = RequestMethod.POST)
-    @ApiOperation(value = "单服务session测试", notes = "")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
-    })
-    public void gateSession(HttpServletRequest request, @RequestParam String username, @RequestParam String password){
-        HttpSession session = request.getSession();
-        session.setAttribute("username", username);
     }
 
 }

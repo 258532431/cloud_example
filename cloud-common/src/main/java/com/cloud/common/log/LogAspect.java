@@ -1,6 +1,7 @@
 package com.cloud.common.log;
 
 import com.alibaba.fastjson.JSON;
+import com.cloud.common.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -105,9 +106,9 @@ public class LogAspect {
             RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
             if(requestAttributes != null){
                 HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
-                ipAddr = LogUtils.getRemoteHost(request);//IP
+                ipAddr = StringUtils.getIP(request);//IP
                 url = request.getRequestURI();//请求地址
-                if(LogUtils.isMobileDevice(request)){
+                if(StringUtils.isMobileDevice(request)){
                     visitDeviceType = EnableBizLog.VisitDeviceType.MOBILE.getCode();
                 }else {
                     visitDeviceType = EnableBizLog.VisitDeviceType.PC.getCode();

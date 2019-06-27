@@ -41,39 +41,4 @@ public class LogUtils {
         }
     }
 
-    //获取IP地址
-    public static String getRemoteHost(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        if(!StringUtils.isBlank(ip)){
-            ip = ip.split(",")[0];
-        }
-        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
-    }
-
-    //判断是PC还是移动端访问
-    public static boolean isMobileDevice(HttpServletRequest request){
-        //android : 所有android设备, mac os : iphone ipad , windows phone: windows系统的手机
-        String[] deviceArray = new String[]{"android","mac os","windows phone"};
-        String requestHeader = request.getHeader("user-agent");
-        if(StringUtils.isBlank(requestHeader)){
-            return false;
-        }
-        requestHeader = requestHeader.toLowerCase();
-        for(int i=0; i<deviceArray.length; i++){
-            if(requestHeader.indexOf(deviceArray[i]) > 0){
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

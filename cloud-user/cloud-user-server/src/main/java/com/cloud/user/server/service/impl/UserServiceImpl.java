@@ -1,6 +1,8 @@
 package com.cloud.user.server.service.impl;
 
+import com.cloud.common.config.GlobalException;
 import com.cloud.common.enums.ResponseCodeEnum;
+import com.cloud.common.utils.StringUtils;
 import com.cloud.user.entity.User;
 import com.cloud.user.server.mapper.UserMapper;
 import com.cloud.user.server.service.UserService;
@@ -29,9 +31,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int insertSelective(User user) {
-        user.setUserCode(UUID.randomUUID().toString());
+        user.setUserCode(StringUtils.getSerialNumber());
         user.setCreateTime(new Date());
         user.setStatus(0);
+        user.setPassword(StringUtils.md5(user.getPassword()));
         return userMapper.insertSelective(user);
     }
 

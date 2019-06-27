@@ -37,4 +37,7 @@ public class User implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String remark;
+
+    @ApiModelProperty(value = "会话token")
+    private String token;//会话token
 }

@@ -1,10 +1,10 @@
-package com.cloud.user.server.controller;
+package com.cloud.gate.controller;
 
 import com.cloud.common.utils.DateUtils;
 import com.cloud.common.utils.StringUtils;
+import com.cloud.gate.utils.RedisUtils;
 import com.cloud.user.constant.UserConstants;
 import com.cloud.user.entity.User;
-import com.cloud.user.server.utils.RedisUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +32,7 @@ public class BaseController {
      * @Author: yangchenglong on 2019/6/27
      * @Description: 缓存会话数据
      * update by: 
-     * @Param:
+     * @Param: 
      * @return:  缓存key值
      */
     public String setUserSession(User user) {
@@ -47,7 +47,7 @@ public class BaseController {
             user.setToken(token);
             this.setSessionCache(token, user);
         }
-
+        
         return token;
     }
 
@@ -55,7 +55,7 @@ public class BaseController {
      * @Author: yangchenglong on 2019/6/27
      * @Description: 取出会话数据
      * update by: 
-     * @Param:
+     * @Param: 
      * @return:  User
      */
     public User getUserSession() {
@@ -88,7 +88,7 @@ public class BaseController {
     /**
      * @Author: yangchenglong on 2019/6/27
      * @Description: 刷新缓存
-     * update by: 
+     * update by:
      * @Param:
      * @return:
      */

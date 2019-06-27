@@ -2,6 +2,7 @@ package com.cloud.user.server.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.cloud.common.entity.ResponseMessage;
+import com.cloud.user.constant.UserConstants;
 import com.cloud.user.entity.User;
 import com.cloud.user.server.service.UserService;
 import io.swagger.annotations.Api;
@@ -31,8 +32,7 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/getSessionUser", method = RequestMethod.GET)
     @ApiOperation(value = "获取当前登录用户", notes = "")
     public void getSessionUser(){
-        HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("userInfo");
+        User sessionUser = getUserSession();
         System.out.println("session User: "+sessionUser);
     }
 
@@ -45,9 +45,9 @@ public class UserController extends BaseController{
     public User login(@RequestParam String username, @RequestParam String password){
         User user = userService.login(username, password);
         if(user != null){
-            HttpSession session = request.getSession();
-            session.setAttribute("userInfo", user);
+            setUserSession(user);
         }
+
         return user;
     }
 

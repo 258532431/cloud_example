@@ -14,6 +14,11 @@ eureka:
     lease-renewal-interval-in-seconds: 5   #定义服务续约任务（心跳）的调用间隔，单位：秒
     lease-expiration-duration-in-seconds: 10   #定义服务失效的时间，单位：秒
 
+# 调整日志级别，打印SQL语句
+logging:
+  level:
+    com.cloud: DEBUG
+
 #ZUUL反向代理设置
 zuul:
   host:
@@ -43,6 +48,8 @@ management:
 
 #请求和响应GZIP压缩支持
 feign:
+  hystrix:
+    enabled: true
   httpclient:
     enabled: false
   okhttp:
