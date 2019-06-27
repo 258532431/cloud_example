@@ -72,6 +72,23 @@ public class BaseController {
 
     /**
      * @Author: yangchenglong on 2019/6/27
+     * @Description: 清空会话数据
+     * update by:
+     * @Param:
+     * @return:
+     */
+    public void removeUserSession() {
+        String token = request.getHeader(UserConstants.PC_ACCESS_TOKEN);
+        if (StringUtils.isMobileDevice()) {//移动端
+            token = request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
+        }
+        if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {
+            redisUtils.remove(token);
+        }
+    }
+
+    /**
+     * @Author: yangchenglong on 2019/6/27
      * @Description: 设置缓存
      * update by:
      * @Param:
