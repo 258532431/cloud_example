@@ -14,7 +14,7 @@ import java.util.Enumeration;
 
 /**
  * @Author: yangchenglong on 2019/6/26
- * @Description: 启用自定义Feign的隔离策略
+ * @Description: 启用自定义Feign的隔离策略，对所有的Feign请求,设置Header
  */
 @Configuration
 @EnableFeignClients(basePackages = "com.cloud.gate.feign")

@@ -34,7 +34,7 @@ public interface UserFeign {
 
         @Override
         public GlobalException create(Throwable throwable) {
-            return new GlobalException(ResponseCodeEnum.RETURN_CODE_100501);
+            return new GlobalException(ResponseCodeEnum.RETURN_CODE_101000);
         }
 
     }

@@ -2,6 +2,7 @@ package com.cloud.user.server.utils;
 
 import com.cloud.common.config.GlobalException;
 import com.cloud.common.enums.ResponseCodeEnum;
+import com.cloud.user.constant.UserConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -234,6 +235,36 @@ public class RedisUtils {
             throw new GlobalException(ResponseCodeEnum.RETURN_CODE_100500, e.getMessage());
         }
         return newObj;
+    }
+
+    /**
+     * @Author: yangchenglong on 2019/6/27
+     * @Description: 设置缓存
+     * update by:
+     * @Param:
+     * @return:
+     */
+    public void setSessionCache(String key, Object value) {
+        if (com.cloud.common.utils.StringUtils.isMobileDevice()) {//移动端
+            this.setExpireObject(UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +key, value, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
+        } else {//PC端
+            this.setExpireObject(UserConstants.REDIS_PC_USER_TOKEN + ":" +key, value, UserConstants.PC_SESSION_EXPIRETIME_SECONDS);
+        }
+    }
+
+    /**
+     * @Author: yangchenglong on 2019/6/27
+     * @Description: 刷新缓存
+     * update by:
+     * @Param:
+     * @return:
+     */
+    public void refreshSessionCache(String key) {
+        if (com.cloud.common.utils.StringUtils.isMobileDevice()) {
+            this.expire(UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +key, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
+        } else {
+            this.expire(UserConstants.REDIS_PC_USER_TOKEN + ":" +key, UserConstants.PC_SESSION_EXPIRETIME_SECONDS);
+        }
     }
 
 }

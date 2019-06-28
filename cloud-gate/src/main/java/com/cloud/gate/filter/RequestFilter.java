@@ -69,8 +69,12 @@ public class RequestFilter extends ZuulFilter {
         try {
             //如果是走swagger进来的请求，自动把token放入header
             if (StringUtils.isNotBlank(refererUrl) && refererUrl.endsWith("swagger-ui.html")) {
-                ctx.addZuulRequestHeader(UserConstants.PC_ACCESS_TOKEN, (String) session.getAttribute("token"));
-                ctx.addZuulRequestHeader(UserConstants.MOBILE_ACCESS_TOKEN, (String) session.getAttribute("token"));
+                String token = (String) session.getAttribute("token");
+                if (StringUtils.isMobileDevice()) {//移动端
+                    ctx.addZuulRequestHeader(UserConstants.MOBILE_ACCESS_TOKEN, token);
+                }else {//PC端
+                    ctx.addZuulRequestHeader(UserConstants.PC_ACCESS_TOKEN, token);
+                }
             }
         } catch (Exception e) {
             throw new GlobalException(ResponseCodeEnum.RETURN_CODE_100500, e.getMessage());

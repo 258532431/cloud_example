@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cloud.common.config.GlobalException;
 import com.cloud.common.entity.ResponseMessage;
 import com.cloud.common.enums.ResponseCodeEnum;
+import com.cloud.common.utils.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,22 +34,10 @@ public class ExceptionHandle {
             } else {
                 json = JSONObject.toJSONString(new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100500.getCode(), exception.getMessage()));
             }
-            this.print(json);
+            StringUtils.print(json);
         } catch (Exception e) {
             throw new GlobalException(ResponseCodeEnum.RETURN_CODE_100500, e.getMessage());
         }
-    }
-
-    public static void print(Object object) throws IOException {
-        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-//        HttpServletRequest request = requestAttributes.getRequest();
-        HttpServletResponse response = requestAttributes.getResponse();
-        response.addHeader("Cache-Control", "no-cache");
-        response.setContentType("application/json;charset=utf-8");
-        PrintWriter out = response.getWriter();
-        out.print(object);
-        out.flush();
-        out.close();
     }
 
 }

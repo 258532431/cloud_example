@@ -12,7 +12,7 @@ public enum ResponseCodeEnum {
     RETURN_CODE_100500("100500", "系统异常"),
     RETURN_CODE_100600("100600", "请求超时"),
 
-    RETURN_CODE_100501("100501", "用户服务异常"),
+
 
     RETURN_CODE_100000("100000", "未登录"),
     RETURN_CODE_100001("100001", "权限不足"),
@@ -20,11 +20,16 @@ public enum ResponseCodeEnum {
     RETURN_CODE_100003("100003", "入参格式或类型错误"),
 
     //用户相关
+    RETURN_CODE_101000("101000", "用户服务异常"),
     RETURN_CODE_101001("101001", "用户名或密码错误"),
     RETURN_CODE_101002("101002", "短信验证码错误"),
     RETURN_CODE_101003("101003", "图形验证码错误"),
     RETURN_CODE_101004("101004", "该用户已禁用"),
-    RETURN_CODE_101005("101005", "该用户不存在");
+    RETURN_CODE_101005("101005", "该用户不存在"),
+
+    //gate路由相关
+    RETURN_CODE_102000("102000", "路由服务异常"),
+    RETURN_CODE_102001("102001", "调试密码错误");
 
     private final String code;
     private final String msg;

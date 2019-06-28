@@ -81,3 +81,5 @@ ribbon:
   maxAutoRetries: 0  # 对当前实例的重试次数
   maxAutoRetriesNextServer: 0  # 切换实例的重试次数
   okToRetryOnAllOperations: false  # 对所有操作请求都进行重试
+
+debug-api-password: 123

@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -23,19 +24,13 @@ import javax.servlet.http.HttpSession;
  * @create: 2019-05-31 16:08
  */
 @RestController
+@Transactional
 @RequestMapping("/base")
 @Api(tags = "用户管理", description = "用户管理rest接口")
 public class UserController extends BaseController{
 
     @Resource
     private UserService userService;
-
-    @RequestMapping(value = "/getSessionUser", method = RequestMethod.GET)
-    @ApiOperation(value = "获取当前登录用户", notes = "")
-    public void getSessionUser(){
-        User sessionUser = getUserSession();
-        System.out.println("session User: "+sessionUser);
-    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "用户登录", notes = "登录密码通过RSA加密传输")
@@ -49,6 +44,20 @@ public class UserController extends BaseController{
             setUserSession(user);
         }
 
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, user);
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ApiOperation(value = "获取当前登录用户", notes = "")
+    public ResponseMessage logout(){
+        removeUserSession();
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);
+    }
+
+    @RequestMapping(value = "/getSessionUser", method = RequestMethod.GET)
+    @ApiOperation(value = "获取当前登录用户", notes = "")
+    public ResponseMessage<User> getSessionUser(){
+        User user = getUserSession();
         return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, user);
     }
 

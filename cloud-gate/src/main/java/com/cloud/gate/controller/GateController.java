@@ -1,5 +1,6 @@
 package com.cloud.gate.controller;
 
+import com.cloud.common.config.GlobalException;
 import com.cloud.common.entity.ResponseMessage;
 import com.cloud.common.enums.ResponseCodeEnum;
 import com.cloud.gate.feign.UserFeign;
@@ -8,10 +9,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -25,30 +29,32 @@ import javax.servlet.http.HttpSession;
 @Api(tags = "网关", description = "网关授权rest接口")
 public class GateController extends BaseController{
 
+    @Value("${debug-api-password}")
+    private String debugApiPassword;//接口调试密码
+
     @Resource
     private UserFeign userFeign;
 
-    @RequestMapping(value = "/testSessionUser", method = RequestMethod.GET)
-    @ApiOperation(value = "session测试", notes = "")
-    public ResponseMessage<User> testSessionUser() {
-        User user = getUserSession();
-        System.out.println("gate session User: "+user);
-
-        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, user);
-    }
-
-    @RequestMapping(value = "/debugLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/authorize", method = RequestMethod.POST)
     @ApiOperation(value = "调试用登录", notes = "密码通过RSA加密传输")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "authCode", value = "授权码", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "apiPassword", value = "接口调试密码", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
     })
-    public ResponseMessage<User> debugLogin(@RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
-        ResponseMessage<User> user = userFeign.login(username, password);
-        System.out.println("user : "+user.getDatas().toString());
+    public ResponseMessage<User> authorize(@RequestParam String apiPassword, @RequestParam String username, @RequestParam String password) {
+        if(debugApiPassword.equals(apiPassword)){
+            ResponseMessage<User> user = userFeign.login(username, password);
+            if(user.getDatas() == null) {
+                throw  new GlobalException(user.getErrorCode(), user.getMsg());
+            }
+            //调试方便，将token保存在session中
+            HttpSession session = request.getSession();
+            session.setAttribute("token", user.getDatas().getToken());
+            return user;
+        }
 
-        return user;
+        return new ResponseMessage<>(ResponseCodeEnum.RETURN_CODE_102001);
     }
 
 }
