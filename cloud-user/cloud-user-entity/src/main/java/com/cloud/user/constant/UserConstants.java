@@ -9,10 +9,10 @@ package com.cloud.user.constant;
 public class UserConstants {
 
     //redis PC端缓存目录
-    public static final String REDIS_PC_USER_TOKEN = "AUTH:PC:TOKEN";
+    public static final String REDIS_PC_USER_TOKEN = "PC:USER:TOKEN";
 
     //redis 移动端缓存目录
-    public static final String REDIS_MOBILE_USER_TOKEN = "AUTH:MOBILE:TOKEN";
+    public static final String REDIS_MOBILE_USER_TOKEN = "MOBILE:USER:TOKEN";
 
     //PC用户登录失效时间（秒）
     public static final Long PC_SESSION_EXPIRETIME_SECONDS = 60 * 60L;
