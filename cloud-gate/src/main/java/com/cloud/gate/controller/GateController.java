@@ -30,9 +30,11 @@ public class GateController extends BaseController{
 
     @RequestMapping(value = "/testSessionUser", method = RequestMethod.GET)
     @ApiOperation(value = "session测试", notes = "")
-    public void testSessionUser() {
-        User sessionUser = getUserSession();
-        System.out.println("gate session User: "+sessionUser);
+    public ResponseMessage<User> testSessionUser() {
+        User user = getUserSession();
+        System.out.println("gate session User: "+user);
+
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, user);
     }
 
     @RequestMapping(value = "/debugLogin", method = RequestMethod.POST)
@@ -42,12 +44,11 @@ public class GateController extends BaseController{
             @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
     })
-    @ResponseBody
-    public ResponseMessage debugLogin(@RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
-        User user = userFeign.login(username, password);
+    public ResponseMessage<User> debugLogin(@RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
+        ResponseMessage<User> user = userFeign.login(username, password);
         System.out.println("user : "+user.toString());
 
-        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, user);
+        return user;
     }
 
 }

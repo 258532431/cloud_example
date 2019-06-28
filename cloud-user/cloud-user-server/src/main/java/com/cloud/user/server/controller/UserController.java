@@ -2,6 +2,7 @@ package com.cloud.user.server.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.cloud.common.entity.ResponseMessage;
+import com.cloud.common.enums.ResponseCodeEnum;
 import com.cloud.user.constant.UserConstants;
 import com.cloud.user.entity.User;
 import com.cloud.user.server.service.UserService;
@@ -42,13 +43,13 @@ public class UserController extends BaseController{
             @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
     })
-    public User login(@RequestParam String username, @RequestParam String password){
+    public ResponseMessage<User> login(@RequestParam String username, @RequestParam String password){
         User user = userService.login(username, password);
         if(user != null){
             setUserSession(user);
         }
 
-        return user;
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, user);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -56,8 +57,8 @@ public class UserController extends BaseController{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键Id", dataType = "Long", paramType = "path", example = "0", required = true)
     })
-    public User get(@PathVariable Long id){
-        return userService.selectByPrimaryKey(id);
+    public ResponseMessage<User> get(@PathVariable Long id){
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, userService.selectByPrimaryKey(id));
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -67,8 +68,9 @@ public class UserController extends BaseController{
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "remark", value = "备注", dataType = "String", paramType = "query")
     })
-    public int insertSelective(@ApiIgnore User user){
-        return userService.insertSelective(user);
+    public ResponseMessage insertSelective(@ApiIgnore User user){
+        userService.insertSelective(user);
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);
     }
 
 }

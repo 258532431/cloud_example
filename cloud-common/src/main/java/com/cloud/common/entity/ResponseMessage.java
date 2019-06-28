@@ -3,7 +3,9 @@ package com.cloud.common.entity;
 import com.cloud.common.enums.ResponseCodeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -13,8 +15,12 @@ import java.io.Serializable;
  * update by:
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(value = "返回消息")
 public class ResponseMessage<T> implements Serializable{
+
+	private static final long serialVersionUID = 8331741063712897741L;
 
 	@ApiModelProperty(value = "是否成功")
 	private boolean success;//是否成功
@@ -26,11 +32,11 @@ public class ResponseMessage<T> implements Serializable{
 	private String msg;//返回信息
 
 	@ApiModelProperty(value = "封装返回数据")
-	private T data;//封装返回数据
+	private T datas;//封装返回数据
 
-	public ResponseMessage(ResponseCodeEnum responseCodeEnum, T data){
+	public ResponseMessage(ResponseCodeEnum responseCodeEnum, T datas){
 		this.errorCode = responseCodeEnum.getCode();
-		this.data = data;
+		this.datas = datas;
 		this.msg = responseCodeEnum.getMsg();
 		if(this.errorCode.equals(ResponseCodeEnum.RETURN_CODE_100200.getCode())){
 			this.success = true;
