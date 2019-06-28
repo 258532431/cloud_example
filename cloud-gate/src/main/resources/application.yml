@@ -82,4 +82,5 @@ ribbon:
   maxAutoRetriesNextServer: 0  # 切换实例的重试次数
   okToRetryOnAllOperations: false  # 对所有操作请求都进行重试
 
+# swagger接口调试密码
 debug-api-password: 123

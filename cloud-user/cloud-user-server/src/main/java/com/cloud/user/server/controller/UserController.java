@@ -55,7 +55,7 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(value = "/getSessionUser", method = RequestMethod.GET)
-    @ApiOperation(value = "获取当前登录用户", notes = "")
+    @ApiOperation(value = "获取当前登录用户", notes = "前端请求需要在header中传入token")
     public ResponseMessage<User> getSessionUser(){
         User user = getUserSession();
         return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, user);

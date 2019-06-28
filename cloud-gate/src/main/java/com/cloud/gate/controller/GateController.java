@@ -44,6 +44,7 @@ public class GateController extends BaseController{
     })
     public ResponseMessage<User> authorize(@RequestParam String apiPassword, @RequestParam String username, @RequestParam String password) {
         if(debugApiPassword.equals(apiPassword)){
+            removeUserSession();
             ResponseMessage<User> user = userFeign.login(username, password);
             if(user.getDatas() == null) {
                 throw  new GlobalException(user.getErrorCode(), user.getMsg());

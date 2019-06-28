@@ -49,8 +49,7 @@ public class CloudUserServerApplication implements WebMvcConfigurer {
         //配置拦截路径
         registry.addInterceptor(getLoginInterceptor())
                 .addPathPatterns("/base/**")
-                .excludePathPatterns("/base/login")
-                .excludePathPatterns("/base/logout");
+                .excludePathPatterns("/base/login");
     }
 
     @Override
@@ -68,7 +67,7 @@ public class CloudUserServerApplication implements WebMvcConfigurer {
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
             String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-            if (StringUtils.isMobileDevice()) {//移动端
+            if (StringUtils.isMobileDevice(request)) {//移动端
                 token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
             }
             if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {

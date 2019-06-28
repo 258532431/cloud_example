@@ -70,7 +70,7 @@ public class RequestFilter extends ZuulFilter {
             //如果是走swagger进来的请求，自动把token放入header
             if (StringUtils.isNotBlank(refererUrl) && refererUrl.endsWith("swagger-ui.html")) {
                 String token = (String) session.getAttribute("token");
-                if (StringUtils.isMobileDevice()) {//移动端
+                if (StringUtils.isMobileDevice(request)) {//移动端
                     ctx.addZuulRequestHeader(UserConstants.MOBILE_ACCESS_TOKEN, token);
                 }else {//PC端
                     ctx.addZuulRequestHeader(UserConstants.PC_ACCESS_TOKEN, token);

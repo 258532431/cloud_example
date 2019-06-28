@@ -245,11 +245,7 @@ public class RedisUtils {
      * @return:
      */
     public void setSessionCache(String key, Object value) {
-        if (com.cloud.common.utils.StringUtils.isMobileDevice()) {//移动端
-            this.setExpireObject(UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +key, value, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
-        } else {//PC端
-            this.setExpireObject(UserConstants.REDIS_PC_USER_TOKEN + ":" +key, value, UserConstants.PC_SESSION_EXPIRETIME_SECONDS);
-        }
+        this.setExpireObject(key, value, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
     }
 
     /**
@@ -260,11 +256,7 @@ public class RedisUtils {
      * @return:
      */
     public void refreshSessionCache(String key) {
-        if (com.cloud.common.utils.StringUtils.isMobileDevice()) {
-            this.expire(UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +key, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
-        } else {
-            this.expire(UserConstants.REDIS_PC_USER_TOKEN + ":" +key, UserConstants.PC_SESSION_EXPIRETIME_SECONDS);
-        }
+        this.expire(key, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
     }
 
 }

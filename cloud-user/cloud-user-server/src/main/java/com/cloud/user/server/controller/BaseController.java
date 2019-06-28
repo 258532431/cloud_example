@@ -37,7 +37,7 @@ public class BaseController {
      */
     public String setUserSession(User user) {
         String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-        if (StringUtils.isMobileDevice()) {//移动端
+        if (StringUtils.isMobileDevice(request)) {//移动端
             token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {//token存在刷新
@@ -60,7 +60,7 @@ public class BaseController {
      */
     public User getUserSession() {
         String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-        if (StringUtils.isMobileDevice()) {//移动端
+        if (StringUtils.isMobileDevice(request)) {//移动端
             token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {
@@ -79,7 +79,7 @@ public class BaseController {
      */
     public void removeUserSession() {
         String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-        if (StringUtils.isMobileDevice()) {//移动端
+        if (StringUtils.isMobileDevice(request)) {//移动端
             token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {

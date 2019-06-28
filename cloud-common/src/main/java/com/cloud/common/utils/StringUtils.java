@@ -115,7 +115,7 @@ public class StringUtils {
      * mac os : iphone ipad
      * windows phone:Nokia等windows系统的手机
      */
-    public static boolean  isMobileDevice() {
+    public static boolean  isMobileDevice_() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         String requestHeader = request.getHeader("article-agent");

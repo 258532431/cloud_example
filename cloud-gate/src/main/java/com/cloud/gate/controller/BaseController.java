@@ -31,13 +31,13 @@ public class BaseController {
     /**
      * @Author: yangchenglong on 2019/6/27
      * @Description: 缓存会话数据
-     * update by: 
-     * @Param: 
+     * update by:
+     * @Param:
      * @return:  缓存key值
      */
     public String setUserSession(User user) {
         String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-        if (StringUtils.isMobileDevice()) {//移动端
+        if (StringUtils.isMobileDevice(request)) {//移动端
             token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {//token存在刷新
@@ -47,20 +47,20 @@ public class BaseController {
             user.setToken(token);
             redisUtils.setSessionCache(token, user);
         }
-        
+
         return token;
     }
 
     /**
      * @Author: yangchenglong on 2019/6/27
      * @Description: 取出会话数据
-     * update by: 
-     * @Param: 
+     * update by:
+     * @Param:
      * @return:  User
      */
     public User getUserSession() {
         String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-        if (StringUtils.isMobileDevice()) {//移动端
+        if (StringUtils.isMobileDevice(request)) {//移动端
             token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {
@@ -79,7 +79,7 @@ public class BaseController {
      */
     public void removeUserSession() {
         String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-        if (StringUtils.isMobileDevice()) {//移动端
+        if (StringUtils.isMobileDevice(request)) {//移动端
             token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {
