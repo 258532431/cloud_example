@@ -36,9 +36,9 @@ public class BaseController {
      * @return:  缓存key值
      */
     public String setUserSession(User user) {
-        String token = request.getHeader(UserConstants.PC_ACCESS_TOKEN);
+        String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
         if (StringUtils.isMobileDevice()) {//移动端
-            token = request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
+            token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {//token存在刷新
             this.refreshSessionCache(token);
@@ -59,9 +59,9 @@ public class BaseController {
      * @return:  User
      */
     public User getUserSession() {
-        String token = request.getHeader(UserConstants.PC_ACCESS_TOKEN);
+        String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
         if (StringUtils.isMobileDevice()) {//移动端
-            token = request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
+            token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {
             return (User) redisUtils.getObject(token);
@@ -78,9 +78,9 @@ public class BaseController {
      * @return:
      */
     public void removeUserSession() {
-        String token = request.getHeader(UserConstants.PC_ACCESS_TOKEN);
+        String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
         if (StringUtils.isMobileDevice()) {//移动端
-            token = request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
+            token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {
             redisUtils.remove(token);
