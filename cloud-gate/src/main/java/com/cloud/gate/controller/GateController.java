@@ -46,7 +46,7 @@ public class GateController extends BaseController{
     })
     public ResponseMessage<User> debugLogin(@RequestParam String authCode, @RequestParam String username, @RequestParam String password) {
         ResponseMessage<User> user = userFeign.login(username, password);
-        System.out.println("user : "+user.toString());
+        System.out.println("user : "+user.getDatas().toString());
 
         return user;
     }

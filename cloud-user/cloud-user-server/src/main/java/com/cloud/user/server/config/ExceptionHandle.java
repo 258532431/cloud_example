@@ -1,6 +1,7 @@
-package com.cloud.common.config;
+package com.cloud.user.server.config;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cloud.common.config.GlobalException;
 import com.cloud.common.entity.ResponseMessage;
 import com.cloud.common.enums.ResponseCodeEnum;
 import org.springframework.web.bind.annotation.ControllerAdvice;
