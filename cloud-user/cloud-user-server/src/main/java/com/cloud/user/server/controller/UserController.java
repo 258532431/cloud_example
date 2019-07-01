@@ -48,7 +48,7 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    @ApiOperation(value = "获取当前登录用户", notes = "")
+    @ApiOperation(value = "退出登录", notes = "")
     public ResponseMessage logout(){
         removeUserSession();
         return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);

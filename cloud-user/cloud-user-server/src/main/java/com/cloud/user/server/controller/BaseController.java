@@ -36,8 +36,10 @@ public class BaseController {
      * @return:  缓存key值
      */
     public String setUserSession(User user) {
+        String tokenPrefix = UserConstants.REDIS_PC_USER_TOKEN;
         String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
         if (StringUtils.isMobileDevice(request)) {//移动端
+            tokenPrefix = UserConstants.REDIS_MOBILE_USER_TOKEN;
             token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {//token存在刷新
@@ -45,7 +47,7 @@ public class BaseController {
         } else {//不存在增加
             token = StringUtils.getSerialNumber() + StringUtils.md5(DateUtils.DateToString(new Date(), DateUtils.formatToNo));
             user.setToken(token);
-            redisUtils.setSessionCache(token, user);
+            redisUtils.setSessionCache(tokenPrefix + ":" +token, user);
         }
 
         return token;
@@ -86,35 +88,5 @@ public class BaseController {
             redisUtils.remove(token);
         }
     }
-
-    /**
-     * @Author: yangchenglong on 2019/6/27
-     * @Description: 设置缓存
-     * update by:
-     * @Param:
-     * @return:
-     */
-    /*public void setSessionCache(String key, Object value) {
-        if (StringUtils.isMobileDevice()) {//移动端
-            redisUtils.setExpireObject(UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +key, value, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
-        } else {//PC端
-            redisUtils.setExpireObject(UserConstants.REDIS_PC_USER_TOKEN + ":" +key, value, UserConstants.PC_SESSION_EXPIRETIME_SECONDS);
-        }
-    }*/
-
-    /**
-     * @Author: yangchenglong on 2019/6/27
-     * @Description: 刷新缓存
-     * update by:
-     * @Param:
-     * @return:
-     */
-    /*public void refreshSessionCache(String key) {
-        if (StringUtils.isMobileDevice()) {
-            redisUtils.expire(UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +key, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
-        } else {
-            redisUtils.expire(UserConstants.REDIS_PC_USER_TOKEN + ":" +key, UserConstants.PC_SESSION_EXPIRETIME_SECONDS);
-        }
-    }*/
 
 }
