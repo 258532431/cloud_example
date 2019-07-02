@@ -2,7 +2,8 @@
 1、此项目为cloud微服务框架项目      
 2、数据库使用mysql, 数据库文件在sql文件夹       
 3、运行项目需要安装redis、rabbitmq    
-4、maven的settings.xml文件在项目根目录        
+4、maven的settings.xml文件在项目根目录   
+5、运行内存配置VM Options： -Xms10m -Xmx200m                
 
 # 项目技术点        
 1、用户鉴权信息使用redis存储        
