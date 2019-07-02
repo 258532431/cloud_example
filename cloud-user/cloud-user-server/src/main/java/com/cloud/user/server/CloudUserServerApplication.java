@@ -8,6 +8,7 @@ import com.cloud.user.constant.UserConstants;
 import com.cloud.user.server.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -34,6 +35,12 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class CloudUserServerApplication implements WebMvcConfigurer {
 
+    @Value("${filter-path}")
+    private String filterPath;//未登录需拦截路径
+
+    @Value("${excludes-filter-path}")
+    private String excludesFilterPath;//未登录不需要拦截的路径
+
     public static void main(String[] args) {
         SpringApplication.run(CloudUserServerApplication.class, args);
         log.info("-------------------CloudUserServerApplication 启动成功------------------------");
@@ -46,10 +53,12 @@ public class CloudUserServerApplication implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
+        String[] filterPaths = this.filterPath.split(",");
+        String[] excludesFilterPaths = this.excludesFilterPath.split(",");
         //配置拦截路径
         registry.addInterceptor(getLoginInterceptor())
-                .addPathPatterns("/base/**")
-                .excludePathPatterns("/base/login");
+                .addPathPatterns(filterPaths)
+                .excludePathPatterns(excludesFilterPaths);
     }
 
     @Override

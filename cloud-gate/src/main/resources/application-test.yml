@@ -21,9 +21,6 @@ spring:
         max-idle: 8  # 连接池中的最大空闲连接
         min-idle: 0  # 连接池中的最小空闲连接
 
-#不需要拦截的路径，多个的话以逗号分隔
-#permit-path: /actuator/**,/swagger-resources/**,/webjars/**,/**/v2/**,/**/rest/api/doc/**,/swagger-ui.html/**
-
 eureka:
   port: 8500
   instance:
