@@ -8,11 +8,7 @@ import com.cloud.user.entity.User;
  * @author: yangchenglong
  * @create: 2019-05-31 16:02
  */
-public interface UserService {
-
-    User selectByPrimaryKey(Long id);
-
-    int insertSelective(User user);
+public interface UserService extends BaseService<User>{
 
     User selectByUsername(String username);
 

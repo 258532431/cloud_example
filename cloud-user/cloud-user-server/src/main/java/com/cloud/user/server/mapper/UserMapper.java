@@ -2,19 +2,13 @@ package com.cloud.user.server.mapper;
 
 import com.cloud.user.entity.User;
 
-public interface UserMapper {
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+/**
+ * @program: cloud_example
+ * @description: 用户接口
+ * @author: yangchenglong
+ * @create: 2019-05-31 16:02
+ */
+public interface UserMapper extends BaseMapper<User>{
 
     User selectByUsername(String username);
 }

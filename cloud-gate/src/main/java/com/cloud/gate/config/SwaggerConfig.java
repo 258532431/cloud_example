@@ -35,12 +35,13 @@ public class SwaggerConfig {
 
     @Bean
     public Docket createRestApi() {
-        ParameterBuilder ticketPar = new ParameterBuilder();
+        //增加header参数token
+        /*ParameterBuilder ticketPar = new ParameterBuilder();
         List<Parameter> pars = new ArrayList<Parameter>();
         ticketPar.name("token").description("用户Token")
                 .modelRef(new ModelRef("String")).parameterType("header")
                 .required(false).build(); //header中的ticket参数非必填，传空也可以
-        pars.add(ticketPar.build());
+        pars.add(ticketPar.build());*/
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
@@ -49,8 +50,8 @@ public class SwaggerConfig {
 //                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .apis(RequestHandlerSelectors.basePackage("com.cloud.gate.controller"))
                 .paths(PathSelectors.any())
-                .build()
-                .globalOperationParameters(pars);
+                .build();
+//                .globalOperationParameters(pars); //增加header参数token
     }
 
     private ApiInfo apiInfo() {

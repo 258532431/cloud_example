@@ -19,14 +19,14 @@ import java.util.UUID;
  * @create: 2019-05-31 16:03
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Resource
     private UserMapper userMapper;
 
     @Override
-    public User selectByPrimaryKey(Long id) {
-        return userMapper.selectByPrimaryKey(id);
+    public int insert(User user) {
+        return 0;
     }
 
     @Override
@@ -53,6 +53,8 @@ public class UserServiceImpl implements UserService {
             if(user.getStatus() != 1) {
                 throw new GlobalException(ResponseCodeEnum.RETURN_CODE_101004);
             }
+        }else {
+            throw new GlobalException(ResponseCodeEnum.RETURN_CODE_101005);
         }
 
         return user;

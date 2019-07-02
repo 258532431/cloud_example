@@ -1,11 +1,11 @@
 package com.cloud.user.server.mapper;
 
-import java.util.List;
-import java.util.Map;
-
 /**
- * 基础Mapper
- * */
+ * @program: cloud_example
+ * @description: 基础Mapper
+ * @author: yangchenglong
+ * @create: 2019-05-31 16:02
+ */
 public interface BaseMapper<T> {
 	/**
 	 * 新增
@@ -22,7 +22,7 @@ public interface BaseMapper<T> {
 	int insertSelective(T t);
 
 	/**
-	 * 按主键删除
+	 * 按主键物理删除
 	 * @param key
 	 * @return
 	 */
@@ -48,17 +48,5 @@ public interface BaseMapper<T> {
 	 * @return
 	 */
 	T selectByPrimaryKey(Object key);
-
-	/**
-	 * 查询列表
-	 * */
-	List<T> page(Map map);
-
-	/**
-	 * 查询列表分页总数
-	 * @param map
-	 * @return
-	 */
-    long pageCount(Map map);
 	
 }

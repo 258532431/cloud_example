@@ -10,27 +10,32 @@
         <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
+
     <sql id="Base_Column_List">
-    id, user_code, username, password, create_time, status, remark
-  </sql>
+        id, user_code, username, password, create_time, status, remark
+    </sql>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from biz_user
         where id = #{id,jdbcType=BIGINT}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from biz_user
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from biz_user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
     <insert id="insert" parameterType="com.cloud.user.entity.User">
-    insert into biz_user (id, user_code, username, 
-      password, create_time, status, 
-      remark)
-    values (#{id,jdbcType=BIGINT}, #{userCode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
-      #{remark,jdbcType=VARCHAR})
-  </insert>
+        insert into biz_user (id, user_code, username,
+          password, create_time, status,
+          remark)
+        values (#{id,jdbcType=BIGINT}, #{userCode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+          #{password,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT},
+          #{remark,jdbcType=VARCHAR})
+    </insert>
+
     <insert id="insertSelective" parameterType="com.cloud.user.entity.User">
         insert into biz_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -80,6 +85,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.cloud.user.entity.User">
         update biz_user
         <set>
@@ -104,16 +110,17 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.cloud.user.entity.User">
-    update biz_user
-    set user_code = #{userCode,jdbcType=VARCHAR},
-      username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT},
-      remark = #{remark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update biz_user
+        set user_code = #{userCode,jdbcType=VARCHAR},
+          username = #{username,jdbcType=VARCHAR},
+          password = #{password,jdbcType=VARCHAR},
+          create_time = #{createTime,jdbcType=TIMESTAMP},
+          status = #{status,jdbcType=TINYINT},
+          remark = #{remark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
     <select id="selectByUsername" parameterType="java.util.Map" resultMap="BaseResultMap">
         select
