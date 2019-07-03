@@ -1,4 +1,4 @@
-package com.cloud.user.server.mapper;
+package com.cloud.common.mybatis;
 
 /**
  * @program: cloud_example

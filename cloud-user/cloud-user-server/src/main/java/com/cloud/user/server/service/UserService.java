@@ -1,5 +1,6 @@
 package com.cloud.user.server.service;
 
+import com.cloud.common.mybatis.BaseService;
 import com.cloud.user.entity.User;
 
 /**
@@ -8,7 +9,7 @@ import com.cloud.user.entity.User;
  * @author: yangchenglong
  * @create: 2019-05-31 16:02
  */
-public interface UserService extends BaseService<User>{
+public interface UserService extends BaseService<User> {
 
     User insertSelectiveGet(User user);
 

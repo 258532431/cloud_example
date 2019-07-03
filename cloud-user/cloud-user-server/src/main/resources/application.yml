@@ -16,7 +16,7 @@ eureka:
 
 # 配置数据库映射文件路径
 mybatis:
-  mapper-locations: "classpath:mapper/*.xml"
+  mapper-locations: "classpath*:mapper/*.xml"
 
 # 调整日志级别，打印SQL语句
 logging:

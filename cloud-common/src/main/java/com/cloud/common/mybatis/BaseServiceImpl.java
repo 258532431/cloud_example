@@ -1,17 +1,6 @@
-package com.cloud.user.server.service.impl;
-
-import com.cloud.common.config.GlobalException;
-import com.cloud.common.enums.ResponseCodeEnum;
-import com.cloud.common.utils.StringUtils;
-import com.cloud.user.entity.User;
-import com.cloud.user.server.mapper.BaseMapper;
-import com.cloud.user.server.mapper.UserMapper;
-import com.cloud.user.server.service.BaseService;
-import com.cloud.user.server.service.UserService;
-import org.springframework.stereotype.Service;
+package com.cloud.common.mybatis;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * @program: cloud_example
@@ -19,7 +8,6 @@ import java.util.Date;
  * @author: yangchenglong
  * @create: 2019-05-31 16:03
  */
-@Service
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     @Resource

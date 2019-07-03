@@ -1,4 +1,4 @@
-package com.cloud.user.server.service;
+package com.cloud.common.mybatis;
 
 /**
  * @program: cloud_example
