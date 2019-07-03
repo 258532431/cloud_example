@@ -10,6 +10,8 @@ import com.cloud.user.entity.User;
  */
 public interface UserService extends BaseService<User>{
 
+    User insertSelectiveGet(User user);
+
     User selectByUsername(String username);
 
     User login(String username, String password);

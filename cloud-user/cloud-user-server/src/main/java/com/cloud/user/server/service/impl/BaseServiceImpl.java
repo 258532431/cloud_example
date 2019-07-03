@@ -20,11 +20,10 @@ import java.util.Date;
  * @create: 2019-05-31 16:03
  */
 @Service
-public class BaseServiceImpl<T> implements BaseService<T> {
+public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     @Resource
     private BaseMapper<T> baseMapper;
-
 
     @Override
     public int insert(T t) {

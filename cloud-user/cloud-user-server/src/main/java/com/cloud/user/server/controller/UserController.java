@@ -48,21 +48,21 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    @ApiOperation(value = "退出登录", notes = "")
+    @ApiOperation(value = "退出登录", notes = "请求需要在header中传入token")
     public ResponseMessage logout(){
         removeUserSession();
         return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);
     }
 
     @RequestMapping(value = "/getSessionUser", method = RequestMethod.GET)
-    @ApiOperation(value = "获取当前登录用户", notes = "前端请求需要在header中传入token")
+    @ApiOperation(value = "获取当前登录用户", notes = "请求需要在header中传入token")
     public ResponseMessage<User> getSessionUser(){
         User user = getUserSession();
         return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, user);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ApiOperation(value = "根据ID获取用户", notes = "")
+    @ApiOperation(value = "根据ID获取用户", notes = "请求需要在header中传入token")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "主键Id", dataType = "Long", paramType = "path", example = "0", required = true)
     })
@@ -71,14 +71,24 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ApiOperation(value = "新增用户", notes = "密码通过RSA加密传输")
+    @ApiOperation(value = "新增用户", notes = "密码通过RSA加密传输；请求需要在header中传入token")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "remark", value = "备注", dataType = "String", paramType = "query")
     })
     public ResponseMessage insertSelective(@ApiIgnore User user){
-        userService.insertSelective(user);
+        User entity = userService.insertSelectiveGet(user);
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, entity);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ApiOperation(value = "根据ID删除用户", notes = "请求需要在header中传入token")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "主键Id", dataType = "Long", paramType = "path", example = "0", required = true)
+    })
+    public ResponseMessage<User> delete(@PathVariable Long id){
+        userService.deleteByPrimaryKey(id);
         return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);
     }
 

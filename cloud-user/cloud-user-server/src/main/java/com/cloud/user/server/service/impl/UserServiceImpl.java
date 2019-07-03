@@ -26,16 +26,38 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public int insert(User user) {
-        return 0;
+        return userMapper.insert(this.setEntity(user));
     }
 
     @Override
     public int insertSelective(User user) {
+        return userMapper.insertSelective(this.setEntity(user));
+    }
+
+    //处理新增数据
+    private User setEntity(User user){
         user.setUserCode(StringUtils.getSerialNumber());
         user.setCreateTime(new Date());
-        user.setStatus(0);
+        user.setStatus(1);
         user.setPassword(StringUtils.md5(user.getPassword()));
-        return userMapper.insertSelective(user);
+
+        return user;
+    }
+
+    /**
+     * @Author: yangchenglong on 2019/7/3
+     * @Description: 新增并返回对象
+     * update by: 
+     * @Param: 
+     * @return: 
+     */
+    @Override
+    public User insertSelectiveGet(User user) {
+        int result = this.insertSelective(user);
+        if (result > 0)
+            return user;
+        
+        return null;
     }
 
     @Override
