@@ -14,6 +14,9 @@
 6、swagger api接口展示       
 7、LCN解决分布式事务（暂未配置）      
 
+# 前端vue框架介绍         
+1、除登录接口外，调用其他接口需在header中传入token值，token的参数名由前后端双方约定          
+
 # 跨域请求       
 注解：@CrossOrigin
 
@@ -37,6 +40,6 @@
 @toString：注解在类上；为类提供toString方法（可以添加排除和依赖）；      
 官方文档https://projectlombok.org/features/index.html
 
-#  spring redis session 问题      
+#  如需使用spring redis session 问题（本项目未使用）      
 前端使用vue axios 进行ajax请求需配置：        
 axios.defaults.withCredentials = true   //解决跨域造成的每次sessionId不一样     
