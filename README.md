@@ -14,7 +14,8 @@
 4、zuul路由转发      
 5、feign服务接口调用，hystrix熔断机制，ribbon负载均衡   
 6、swagger api接口展示（地址：http://127.0.0.1:8410/swagger-ui.html）       
-7、LCN解决分布式事务（暂未配置）      
+7、LCN解决分布式事务（暂未配置）     
+8、activiti工作流        
 
 # 前端vue框架介绍         
 1、除登录接口外，调用其他接口需在header中传入token值，token的参数名由前后端双方约定         
