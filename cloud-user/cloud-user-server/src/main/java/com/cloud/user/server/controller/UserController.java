@@ -1,9 +1,7 @@
 package com.cloud.user.server.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.cloud.common.entity.ResponseMessage;
 import com.cloud.common.enums.ResponseCodeEnum;
-import com.cloud.user.constant.UserConstants;
 import com.cloud.user.entity.User;
 import com.cloud.user.server.service.UserService;
 import io.swagger.annotations.Api;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 /**
  * @program: cloud_example
