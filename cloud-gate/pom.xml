@@ -85,7 +85,6 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>5.1.5.RELEASE</version>
         </dependency>
         <!-- 公共资源池。我们可以根据它来快速的建立一个自己的对象池 -->
         <dependency>

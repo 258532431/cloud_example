@@ -1,4 +1,4 @@
-package com.cloud.activiti.rest.editor.controller;
+package com.cloud.activiti.controller;
 
 import com.cloud.common.entity.ResponseMessage;
 import com.cloud.common.enums.ResponseCodeEnum;
