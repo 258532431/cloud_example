@@ -78,7 +78,7 @@ public class ModelerController {
                 "http://b3mn.org/stencilset/bpmn2.0#");
         editorNode.put("stencilset", stencilSetNode);
         repositoryService.addModelEditorSource(id,editorNode.toString().getBytes("utf-8"));
-        return new ResponseMessage<>(ResponseCodeEnum.RETURN_CODE_100200, id);
+        return new ResponseMessage<>(ResponseCodeEnum.RETURN_CODE_100200, model);
     }
 
     @ApiOperation(value = "获取所有模型", notes = "")
