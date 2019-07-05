@@ -7,6 +7,7 @@ import com.cloud.common.utils.StringUtils;
 import com.cloud.user.entity.User;
 import com.cloud.user.server.mapper.UserMapper;
 import com.cloud.user.server.service.UserService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import java.util.Date;
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Resource
+    @Qualifier("userMapper")
     private UserMapper userMapper;
 
     @Override

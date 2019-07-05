@@ -11,7 +11,6 @@ import java.util.List;
  * @Description: 请假mapper接口
  * update by:
  */
-@Qualifier("leaveMapper")
 public interface LeaveMapper extends BaseMapper<Leave> {
 
     Leave selectByLeaveCode(String leaveCode);

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * @author: yangchenglong
  * @create: 2019-05-31 16:02
  */
-@Qualifier("userMapper")
 public interface UserMapper extends BaseMapper<User> {
 
     User selectByUsername(String username);
