@@ -6,6 +6,7 @@ import com.cloud.user.server.mapper.LeaveMapper;
 import com.cloud.user.server.service.LeaveService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,11 +17,11 @@ import java.util.List;
  * @author: yangchenglong
  * @create: 2019-05-31 16:03
  */
-@Service("leaveService")
+@Service
+@Transactional
 public class LeaveServiceImpl extends BaseServiceImpl<Leave> implements LeaveService {
 
     @Resource
-    @Qualifier("leaveMapper")
     private LeaveMapper leaveMapper;
 
     @Override

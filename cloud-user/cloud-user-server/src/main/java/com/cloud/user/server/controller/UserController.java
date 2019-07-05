@@ -8,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -21,7 +20,6 @@ import javax.annotation.Resource;
  * @create: 2019-05-31 16:08
  */
 @RestController
-@Transactional
 @RequestMapping("/base")
 @Api(tags = "用户管理", description = "用户管理rest接口")
 public class UserController extends BaseController{

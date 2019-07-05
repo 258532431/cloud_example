@@ -30,4 +30,4 @@ management:
         allowed-methods: "*"
 
 # 未登录需拦截路径，多个的话以逗号分隔
-filter-path: /activiti/**
+filter-path: /**

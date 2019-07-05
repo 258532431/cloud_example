@@ -9,6 +9,7 @@ import com.cloud.user.server.mapper.UserMapper;
 import com.cloud.user.server.service.UserService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -19,11 +20,11 @@ import java.util.Date;
  * @author: yangchenglong
  * @create: 2019-05-31 16:03
  */
-@Service("userService")
+@Service
+@Transactional
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Resource
-    @Qualifier("userMapper")
     private UserMapper userMapper;
 
     @Override

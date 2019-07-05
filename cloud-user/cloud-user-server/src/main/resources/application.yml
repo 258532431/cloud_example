@@ -34,6 +34,6 @@ management:
         allowed-methods: "*"
 
 # 未登录需拦截路径，多个的话以逗号分隔
-filter-path: /user/**
+filter-path: /**
 # 未登录不需要拦截的路径，多个的话以逗号分隔
-excludes-filter-path: /user/base/login
+excludes-filter-path: /base/login

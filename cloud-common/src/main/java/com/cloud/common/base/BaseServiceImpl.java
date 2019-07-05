@@ -1,5 +1,7 @@
 package com.cloud.common.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.annotation.Resource;
 
 /**
@@ -10,7 +12,7 @@ import javax.annotation.Resource;
  */
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
-    @Resource
+    @Autowired
     private BaseMapper<T> baseMapper;
 
     @Override
