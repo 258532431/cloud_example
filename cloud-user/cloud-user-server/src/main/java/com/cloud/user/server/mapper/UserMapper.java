@@ -1,7 +1,8 @@
 package com.cloud.user.server.mapper;
 
-import com.cloud.common.mybatis.BaseMapper;
+import com.cloud.common.base.BaseMapper;
 import com.cloud.user.entity.User;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * @program: cloud_example
@@ -9,6 +10,7 @@ import com.cloud.user.entity.User;
  * @author: yangchenglong
  * @create: 2019-05-31 16:02
  */
+@Qualifier("userMapper")
 public interface UserMapper extends BaseMapper<User> {
 
     User selectByUsername(String username);

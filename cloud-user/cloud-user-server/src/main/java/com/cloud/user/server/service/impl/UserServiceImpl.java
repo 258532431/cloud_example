@@ -2,7 +2,7 @@ package com.cloud.user.server.service.impl;
 
 import com.cloud.common.config.GlobalException;
 import com.cloud.common.enums.ResponseCodeEnum;
-import com.cloud.common.mybatis.BaseServiceImpl;
+import com.cloud.common.base.BaseServiceImpl;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.user.entity.User;
 import com.cloud.user.server.mapper.UserMapper;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @program: cloud_example
@@ -19,7 +18,7 @@ import java.util.UUID;
  * @author: yangchenglong
  * @create: 2019-05-31 16:03
  */
-@Service
+@Service("userService")
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Resource

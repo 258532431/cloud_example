@@ -1,6 +1,6 @@
 package com.cloud.user.server.service.impl;
 
-import com.cloud.common.mybatis.BaseServiceImpl;
+import com.cloud.common.base.BaseServiceImpl;
 import com.cloud.user.entity.Leave;
 import com.cloud.user.server.mapper.LeaveMapper;
 import com.cloud.user.server.service.LeaveService;
@@ -15,7 +15,7 @@ import java.util.List;
  * @author: yangchenglong
  * @create: 2019-05-31 16:03
  */
-@Service
+@Service("leaveService")
 public class LeaveServiceImpl extends BaseServiceImpl<Leave> implements LeaveService {
 
     @Resource

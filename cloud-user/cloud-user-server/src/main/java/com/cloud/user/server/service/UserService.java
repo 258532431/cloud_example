@@ -1,6 +1,6 @@
 package com.cloud.user.server.service;
 
-import com.cloud.common.mybatis.BaseService;
+import com.cloud.common.base.BaseService;
 import com.cloud.user.entity.User;
 
 /**
