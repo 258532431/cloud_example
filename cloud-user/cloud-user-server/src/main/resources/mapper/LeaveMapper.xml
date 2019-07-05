@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.user.server.mapper.LeaveMapper">
+    <resultMap id="BaseResultMap" type="com.cloud.user.entity.Leave">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="leave_code" jdbcType="VARCHAR" property="leaveCode"/>
+        <result column="user_code" jdbcType="VARCHAR" property="userCode"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="audit_status" jdbcType="TINYINT" property="auditStatus"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      id, leave_code, user_code, type, content, audit_status
+     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from biz_leave
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from biz_leave
+        where id = #{id,jdbcType=BIGINT}
+     </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.cloud.user.entity.Leave">
+        insert into biz_leave (id, leave_code, user_code,
+          type, content, audit_status
+          )
+        values (#{id,jdbcType=BIGINT}, #{leaveCode,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR},
+          #{type,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR}, #{auditStatus,jdbcType=BIT}
+          )
+    </insert>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.cloud.user.entity.Leave">
+        insert into biz_leave
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="leaveCode != null">
+                leave_code,
+            </if>
+            <if test="userCode != null">
+                user_code,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="auditStatus != null">
+                audit_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="leaveCode != null">
+                #{leaveCode,jdbcType=VARCHAR},
+            </if>
+            <if test="userCode != null">
+                #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStatus != null">
+                #{auditStatus,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.cloud.user.entity.Leave">
+        update biz_leave
+        <set>
+            <if test="leaveCode != null">
+                leave_code = #{leaveCode,jdbcType=VARCHAR},
+            </if>
+            <if test="userCode != null">
+                user_code = #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStatus != null">
+                audit_status = #{auditStatus,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.cloud.user.entity.Leave">
+        update biz_leave
+        set leave_code = #{leaveCode,jdbcType=VARCHAR},
+          user_code = #{userCode,jdbcType=VARCHAR},
+          type = #{type,jdbcType=TINYINT},
+          content = #{content,jdbcType=VARCHAR},
+          audit_status = #{auditStatus,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByLeaveCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from biz_leave bl
+        where bl.leave_code = #{leaveCode}
+    </select>
+
+    <select id="selectByUserCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from biz_leave bl
+        where bl.user_code = #{userCode}
+    </select>
+
+</mapper>
