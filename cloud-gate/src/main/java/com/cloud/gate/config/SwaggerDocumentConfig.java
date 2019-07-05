@@ -22,7 +22,7 @@ public class SwaggerDocumentConfig implements SwaggerResourcesProvider {
         List resources = new ArrayList<>();
         resources.add(swaggerResource("网关授权API", "/gate/v2/api-docs", "1.0"));
         resources.add(swaggerResource("用户服务API", "/user/v2/api-docs", "1.0"));
-        resources.add(swaggerResource("工作流服务API", "/workflow/v2/api-docs", "1.0"));
+        resources.add(swaggerResource("工作流服务API", "/activiti/v2/api-docs", "1.0"));
         /* 自动映射API
         List<SwaggerResource> resources = new ArrayList<>();
         List<Route> routes = routeLocator.getRoutes();
