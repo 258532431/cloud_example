@@ -2,24 +2,24 @@ spring:
   profiles:
     active: #spring.profiles.active#
   application:
-    name: cloud-activiti  #·şÎñÃû³Æ
+    name: cloud-activiti  #æœåŠ¡åç§°
 
 server:
-  port: 8630 #Ä¬ÈÏ¶Ë¿Ú£¬×ÓÅäÖÃ¶Ë¿Ú»á¸²¸Ç´Ë¶Ë¿Ú
+  port: 8630 #é»˜è®¤ç«¯å£ï¼Œå­é…ç½®ç«¯å£ä¼šè¦†ç›–æ­¤ç«¯å£
 
 eureka:
   instance:
-    #status-page-url-path: /actuator/info         #×´Ì¬Ò³ÃæµÄURL£¬Ïà¶ÔÂ·¾¶£¬Ä¬ÈÏÊ¹ÓÃ HTTP ·ÃÎÊ£¬Èç¹ûĞèÒªÊ¹ÓÃ HTTPSÔòĞèÒªÊ¹ÓÃ¾ø¶ÔÂ·¾¶ÅäÖÃ
-    #health-check-url-path: /actuator/health      #½¡¿µ¼ì²éÒ³ÃæµÄURL£¬Ïà¶ÔÂ·¾¶£¬Ä¬ÈÏÊ¹ÓÃ HTTP ·ÃÎÊ£¬Èç¹ûĞèÒªÊ¹ÓÃ HTTPSÔòĞèÒªÊ¹ÓÃ¾ø¶ÔÂ·¾¶ÅäÖÃ
-    lease-renewal-interval-in-seconds: 5   #¶¨Òå·şÎñĞøÔ¼ÈÎÎñ£¨ĞÄÌø£©µÄµ÷ÓÃ¼ä¸ô£¬µ¥Î»£ºÃë
-    lease-expiration-duration-in-seconds: 10   #¶¨Òå·şÎñÊ§Ğ§µÄÊ±¼ä£¬µ¥Î»£ºÃë
+    #status-page-url-path: /actuator/info         #çŠ¶æ€é¡µé¢çš„URLï¼Œç›¸å¯¹è·¯å¾„ï¼Œé»˜è®¤ä½¿ç”¨ HTTP è®¿é—®ï¼Œå¦‚æœéœ€è¦ä½¿ç”¨ HTTPSåˆ™éœ€è¦ä½¿ç”¨ç»å¯¹è·¯å¾„é…ç½®
+    #health-check-url-path: /actuator/health      #å¥åº·æ£€æŸ¥é¡µé¢çš„URLï¼Œç›¸å¯¹è·¯å¾„ï¼Œé»˜è®¤ä½¿ç”¨ HTTP è®¿é—®ï¼Œå¦‚æœéœ€è¦ä½¿ç”¨ HTTPSåˆ™éœ€è¦ä½¿ç”¨ç»å¯¹è·¯å¾„é…ç½®
+    lease-renewal-interval-in-seconds: 5   #å®šä¹‰æœåŠ¡ç»­çº¦ä»»åŠ¡ï¼ˆå¿ƒè·³ï¼‰çš„è°ƒç”¨é—´éš”ï¼Œå•ä½ï¼šç§’
+    lease-expiration-duration-in-seconds: 10   #å®šä¹‰æœåŠ¡å¤±æ•ˆçš„æ—¶é—´ï¼Œå•ä½ï¼šç§’
 
-# µ÷ÕûÈÕÖ¾¼¶±ğ£¬´òÓ¡SQLÓï¾ä
+# è°ƒæ•´æ—¥å¿—çº§åˆ«ï¼Œæ‰“å°SQLè¯­å¥
 logging:
   level:
     com.cloud: DEBUG
 
-# ¿çÓòÇëÇóÅäÖÃ
+# è·¨åŸŸè¯·æ±‚é…ç½®
 management:
   endpoints:
     web:
