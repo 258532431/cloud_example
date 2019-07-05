@@ -7,7 +7,7 @@ spring:
     active: prod #对应maven多环境配置 打包：clean install -Pdev
   datasource:
     name: test
-    url: jdbc:mysql://127.0.0.1:3306/cloud_activiti?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF8
+    url: jdbc:mysql://127.0.0.1:3306/cloud_user?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource   # 使用druid数据源

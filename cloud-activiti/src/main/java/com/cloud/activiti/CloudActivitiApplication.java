@@ -8,18 +8,18 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableDiscoveryClient
-@SpringBootApplication
+@SpringBootApplication(exclude = {org.activiti.spring.boot.SecurityAutoConfiguration.class})  //排除这个否则导致启动失败
 @EnableFeignClients
 @Slf4j
 @ComponentScan({"org.activiti.rest.diagram", "com.westcatr.rd"})
-@EnableAsync
+//@EnableAsync  // 启用异步任务
 public class CloudActivitiApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CloudActivitiApplication.class, args);
+        log.info("-------------------CloudActivitiApplication 启动成功------------------------");
     }
 
     @Bean

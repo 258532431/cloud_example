@@ -15,6 +15,7 @@ spring:
   security:
     basic:
       path: /actuator   #多个的话以逗号分隔，默认为[/**]
+      enabled: false
     user:
       name: admin             #配置注册中心账户
       password: 123456        #配置注册中心密码
