@@ -33,7 +33,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RestController
-@RequestMapping("models")
+@RequestMapping("/base")
 @Api(tags = "工作流管理", description = "工作流管理rest接口")
 public class ModelerController {
 
