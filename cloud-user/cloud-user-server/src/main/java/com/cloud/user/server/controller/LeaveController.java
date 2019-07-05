@@ -40,4 +40,13 @@ public class LeaveController extends BaseController {
         return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, leaveService.selectByPrimaryKey(id));
     }
 
+    @RequestMapping(value = "/getByCode/{leaveCode}", method = RequestMethod.GET)
+    @ApiOperation(value = "根据code获取对象", notes = "请求需要在header中传入token")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "leaveCode", value = "请假编码", dataType = "String", paramType = "path", example = "", required = true)
+    })
+    public ResponseMessage<Leave> getByCode(@PathVariable String leaveCode){
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, leaveService.selectByLeaveCode(leaveCode));
+    }
+
 }
