@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import javax.annotation.Resource;
+
 /**
  * @author Tijs Rademakers
  */
@@ -41,7 +43,7 @@ public class ModelSaveRestResource implements ModelDataJsonConstants {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(ModelSaveRestResource.class);
 
-    @Autowired
+    @Resource
     private RepositoryService repositoryService;
 
     @Autowired

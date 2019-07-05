@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import java.io.ByteArrayInputStream;
@@ -36,11 +37,11 @@ import java.util.List;
 @Api(tags = "工作流管理", description = "工作流管理rest接口")
 public class ModelerController {
 
-    @Autowired
+    @Resource
     private ProcessEngine processEngine;
-    @Autowired
+    @Resource
     private ObjectMapper objectMapper;
-    @Autowired
+    @Resource
     private RepositoryService repositoryService;
 
     @ApiOperation(value = "新建一个空模型", notes = "")
