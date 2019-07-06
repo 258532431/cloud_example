@@ -34,6 +34,7 @@ import javax.annotation.Resource;
  * @author Tijs Rademakers
  */
 @RestController
+@RequestMapping(value = "/service")
 public class ModelEditorJsonRestResource implements ModelDataJsonConstants {
   
   protected static final Logger LOGGER = LoggerFactory.getLogger(ModelEditorJsonRestResource.class);

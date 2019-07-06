@@ -38,6 +38,9 @@ public class CloudActivitiApplication implements WebMvcConfigurer {
     @Value("${filter-path}")
     private String filterPath;//未登录需拦截路径
 
+    @Value("${excludes-filter-path}")
+    private String excludesFilterPath;//未登录不需要拦截的路径
+
     public static void main(String[] args) {
         SpringApplication.run(CloudActivitiApplication.class, args);
         log.info("-------------------CloudActivitiApplication 启动成功------------------------");
@@ -51,9 +54,11 @@ public class CloudActivitiApplication implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry){
         String[] filterPaths = this.filterPath.split(",");
+        String[] excludesFilterPaths = this.excludesFilterPath.split(",");
         //配置拦截路径
         registry.addInterceptor(getLoginInterceptor())
-                .addPathPatterns(filterPaths);
+                .addPathPatterns(filterPaths)
+                .excludePathPatterns(excludesFilterPaths);
     }
 
     @Override

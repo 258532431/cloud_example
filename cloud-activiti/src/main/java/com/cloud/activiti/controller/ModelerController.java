@@ -43,7 +43,7 @@ public class ModelerController {
     @Resource
     private RepositoryService repositoryService;
 
-    @ApiOperation(value = "新建一个空模型", notes = "")
+    @ApiOperation(value = "新建一个空模型", notes = "访问地址：http://127.0.0.1:8430/static/modeler.html?modelId=模型ID")
     @PostMapping
     public ResponseMessage newModel() throws UnsupportedEncodingException {
         RepositoryService repositoryService = processEngine.getRepositoryService();
