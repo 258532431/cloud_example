@@ -1,5 +1,6 @@
 package com.cloud.common.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -29,7 +30,7 @@ public class RSAUtils {
     /**
      * 随机生成密钥对
      */
-    public Map<String, String> genKeyPair() throws NoSuchAlgorithmException {
+    public static Map<String, String> genKeyPair() throws NoSuchAlgorithmException {
         // KeyPairGenerator类用于生成公钥和私钥对，基于RSA算法生成对象
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
         // 初始化密钥对生成器，密钥大小为96-1024位
@@ -46,6 +47,10 @@ public class RSAUtils {
         map.put(PRIVATEKEY, privateKey);
         map.put(PUBLICKEY, publicKey);
         return map;
+    }
+
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        System.out.println(JSONObject.toJSONString(genKeyPair()));
     }
 
     /**

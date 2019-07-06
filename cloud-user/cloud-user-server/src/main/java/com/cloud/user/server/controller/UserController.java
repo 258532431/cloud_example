@@ -34,6 +34,7 @@ public class UserController extends BaseController{
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "query", required = true)
     })
     public ResponseMessage<User> login(@RequestParam String username, @RequestParam String password){
+        removeUserSession();//单点登录
         User user = userService.login(username, password);
         if(user != null){
             setUserSession(user);

@@ -1,13 +1,14 @@
 package com.cloud.user.server.service.impl;
 
+import com.cloud.common.base.BaseServiceImpl;
 import com.cloud.common.config.GlobalException;
 import com.cloud.common.enums.ResponseCodeEnum;
-import com.cloud.common.base.BaseServiceImpl;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.user.entity.User;
 import com.cloud.user.server.mapper.UserMapper;
 import com.cloud.user.server.service.UserService;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +23,14 @@ import java.util.Date;
  */
 @Service
 @Transactional
+@Slf4j
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
+
+    @Value("${rsa.publicKey}")
+    private String rsaPublicKey;
+
+    @Value("${rsa.privateKey}")
+    private String rsaPrivateKey;
 
     @Resource
     private UserMapper userMapper;
@@ -39,10 +47,14 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     //处理新增数据
     private User setEntity(User user){
-        user.setUserCode(StringUtils.getSerialNumber());
-        user.setCreateTime(new Date());
-        user.setStatus(1);
-        user.setPassword(StringUtils.md5(user.getPassword()));
+        try {
+            user.setUserCode(StringUtils.getSerialNumber());
+            user.setCreateTime(new Date());
+            user.setStatus(1);
+            user.setPassword(StringUtils.md5(user.getPassword()));
+        } catch (Exception e) {
+            log.error("rsa解密失败：{}", e);
+        }
 
         return user;
     }
