@@ -64,7 +64,7 @@ public class StringUtils {
 
     /**
      * @Author: yangchenglong on 2019/6/27
-     * @Description: 获取IP地址
+     * @Description: 获取客户端IP地址
      * update by: 
      * @Param: 
      * @return: 
@@ -110,28 +110,6 @@ public class StringUtils {
     }
 
     /**
-     * 判断用户是否移动端访问
-     * android : 所有android设备
-     * mac os : iphone ipad
-     * windows phone:Nokia等windows系统的手机
-     */
-    public static boolean  isMobileDevice_() {
-        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = requestAttributes.getRequest();
-        String requestHeader = request.getHeader("article-agent");
-        String[] deviceArray = {"android", "mac os", "windows phone"};
-        if (requestHeader == null)
-            return false;
-        requestHeader = requestHeader.toLowerCase();
-        for (String mobile : deviceArray) {
-            if (requestHeader.indexOf(mobile) > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * @Author: yangchenglong on 2019/6/27
      * @Description: 随机流水号UUID
      * update by: 
@@ -140,10 +118,6 @@ public class StringUtils {
      */
     public static String getSerialNumber() {
         return UUID.randomUUID().toString().replaceAll("-", "");
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getSerialNumber());
     }
 
     /**
