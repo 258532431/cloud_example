@@ -84,7 +84,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     public User login(String username, String password) {
         User user = this.selectByUsername(username);
         if(user != null){
-            if(!user.getPassword().equals(password)){
+            if(!user.getPassword().equals(StringUtils.md5(password))){
                 throw new GlobalException(ResponseCodeEnum.RETURN_CODE_101001);
             }
             if(user.getStatus() != 1) {
