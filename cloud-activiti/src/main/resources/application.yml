@@ -31,5 +31,5 @@ management:
 
 # 未登录需拦截路径，多个的话以逗号分隔
 filter-path: /**
-# 未登录不需要拦截的路径，多个的话以逗号分隔
-excludes-filter-path: /static/**
+# 未登录不需要拦截的路径，多个的话以逗号分隔(这里配置不拦截activiti工作流相关的资源路径)
+excludes-filter-path: /static/**,/service/**
