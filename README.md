@@ -5,7 +5,7 @@
 4、maven的settings.xml文件在项目根目录   
 5、运行内存配置VM Options： -Xms10m -Xmx200m       
 6、运行项目设置Active profiles：dev      
-7、项目依次启动顺序：center、gate、user         
+7、项目依次启动顺序：center、其他         
 
 # 项目技术点        
 1、用户鉴权信息使用redis存储        
