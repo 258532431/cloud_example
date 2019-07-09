@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
@@ -29,6 +30,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/task")
 @Api(tags = "工作流管理-任务", description = "工作流管理rest接口")
+@Slf4j
 public class TaskController extends BaseController{
 
     //获取当前登录用户信息
@@ -44,23 +46,26 @@ public class TaskController extends BaseController{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "processDefinitionKey", value = "流程图id", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "businessKey", value = "业务表唯一标识", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "variables", value = "业务属性值", dataType = "Map", paramType = "query")
+            @ApiImplicitParam(name = "variablesJson", value = "业务属性值", dataType = "String", paramType = "query")
     })
     @RequestMapping(value = "/startTask", method = RequestMethod.POST)
-    public void startTask(String processDefinitionKey, String businessKey, String variablesJson) {
+    public ResponseMessage startTask(@RequestParam String processDefinitionKey, @RequestParam String businessKey, @RequestParam String variablesJson) {
         //设置认证信息
         String userCode = this.getSessionUser().getUserCode();//用户code唯一标识
         identityService.setAuthenticatedUserId(userCode);
         Map variables = new HashMap();
+        log.info("variablesJson = {}", variablesJson);
         if(!StringUtils.isNotBlank(variablesJson)){
             variables = JSONObject.parseObject(variablesJson);
         }
         ProcessInstance pi = runtimeService.startProcessInstanceByKey(processDefinitionKey, businessKey, variables);
-        System.out.println("流程启动成功，流程id:"+pi.getId());
+        log.info("流程启动成功，流程id:{}", pi.getId());
         ExecutionEntity executionEntity = (ExecutionEntity) pi;
         String taskId = executionEntity.getTasks().get(0).getId();//任务ID
         // 根据实例把流程往下推
         taskService.complete(taskId, variables);
+
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);
     }
 
     @ApiOperation(value = "获取当前用户的任务", notes = "")

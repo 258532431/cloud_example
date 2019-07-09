@@ -53,17 +53,21 @@ hystrix:
   command:
     default:
       execution:
+        timeout:
+          enabled: true
         isolation:
           thread:
-            timeoutInMilliseconds: 50000  #命令执行超时时间，默认1000ms
+            timeoutInMilliseconds: 120000  #命令执行超时时间，默认1000ms
 
 # ribbon负载均衡配置
 ribbon:
-  connectTimeout: 120000  # 请求连接的超时时间
-  readTimeout: 120000  # 请求处理的超时时间
+  connectTimeout: 100000  # 请求连接的超时时间
+  readTimeout: 100000  # 请求处理的超时时间
   maxAutoRetries: 0  # 对当前实例的重试次数
   maxAutoRetriesNextServer: 0  # 切换实例的重试次数
   okToRetryOnAllOperations: false  # 对所有操作请求都进行重试
+  eureka:
+    enabled: true
 
 # 未登录需拦截路径，多个的话以逗号分隔
 filter-path: /**
