@@ -50,7 +50,7 @@ public class ModelerController {
             @ApiImplicitParam(name = "description", value = "模版描述", dataType = "String", paramType = "query")
     })
     @PostMapping
-    public ResponseMessage newModel(@RequestParam String key, @RequestParam String name, @RequestParam String description) throws UnsupportedEncodingException {
+    public ResponseMessage newModel(@RequestParam String key, @RequestParam String name, @RequestParam(defaultValue = "") String description) throws UnsupportedEncodingException {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         //初始化一个空模型
         Model model = repositoryService.newModel();

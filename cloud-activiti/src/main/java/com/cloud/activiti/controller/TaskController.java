@@ -68,6 +68,25 @@ public class TaskController extends BaseController{
         return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);
     }
 
+    @ApiOperation(value = "获取当前用户的待办任务列表", notes = "")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "processDefinitionKey", value = "流程图KEY(模型KEY)", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageNum", value = "页码", dataType = "int", example = "0", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "每页数量", dataType = "int", example = "0", paramType = "query", required = true)
+    })
+    @RequestMapping(value = "/getTaskListByUser", method = RequestMethod.GET)
+    public ResponseMessage<List<Task>> getTaskListByUser(@RequestParam String processDefinitionKey, @RequestParam int pageNum, @RequestParam int pageSize) {
+        pageNum = pageNum < 1 ? 1 : pageNum;
+        pageSize = pageSize <= 1 ? 0xf423f : pageSize;
+        int startIndex = (pageNum - 1) * pageSize;
+        String userCode = this.getSessionUser().getUserCode();//用户code唯一标识
+        long count = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskCandidateOrAssigned(userCode).count();
+        List<Task> tasks = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskCandidateOrAssigned(userCode).orderByTaskCreateTime().desc().listPage(startIndex, pageSize);
+
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200, tasks, count);
+    }
+
+
     @ApiOperation(value = "获取当前用户的任务", notes = "")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "页码", dataType = "int", example = "0", paramType = "query", required = true),
@@ -98,16 +117,16 @@ public class TaskController extends BaseController{
         pageNum = pageNum < 1 ? 1 : pageNum;
         pageSize = pageSize <= 1 ? 0xf423f : pageSize;
         int startIndex = (pageNum - 1) * pageSize;
-        String userCode = this.getSessionUser().getUserCode();//用户code唯一标识
+        String auditorCode = this.getSessionUser().getUserCode();//用户code唯一标识
         // 获取个人已签收任务
-        long count = taskService.createTaskQuery().taskAssignee(userCode).count();
-        List<Task> tasks = taskService.createTaskQuery().taskAssignee(userCode).listPage(startIndex, pageSize);
+        long count = taskService.createTaskQuery().taskAssignee(auditorCode).count();
+        List<Task> tasks = taskService.createTaskQuery().taskAssignee(auditorCode).listPage(startIndex, pageSize);
         List<String> result = new ArrayList<>();
         tasks.forEach(task -> {
             result.add(task.toString());
         });
         // 获取个人待签收任务
-        List<Task> untasks = taskService.createTaskQuery().taskCandidateUser(userCode).listPage(startIndex, pageSize);
+        List<Task> untasks = taskService.createTaskQuery().taskCandidateUser(auditorCode).listPage(startIndex, pageSize);
         untasks.forEach(task -> {
             result.add(task.toString());
         });
