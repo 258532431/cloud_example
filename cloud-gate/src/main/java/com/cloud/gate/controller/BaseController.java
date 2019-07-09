@@ -30,31 +30,6 @@ public class BaseController {
 
     /**
      * @Author: yangchenglong on 2019/6/27
-     * @Description: 缓存会话数据
-     * update by:
-     * @Param:
-     * @return:  缓存key值
-     */
-    public String setUserSession(User user) {
-        String tokenPrefix = UserConstants.REDIS_PC_USER_TOKEN;
-        String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-        if (StringUtils.isMobileDevice(request)) {//移动端
-            tokenPrefix = UserConstants.REDIS_MOBILE_USER_TOKEN;
-            token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
-        }
-        if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {//token存在刷新
-            redisUtils.refreshSessionCache(token);
-        } else {//不存在增加
-            token = StringUtils.getSerialNumber() + StringUtils.md5(DateUtils.DateToString(new Date(), DateUtils.formatToNo));
-            user.setToken(token);
-            redisUtils.setSessionCache(tokenPrefix + ":" +token, user);
-        }
-
-        return token;
-    }
-
-    /**
-     * @Author: yangchenglong on 2019/6/27
      * @Description: 取出会话数据
      * update by:
      * @Param:

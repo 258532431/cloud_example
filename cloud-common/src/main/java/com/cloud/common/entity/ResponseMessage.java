@@ -27,9 +27,23 @@ public class ResponseMessage<T> implements Serializable{
 
 	private T datas;//封装返回数据
 
+	private long count;//封装返回数据的总条数
+
 	public ResponseMessage(ResponseCodeEnum responseCodeEnum, T datas){
 		this.errorCode = responseCodeEnum.getCode();
 		this.datas = datas;
+		this.msg = responseCodeEnum.getMsg();
+		if(this.errorCode.equals(ResponseCodeEnum.RETURN_CODE_100200.getCode())){
+			this.success = true;
+		} else {
+			this.success = false;
+		}
+	}
+
+	public ResponseMessage(ResponseCodeEnum responseCodeEnum, T datas, long count){
+		this.errorCode = responseCodeEnum.getCode();
+		this.datas = datas;
+		this.count = count;
 		this.msg = responseCodeEnum.getMsg();
 		if(this.errorCode.equals(ResponseCodeEnum.RETURN_CODE_100200.getCode())){
 			this.success = true;

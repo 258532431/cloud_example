@@ -38,16 +38,18 @@ public class BaseController {
     public String setUserSession(User user) {
         String tokenPrefix = UserConstants.REDIS_PC_USER_TOKEN;
         String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
+        Long expireTime = UserConstants.PC_SESSION_EXPIRETIME_SECONDS;
         if (StringUtils.isMobileDevice(request)) {//移动端
             tokenPrefix = UserConstants.REDIS_MOBILE_USER_TOKEN;
             token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
+            expireTime = UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS;
         }
         if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {//token存在刷新
-            redisUtils.refreshSessionCache(token);
+            redisUtils.refreshSessionCache(token, expireTime);
         } else {//不存在增加
             token = StringUtils.getSerialNumber() + StringUtils.md5(DateUtils.DateToString(new Date(), DateUtils.formatToNo));
             user.setToken(token);
-            redisUtils.setSessionCache(tokenPrefix + ":" +token, user);
+            redisUtils.setSessionCache(tokenPrefix + ":" +token, user, expireTime);
         }
 
         return token;

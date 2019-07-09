@@ -2,7 +2,6 @@ package com.cloud.gate.utils;
 
 import com.cloud.common.config.GlobalException;
 import com.cloud.common.enums.ResponseCodeEnum;
-import com.cloud.user.constant.UserConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 
@@ -245,8 +243,8 @@ public class RedisUtils {
      * @Param:
      * @return:
      */
-    public void setSessionCache(String key, Object value) {
-        this.setExpireObject(key, value, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
+    public void setSessionCache(String key, Object value, Long time) {
+        this.setExpireObject(key, value, time);
     }
 
     /**
@@ -256,8 +254,8 @@ public class RedisUtils {
      * @Param:
      * @return:
      */
-    public void refreshSessionCache(String key) {
-        this.expire(key, UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS);
+    public void refreshSessionCache(String key, Long time) {
+        this.expire(key, time);
     }
 
 }

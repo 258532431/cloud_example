@@ -12,8 +12,6 @@ public enum ResponseCodeEnum {
     RETURN_CODE_100500("100500", "系统异常"),
     RETURN_CODE_100600("100600", "请求超时"),
 
-
-
     RETURN_CODE_100000("100000", "未登录"),
     RETURN_CODE_100001("100001", "权限不足"),
     RETURN_CODE_100002("100002", "参数不允许为空"),
@@ -29,7 +27,10 @@ public enum ResponseCodeEnum {
 
     //gate路由相关
     RETURN_CODE_102000("102000", "路由服务异常"),
-    RETURN_CODE_102001("102001", "调试密码错误");
+    RETURN_CODE_102001("102001", "调试密码错误"),
+
+    //工作流相关
+    RETURN_CODE_103000("103000", "工作流服务异常");
 
     private final String code;
     private final String msg;

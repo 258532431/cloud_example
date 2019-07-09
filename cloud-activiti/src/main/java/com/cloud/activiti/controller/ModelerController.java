@@ -33,7 +33,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/base")
-@Api(tags = "工作流管理", description = "工作流管理rest接口")
+@Api(tags = "工作流管理-模型", description = "工作流管理rest接口")
 public class ModelerController {
 
     @Resource
@@ -44,17 +44,22 @@ public class ModelerController {
     private RepositoryService repositoryService;
 
     @ApiOperation(value = "新建一个空模型", notes = "访问地址：http://127.0.0.1:8430/static/modeler.html?modelId=模型ID")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "key", value = "模版key，创建流程用", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "name", value = "模版名称", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "description", value = "模版描述", dataType = "String", paramType = "query")
+    })
     @PostMapping
-    public ResponseMessage newModel() throws UnsupportedEncodingException {
+    public ResponseMessage newModel(@RequestParam String key, @RequestParam String name, @RequestParam String description) throws UnsupportedEncodingException {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         //初始化一个空模型
         Model model = repositoryService.newModel();
 
         //设置一些默认信息
-        String name = "new-process";
-        String description = "";
+//        String name = "new-process";
+//        String description = "";
         int revision = 1;
-        String key = "process";
+//        String key = "process";
 
         ObjectNode modelNode = objectMapper.createObjectNode();
         modelNode.put(ModelDataJsonConstants.MODEL_NAME, name);
@@ -73,8 +78,7 @@ public class ModelerController {
         editorNode.put("id", "canvas");
         editorNode.put("resourceId", "canvas");
         ObjectNode stencilSetNode = objectMapper.createObjectNode();
-        stencilSetNode.put("namespace",
-                "http://b3mn.org/stencilset/bpmn2.0#");
+        stencilSetNode.put("namespace", "http://b3mn.org/stencilset/bpmn2.0#");
         editorNode.put("stencilset", stencilSetNode);
         repositoryService.addModelEditorSource(id,editorNode.toString().getBytes("utf-8"));
         return new ResponseMessage<>(ResponseCodeEnum.RETURN_CODE_100200, model);

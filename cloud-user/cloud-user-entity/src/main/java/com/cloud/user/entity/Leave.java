@@ -26,11 +26,11 @@ public class Leave implements Serializable {
     private String userCode;
 
     @ApiModelProperty(value = "请假类型 0-事假 1-调休")
-    private Byte type;
+    private int type;
 
     @ApiModelProperty(value = "请假说明")
     private String content;
 
     @ApiModelProperty(value = "审核状态 0-待审 1-通过 2-被拒绝")
-    private Boolean auditStatus;
+    private int auditStatus;
 }

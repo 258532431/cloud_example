@@ -77,12 +77,12 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 30000  #命令执行超时时间，默认1000ms
+            timeoutInMilliseconds: 50000  #命令执行超时时间，默认1000ms
 
 # ribbon负载均衡配置
 ribbon:
-  connectTimeout: 60000  # 请求连接的超时时间
-  readTimeout: 60000  # 请求处理的超时时间
+  connectTimeout: 120000  # 请求连接的超时时间
+  readTimeout: 120000  # 请求处理的超时时间
   maxAutoRetries: 0  # 对当前实例的重试次数
   maxAutoRetriesNextServer: 0  # 切换实例的重试次数
   okToRetryOnAllOperations: false  # 对所有操作请求都进行重试

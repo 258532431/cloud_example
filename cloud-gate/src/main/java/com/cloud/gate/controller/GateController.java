@@ -52,6 +52,7 @@ public class GateController extends BaseController{
             //调试方便，将token保存在session中
             HttpSession session = request.getSession();
             session.setAttribute("token", user.getDatas().getToken());
+            session.setMaxInactiveInterval(60 * 60);
             return user;
         }
 

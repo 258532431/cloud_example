@@ -1,15 +1,14 @@
 package com.cloud.activiti.controller;
 
 import com.cloud.activiti.utils.RedisUtils;
-import com.cloud.common.utils.DateUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.user.constant.UserConstants;
 import com.cloud.user.entity.User;
+import org.activiti.engine.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 /**
  * @program: cloud_example
@@ -28,30 +27,26 @@ public class BaseController {
     @Resource
     public RedisUtils redisUtils;
 
-    /**
-     * @Author: yangchenglong on 2019/6/27
-     * @Description: 缓存会话数据
-     * update by: 
-     * @Param:
-     * @return:  缓存key值
-     */
-    public String setUserSession(User user) {
-        String tokenPrefix = UserConstants.REDIS_PC_USER_TOKEN;
-        String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-        if (StringUtils.isMobileDevice(request)) {//移动端
-            tokenPrefix = UserConstants.REDIS_MOBILE_USER_TOKEN;
-            token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
-        }
-        if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {//token存在刷新
-            redisUtils.refreshSessionCache(token);
-        } else {//不存在增加
-            token = StringUtils.getSerialNumber() + StringUtils.md5(DateUtils.DateToString(new Date(), DateUtils.formatToNo));
-            user.setToken(token);
-            redisUtils.setSessionCache(tokenPrefix + ":" +token, user);
-        }
+    @Resource
+    protected RepositoryService repositoryService;//	管理流程定义和流程部署的API
 
-        return token;
-    }
+    @Resource
+    protected RuntimeService runtimeService;//流程运行时对流程实例进行管理和控制
+
+    @Resource
+    protected IdentityService identityService;//流程用户角色管理
+
+    @Resource
+    protected TaskService taskService;//管理流程任务(签收,提交)
+
+    @Resource
+    protected FormService formService;//动态表单
+
+    @Resource
+    protected HistoryService historyService;//管理流程历史数据
+
+    @Resource
+    protected ManagementService managementService;//管理维护流程引擎
 
     /**
      * @Author: yangchenglong on 2019/6/27
@@ -70,23 +65,6 @@ public class BaseController {
         }
 
         return null;
-    }
-
-    /**
-     * @Author: yangchenglong on 2019/6/27
-     * @Description: 清空会话数据
-     * update by:
-     * @Param:
-     * @return:
-     */
-    public void removeUserSession() {
-        String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
-        if (StringUtils.isMobileDevice(request)) {//移动端
-            token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
-        }
-        if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {
-            redisUtils.remove(token);
-        }
     }
 
 }
