@@ -36,6 +36,8 @@ public class LeaveServiceImpl extends BaseServiceImpl<Leave> implements LeaveSer
         int result = leaveMapper.insertSelective(this.setEntity(leave));
         //启动工作流
         Map<String, Object> map = new HashMap<>();
+        map.put("usercode", leave.getUserCode());//申请人
+        map.put("auditorCode", "704528e0c93449aa9abba8906c4d2a77");//审核人
         map.put("leaveCode", leave.getLeaveCode());
         map.put("reason", leave.getContent());
         map.put("startDate", "2019-07-09 09:00");
