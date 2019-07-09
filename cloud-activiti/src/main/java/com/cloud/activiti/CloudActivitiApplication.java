@@ -76,11 +76,13 @@ public class CloudActivitiApplication implements WebMvcConfigurer {
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
             String token = UserConstants.REDIS_PC_USER_TOKEN + ":" +request.getHeader(UserConstants.PC_ACCESS_TOKEN);
+            Long expireTime = UserConstants.PC_SESSION_EXPIRETIME_SECONDS;
             if (StringUtils.isMobileDevice(request)) {//移动端
                 token = UserConstants.REDIS_MOBILE_USER_TOKEN + ":" +request.getHeader(UserConstants.MOBILE_ACCESS_TOKEN);
+                expireTime = UserConstants.MOBILE_SESSION_EXPIRETIME_SECONDS;
             }
             if (StringUtils.isNotBlank(token) && redisUtils.exists(token)) {
-                redisUtils.refreshSessionCache(token);
+                redisUtils.refreshSessionCache(token, expireTime);
                 return true;
             } else {
                 String json = JSONObject.toJSONString(new ResponseMessage<>(ResponseCodeEnum.RETURN_CODE_100000));
