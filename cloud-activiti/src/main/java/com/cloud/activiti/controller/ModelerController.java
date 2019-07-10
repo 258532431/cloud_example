@@ -43,7 +43,7 @@ public class ModelerController {
     @Resource
     private RepositoryService repositoryService;
 
-    @ApiOperation(value = "新建一个空模型", notes = "访问地址：http://127.0.0.1:8430/static/modeler.html?modelId=模型ID")
+    @ApiOperation(value = "新建一个空模型", notes = "访问地址：http://127.0.0.1:8430/static/modeler.html?modelId=模型ID，模型创建好后，需要发布为流程定义")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "key", value = "模版key，创建流程用", dataType = "String", paramType = "query", required = true),
             @ApiImplicitParam(name = "name", value = "模版名称", dataType = "String", paramType = "query", required = true),
