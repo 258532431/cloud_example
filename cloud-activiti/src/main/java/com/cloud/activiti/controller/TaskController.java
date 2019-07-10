@@ -80,7 +80,7 @@ public class TaskController extends BaseController{
     @ApiOperation(value = "审批任务", notes = "")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "taskId", value = "任务表ID", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "variablesJson", value = "业务属性值 - 由Map转Json（信息包括业务KEY、审核状态、审核说明等）", dataType = "String", paramType = "query")
+            @ApiImplicitParam(name = "variablesJson", value = "业务属性值 - 由Map转Json（如：{\"auditStatus\": 1,\"auditorCode\": \"下一个审批人\",\"businessKey\": \"业务表kEY\"}）", dataType = "String", paramType = "query")
     })
     @RequestMapping(value = "/auditTask", method = RequestMethod.POST)
     public ResponseMessage auditTask(@RequestParam String taskId, @RequestParam String variablesJson) {
@@ -95,13 +95,10 @@ public class TaskController extends BaseController{
         //利用任务对象，获取流程实例id
         String processInstancesId = task.getProcessInstanceId();
         Authentication.setAuthenticatedUserId(userCode); // 添加批注时候的审核人，通常应该从session获取
-        //设置下一个审批人
-//        taskService.setAssignee(taskId, (String) variables.get("auditorCode"));
         //在每次提交任务的时候需要描述一些批注信息，例如：请假流程提交的时候要描述信息为什么请假，如果领导驳回可以批注驳回原因等
         taskService.addComment(taskId, processInstancesId, variablesJson);
         // 根据实例把流程往下推
         taskService.complete(taskId, variables);
-
         //判断流程是否结束,查询正在执行的执行对象表
         ProcessInstance rpi = runtimeService.createProcessInstanceQuery().processInstanceId(processInstancesId)//查询条件-流程的实例id(流程的实例id在流程启动后的整个流程中是不改变的)
                 .singleResult(); //返回唯一结果集
