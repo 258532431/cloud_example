@@ -36,11 +36,13 @@ public class LeaveServiceImpl extends BaseServiceImpl<Leave> implements LeaveSer
         int result = leaveMapper.insertSelective(this.setEntity(leave));
         //启动工作流
         Map<String, Object> map = new HashMap<>();
-        map.put("usercode", leave.getUserCode());//申请人
+        map.put("userCode", leave.getUserCode());//申请人
         map.put("auditorCode", "704528e0c93449aa9abba8906c4d2a77");//审核人
-        map.put("leaveCode", leave.getLeaveCode());
+        map.put("businessKey", leave.getLeaveCode());
         map.put("reason", leave.getContent());
-        activitiFeign.startTask("leave_simple", leave.getLeaveCode(), JSONObject.toJSONString(map));
+        String businessType = "0";
+        map.put("businessType", businessType);
+        activitiFeign.startTask("leaveSimple", leave.getLeaveCode(), businessType, JSONObject.toJSONString(map));
 
         return result;
     }

@@ -85,9 +85,6 @@ hystrix:
 ribbon:
   connectTimeout: 100000  # 请求连接的超时时间
   readTimeout: 100000  # 请求处理的超时时间
-  maxAutoRetries: 0  # 对当前实例的重试次数
-  maxAutoRetriesNextServer: 0  # 切换实例的重试次数
-  okToRetryOnAllOperations: false  # 对所有操作请求都进行重试
   eureka:
     enabled: true
 

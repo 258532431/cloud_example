@@ -23,7 +23,7 @@ public interface ActivitiFeign {
 
     @RequestMapping(value = "/task/startTask", method = RequestMethod.POST)
     ResponseMessage startTask(@RequestParam("processDefinitionKey") String processDefinitionKey, @RequestParam("businessKey") String businessKey,
-                              @RequestParam("variablesJson") String variablesJson);
+                              @RequestParam("businessType") String businessType, @RequestParam("variablesJson") String variablesJson);
 
     /**
      * @Author: yangchenglong on 2019/6/20
