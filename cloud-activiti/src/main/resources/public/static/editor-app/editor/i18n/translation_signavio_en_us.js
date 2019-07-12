@@ -17,7 +17,7 @@ ORYX.I18N.Save.saveAs = "Save a copy...";
 ORYX.I18N.Save.saveAsDesc = "Save a copy...";
 ORYX.I18N.Save.saveAsTitle = "Save a copy...";
 ORYX.I18N.Save.savedAs = "Copy saved";
-ORYX.I18N.Save.savedDescription = "The process diagram is stored under";
+ORYX.I18N.Save.savedDescription = "The processes diagram is stored under";
 ORYX.I18N.Save.notAuthorized = "You are currently not logged in. Please <a href='/p/login' target='_blank'>log in</a> in a new window so that you can save the current diagram."
 ORYX.I18N.Save.transAborted = "The saving request took too long. You may use a faster internet connection. If you use wireless LAN, please check the strength of your connection.";
 ORYX.I18N.Save.noRights = "You do not have the required rights to store that model. Please check in the <a href='/p/explorer' target='_blank'>Signavio Explorer</a>, if you still have the rights to write in the target directory.";

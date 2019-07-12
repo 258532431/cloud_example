@@ -1,6 +1,7 @@
 package com.cloud.activiti;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cloud.activiti.modeler.JsonpCallbackFilter;
 import com.cloud.activiti.utils.RedisUtils;
 import com.cloud.common.entity.ResponseMessage;
 import com.cloud.common.enums.ResponseCodeEnum;
@@ -46,6 +47,11 @@ public class CloudActivitiApplication implements WebMvcConfigurer {
     public static void main(String[] args) {
         SpringApplication.run(CloudActivitiApplication.class, args);
         log.info("-------------------CloudActivitiApplication 启动成功------------------------");
+    }
+
+    @Bean
+    public JsonpCallbackFilter filter(){
+        return new JsonpCallbackFilter();
     }
 
     @Bean

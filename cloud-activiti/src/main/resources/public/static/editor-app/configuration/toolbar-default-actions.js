@@ -421,7 +421,7 @@ var SaveModelCtrl = [ '$rootScope', '$scope', '$http', '$route', '$location',
             })
             .error(function (data, status, headers, config) {
                 $scope.error = {};
-                console.log('Something went wrong when updating the process model:' + JSON.stringify(data));
+                console.log('Something went wrong when updating the processes model:' + JSON.stringify(data));
                 $scope.status.loading = false;
             });
     };

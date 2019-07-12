@@ -141,7 +141,7 @@ ORYX.I18N.Save.saved = "Saved!";
 ORYX.I18N.Save.failed = "Saving failed.";
 ORYX.I18N.Save.noRights = "You have no rights to save changes.";
 ORYX.I18N.Save.saving = "Saving";
-ORYX.I18N.Save.saveAsHint = "The process diagram is stored under:";
+ORYX.I18N.Save.saveAsHint = "The processes diagram is stored under:";
 
 if(!ORYX.I18N.File) ORYX.I18N.File = {};
 
@@ -213,8 +213,8 @@ ORYX.I18N.Deployer.desc = "Deploy to engine";
 if(!ORYX.I18N.Tester) ORYX.I18N.Tester = {};
 
 ORYX.I18N.Tester.group = "Testing";
-ORYX.I18N.Tester.name = "Test process";
-ORYX.I18N.Tester.desc = "Open the test component to test this process definition";
+ORYX.I18N.Tester.name = "Test processes";
+ORYX.I18N.Tester.desc = "Open the test component to test this processes definition";
 
 if(!ORYX.I18N.Undo) ORYX.I18N.Undo = {};
 
@@ -309,9 +309,9 @@ ORYX.I18N.RDFExport.rdfExportDescription = "Exports current model to the XML ser
 if(!ORYX.I18N.SyntaxChecker.BPMN) ORYX.I18N.SyntaxChecker.BPMN={};
 ORYX.I18N.SyntaxChecker.BPMN_NO_SOURCE = "An edge must have a source.";
 ORYX.I18N.SyntaxChecker.BPMN_NO_TARGET = "An edge must have a target.";
-ORYX.I18N.SyntaxChecker.BPMN_DIFFERENT_PROCESS = "Source and target node must be contained in the same process.";
+ORYX.I18N.SyntaxChecker.BPMN_DIFFERENT_PROCESS = "Source and target node must be contained in the same processes.";
 ORYX.I18N.SyntaxChecker.BPMN_SAME_PROCESS = "Source and target node must be contained in different pools.";
-ORYX.I18N.SyntaxChecker.BPMN_FLOWOBJECT_NOT_CONTAINED_IN_PROCESS = "A flow object must be contained in a process.";
+ORYX.I18N.SyntaxChecker.BPMN_FLOWOBJECT_NOT_CONTAINED_IN_PROCESS = "A flow object must be contained in a processes.";
 ORYX.I18N.SyntaxChecker.BPMN_ENDEVENT_WITHOUT_INCOMING_CONTROL_FLOW = "An end event must have an incoming sequence flow.";
 ORYX.I18N.SyntaxChecker.BPMN_STARTEVENT_WITHOUT_OUTGOING_CONTROL_FLOW = "A start event must have an outgoing sequence flow.";
 ORYX.I18N.SyntaxChecker.BPMN_STARTEVENT_WITH_INCOMING_CONTROL_FLOW = "Start events must not have incoming sequence flows.";
@@ -341,11 +341,11 @@ ORYX.I18N.SyntaxChecker.EPC_TOO_MANY_EDGES = "Node has too many connected edges.
 ORYX.I18N.SyntaxChecker.EPC_NO_CORRECT_CONNECTOR = "Node is no correct connector.";
 ORYX.I18N.SyntaxChecker.EPC_MANY_STARTS = "There must be only one start event.";
 ORYX.I18N.SyntaxChecker.EPC_FUNCTION_AFTER_OR = "There must be no functions after a splitting OR/XOR.";
-ORYX.I18N.SyntaxChecker.EPC_PI_AFTER_OR = "There must be no process interface after a splitting OR/XOR.";
+ORYX.I18N.SyntaxChecker.EPC_PI_AFTER_OR = "There must be no processes interface after a splitting OR/XOR.";
 ORYX.I18N.SyntaxChecker.EPC_FUNCTION_AFTER_FUNCTION =  "There must be no function after a function.";
 ORYX.I18N.SyntaxChecker.EPC_EVENT_AFTER_EVENT =  "There must be no event after an event.";
-ORYX.I18N.SyntaxChecker.EPC_PI_AFTER_FUNCTION =  "There must be no process interface after a function.";
-ORYX.I18N.SyntaxChecker.EPC_FUNCTION_AFTER_PI =  "There must be no function after a process interface.";
+ORYX.I18N.SyntaxChecker.EPC_PI_AFTER_FUNCTION =  "There must be no processes interface after a function.";
+ORYX.I18N.SyntaxChecker.EPC_FUNCTION_AFTER_PI =  "There must be no function after a processes interface.";
 ORYX.I18N.SyntaxChecker.EPC_SOURCE_EQUALS_TARGET = "Edge must connect two distinct nodes."
 
 if(!ORYX.I18N.SyntaxChecker.PetriNet) ORYX.I18N.SyntaxChecker.PetriNet={};
@@ -395,7 +395,7 @@ ORYX.I18N.SyntaxChecker.BPMN2_EVENT_BASED_WITH_TOO_LESS_OUTGOING_SEQUENCE_FLOWS 
 ORYX.I18N.SyntaxChecker.BPMN2_EVENT_BASED_EVENT_TARGET_CONTRADICTION = "If Message Intermediate Events are used in the configuration, then Receive Tasks must not be used and vice versa.";
 ORYX.I18N.SyntaxChecker.BPMN2_EVENT_BASED_WRONG_TRIGGER = "Only the following Intermediate Event triggers are valid: Message, Signal, Timer, Conditional and Multiple.";
 ORYX.I18N.SyntaxChecker.BPMN2_EVENT_BASED_WRONG_CONDITION_EXPRESSION = "The outgoing Sequence Flows of the Event Gateway must not have a condition expression.";
-ORYX.I18N.SyntaxChecker.BPMN2_EVENT_BASED_NOT_INSTANTIATING = "The Gateway does not meet the conditions to instantiate the process. Please use a start event or an instantiating attribute for the gateway.";
+ORYX.I18N.SyntaxChecker.BPMN2_EVENT_BASED_NOT_INSTANTIATING = "The Gateway does not meet the conditions to instantiate the processes. Please use a start event or an instantiating attribute for the gateway.";
 
 /** New Language Properties 05.10.2009 */
 ORYX.I18N.SyntaxChecker.BPMN2_GATEWAYDIRECTION_MIXED_FAILURE = "The Gateway must have both multiple incoming and outgoing Sequence Flows.";

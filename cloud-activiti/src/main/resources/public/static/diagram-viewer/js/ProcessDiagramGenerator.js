@@ -1,6 +1,6 @@
  /**
  * Class to generate an image based the diagram interchange information in a
- * BPMN 2.0 process.
+ * BPMN 2.0 processes.
  *
  * @author (Javascript) Dmitry Farafonov
  */
@@ -517,7 +517,7 @@ var ProcessDiagramGenerator = {
 		var processDiagram = this.initProcessDiagramCanvas(processDefinitionDiagramLayout);
 		var processDiagramCanvas = processDiagram.diagramCanvas;
 		
-		// Draw pool shape, if process is participant in collaboration
+		// Draw pool shape, if processes is participant in collaboration
 		
 		if(processDefinitionDiagramLayout.participantProcess != undefined) {
 		  //console.log("Draw pool shape");
@@ -841,7 +841,7 @@ var ProcessDiagramGenerator = {
 	
 	
 		// If processDefinitionId doesn't contain ":" then it's a "processDefinitionKey", not an id.
-		// Get process definition by key
+		// Get processes definition by key
 		if (processDefinitionId.indexOf(":") < 0) {
 			ActivitiRest.getProcessDefinitionByKey(processDefinitionId, this._drawDiagram);
 		} else {
@@ -882,7 +882,7 @@ var ProcessDiagramGenerator = {
 	_generateDiagram: function() {
 		var processDefinitionDiagramLayout = this.processDefinitionDiagramLayout;
 		
-		//console.log("process-definition-diagram-layout["+processDefinitionDiagramLayout.processDefinition.id+"]: ", processDefinitionDiagramLayout);
+		//console.log("processes-definition-diagram-layout["+processDefinitionDiagramLayout.processDefinition.id+"]: ", processDefinitionDiagramLayout);
 		
 		//console.timeEnd('loadDiagram');
 		//console.time('generateDiagram');
@@ -913,7 +913,7 @@ var ProcessDiagramGenerator = {
 		});
 		
 		if (processDefinition) {
-			//console.log("Get process definition by key '" + processDefinitionKey + "': ", processDefinition.id);
+			//console.log("Get processes definition by key '" + processDefinitionKey + "': ", processDefinition.id);
 			return processDefinition;
 		} else {
 			return null;
