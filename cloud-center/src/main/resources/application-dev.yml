@@ -16,5 +16,5 @@ eureka:
   instance:
     hostname: 127.0.0.1
   client:
-    serviceUrl:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/  #服务注册中心地址，如果服务注册中心为高可用集群时，多个注册中心地址以逗号分隔
+    service-url:
+      default-zone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/  #服务注册中心地址，如果服务注册中心为高可用集群时，多个注册中心地址以逗号分隔
