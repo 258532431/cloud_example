@@ -71,7 +71,7 @@ feign:
 hystrix:
   threadpool:
     default:
-      coreSize: 500  #并发执行的最大线程数，默认10
+      core-size: 500  #并发执行的最大线程数，默认10
   command:
     default:
       execution:
@@ -83,8 +83,8 @@ hystrix:
 
 # ribbon负载均衡配置
 ribbon:
-  connectTimeout: 100000  # 请求连接的超时时间
-  readTimeout: 100000  # 请求处理的超时时间
+  ConnectTimeout: 100000  # 请求连接的超时时间
+  ReadTimeout: 100000  # 请求处理的超时时间
   eureka:
     enabled: true
 

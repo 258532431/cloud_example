@@ -38,7 +38,7 @@ eureka:
     status-page-url: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/actuator/info         #状态页面的URL，绝对路径
     health-check-url: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/actuator/health      #健康检查页面的URL，绝对路径
   client:
-    serviceUrl:
+    service-url:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${eureka.port}/eureka/  #服务注册中心地址
 
 
