@@ -44,7 +44,7 @@ public class StringUtils {
 
     /**
      * @Author: yangchenglong on 2019/6/27
-     * @Description: 输出对象到response
+     * @Description: 输出json对象到response
      * update by:
      * @Param:
      * @return:
