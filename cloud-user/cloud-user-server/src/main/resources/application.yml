@@ -63,13 +63,6 @@ hystrix:
           thread:
             timeoutInMilliseconds: 120000  #命令执行超时时间，默认1000ms
 
-# ribbon负载均衡配置
-ribbon:
-  ConnectTimeout: 100000  # 请求连接的超时时间
-  ReadTimeout: 100000  # 请求处理的超时时间
-  eureka:
-    enabled: true
-
 # 未登录需拦截路径，多个的话以逗号分隔
 filter-path: /**
 # 未登录不需要拦截的路径，多个的话以逗号分隔

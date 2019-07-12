@@ -81,12 +81,10 @@ hystrix:
           thread:
             timeoutInMilliseconds: 120000  #命令执行超时时间，默认1000ms
 
-# ribbon负载均衡配置
+# ribbon客户端负载均衡配置
 ribbon:
   ConnectTimeout: 100000  # 请求连接的超时时间
   ReadTimeout: 100000  # 请求处理的超时时间
-  eureka:
-    enabled: true
 
 # swagger接口调试密码
 debug-api-password: 123

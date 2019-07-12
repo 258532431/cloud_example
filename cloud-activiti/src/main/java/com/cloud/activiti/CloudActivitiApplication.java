@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 @EnableDiscoveryClient
 @SpringBootApplication(exclude = {org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class, org.activiti.spring.boot.SecurityAutoConfiguration.class})  //排除这个否则导致启动失败
 @EnableFeignClients
+@EnableCircuitBreaker //开启断路器功能
 @EnableTransactionManagement   //启用事务管理
 @Slf4j
 @ComponentScan({"org.activiti.rest.diagram", "com.cloud.activiti"})
