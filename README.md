@@ -8,12 +8,12 @@
 7、项目依次启动顺序：center、其他         
 
 # 项目技术点        
-1、用户鉴权信息使用redis存储        
+1、用户鉴权信息使用redis存储（做单点登录）        
 2、rabbitmq消息中间件(rabbitmq集群暂未配置)       
 3、redis缓存（redis集群暂未配置）      
-4、zuul路由转发      
+4、zuul路由转发（zuul默认使用ribbon做负载均衡）        
 5、feign服务接口调用，hystrix熔断机制，ribbon负载均衡   
-6、swagger api接口展示（地址：http://127.0.0.1:8410/swagger-ui.html）       
+6、swagger api接口展示（dev环境地址：http://127.0.0.1:8410/swagger-ui.html）       
 7、LCN解决分布式事务（暂未配置）     
 8、activiti工作流(调用swagger接口创建新模型会自动建表)        
 
