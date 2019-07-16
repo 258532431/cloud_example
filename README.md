@@ -24,7 +24,7 @@
 # windows的redis集群配置（redis版本3.0）                
 1、配置三主三从，redis配置文件例子见项目根目录的redis集群目录，不设置redis密码               
 2、redis5.0以下版本需安装ruby（这里版本Ruby+Devkit2.6.3-1 (x64)），下载地址：https://rubyinstaller.org/downloads/           
-3、安装Redis的Ruby驱动redis-xxxx.gem，安装文件放在了项目根目录的redis集群目录rubygems-3.0.4.zip，解压后执行ruby setup.rb          
+3、安装Redis的Ruby驱动redis-xxxx.gem，安装文件放在了项目根目录的redis集群目录rubygems-3.0.4.zip(https://rubygems.org/pages/download)，解压后执行ruby setup.rb               
 4、用 GEM 安装 Redis ：切换到redis安装目录，需要在命令行中，执行 gem install redis         
 5、项目根目录的redis集群目录下的redis-trib保存到一个Redis的目录下（如果你是一个redis服务一个文件夹，不用每个都放，我这里是用一个文件夹多个配置文件）       
 6、依次启动6个redis服务     
@@ -45,7 +45,7 @@ axios.defaults.withCredentials = true   //解决跨域造成的每次sessionId�
 
 # 相关知识-git忽略提交target文件夹
 1、git rm -r --cached target   
-2、git push origin master
+2、git push origin master        
 
 # 相关知识-lombock说明    
 @Data 注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了equals、canEqual、hashCode、toString 方法    
