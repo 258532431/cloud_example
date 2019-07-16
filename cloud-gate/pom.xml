@@ -75,7 +75,19 @@
         <dependency>
              <groupId>org.springframework.boot</groupId>
              <artifactId>spring-boot-starter-data-redis</artifactId>
+            <!-- 配置redis集群，使用jedis，这里需要排除lettuce，因为spring2.0版本默认使用的lettuce -->
+            <exclusions>
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>lettuce-core</artifactId>
+                </exclusion>
+            </exclusions>
          </dependency>
+        <!-- 配置redis集群，使用jedis管理redis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
         <!-- 公共资源池。我们可以根据它来快速的建立一个自己的对象池 -->
         <dependency>
              <groupId>org.apache.commons</groupId>

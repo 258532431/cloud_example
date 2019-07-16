@@ -15,17 +15,17 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * @Author: yangchenglong on 2019/6/27
- * @Description: redis配置类
+ * @Description: redis配置类-单机
  * update by: 
  * @Param: 
  * @return: 
  */
-@Configuration
+//@Configuration
 @Slf4j
 public class RedisConfiguration {
 
-    @Bean
-    @ConditionalOnMissingBean(name="redisTemplate")
+//    @Bean
+//    @ConditionalOnMissingBean(name="redisTemplate")
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
         try {
             RedisTemplate<Object, Object> template = new RedisTemplate<Object,Object>();
@@ -52,8 +52,8 @@ public class RedisConfiguration {
         }
     }
 
-    @Bean
-    @ConditionalOnMissingBean(StringRedisTemplate.class)
+//    @Bean
+//    @ConditionalOnMissingBean(StringRedisTemplate.class)
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory){
         try {
             StringRedisTemplate template = new StringRedisTemplate();
