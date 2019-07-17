@@ -37,6 +37,7 @@ spring:
     port: 5672
     username: guest
     password: guest
+    virtual-host: "/cloud-test"
   redis:   #redis集群
     cluster:
       # 各 Redis 节点信息
