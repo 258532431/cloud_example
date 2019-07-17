@@ -40,6 +40,11 @@ zuul:
       service-id: cloud-activiti   #服务注册到eureka的服务名
       sensitive-headers: "*"
       custom-sensitive-headers: true  #保留请求的header信息
+    mq-api:  #消息队列服务路由名称，自定义
+      path: /mq/**
+      service-id: cloud-mq   #服务注册到eureka的服务名
+      sensitive-headers: "*"
+      custom-sensitive-headers: true  #保留请求的header信息
 
 # 跨域请求配置
 management:

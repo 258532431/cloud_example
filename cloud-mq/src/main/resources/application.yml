@@ -1,0 +1,65 @@
+spring:
+  profiles:
+    active: #spring.profiles.active#
+  application:
+    name: cloud-mq  #服务名称
+
+server:
+  port: 8640 #默认端口，子配置端口会覆盖此端口
+
+eureka:
+  instance:
+    #status-page-url-path: /actuator/info         #状态页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
+    #health-check-url-path: /actuator/health      #健康检查页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
+    lease-renewal-interval-in-seconds: 5   #定义服务续约任务（心跳）的调用间隔，单位：秒
+    lease-expiration-duration-in-seconds: 10   #定义服务失效的时间，单位：秒
+
+# 调整日志级别，打印SQL语句
+logging:
+  level:
+    com.cloud: DEBUG
+
+# 跨域请求配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+
+#请求和响应GZIP压缩支持
+feign:
+  hystrix:
+    enabled: true  # hystrix熔断配置
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  compression:
+    request:
+      enabled: true   # 配置请求GZIP压缩
+      mime-types: text/xml,application/xml,application/json  # 配置压缩支持的MIME TYPE
+      min-request-size: 2048  # 配置压缩数据大小的下限
+    response:
+      enabled: true  # 配置响应GZIP压缩
+
+# hystrix配置
+hystrix:
+  threadpool:
+    default:
+      core-size: 500  #并发执行的最大线程数，默认10
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 120000  #命令执行超时时间，默认1000ms
+
+# 未登录需拦截路径，多个的话以逗号分隔
+filter-path: /**
+# 未登录不需要拦截的路径，多个的话以逗号分隔
+#excludes-filter-path: /base/login
