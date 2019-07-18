@@ -9,7 +9,7 @@
 
 # 项目技术点        
 1、用户鉴权信息使用redis存储（做单点登录）        
-2、rabbitmq消息中间件(rabbitmq集群暂未配置)       
+2、rabbitmq消息中间件、消费确认机制(rabbitmq集群暂未配置)       
 3、redis缓存（redis单服务器、redis集群）      
 4、zuul路由转发（zuul默认使用ribbon做负载均衡）        
 5、feign服务接口调用，hystrix熔断机制，ribbon负载均衡   
