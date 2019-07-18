@@ -38,6 +38,18 @@ spring:
     username: guest
     password: guest
     virtual-host: "/cloud-prod"
+    publisher-confirms: true  #开启发送确认, 必须要设置true才能进行消息的回调
+    publisher-returns: true   #开启发送失败退回
+    listener:
+      type: simple
+      simple:
+        acknowledge-mode: manual  #采用手动确认机制
+        prefetch: 1 #消费者每次从队列获取的消息数量
+        retry:
+          enabled: true  #是否重试
+          max-attempts: 3 #重试次数
+          initial-interval: 5000ms  #第一次与第二次投递尝试的时间间隔
+        default-requeue-rejected: false  #重试次数超过上面的设置时是否重新进队（false时不会进队需要写相应代码将该消息加入死信队列）
   redis:   #redis集群
     cluster:
       # 各 Redis 节点信息

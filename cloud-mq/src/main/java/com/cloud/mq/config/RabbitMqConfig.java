@@ -1,12 +1,10 @@
 package com.cloud.mq.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -56,14 +54,6 @@ public class RabbitMqConfig {
         connectionFactory.setPublisherConfirms(publisherConfirms); //开启发送确认, 必须要设置true才能进行消息的回调
         connectionFactory.setPublisherReturns(publisherReturns); //开启发送失败退回  也可以在确认失败那里做另外处理
         return connectionFactory;
-    }
-
-    @Bean
-    public RabbitListenerContainerFactory<?> rabbitListenerContainerFactory(ConnectionFactory connectionFactory){
-        //SimpleRabbitListenerContainerFactory发现消息中有content_type有text就会默认将其转换成string类型的
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory);
-        return factory;
     }
 
     //创建rabbitAdmin，方便动态绑定交换机和队列

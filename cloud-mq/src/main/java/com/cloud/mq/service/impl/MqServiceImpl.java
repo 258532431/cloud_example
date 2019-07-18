@@ -1,6 +1,7 @@
 package com.cloud.mq.service.impl;
 
 import com.cloud.common.mq.MqConstants;
+import com.cloud.common.utils.StringUtils;
 import com.cloud.mq.service.MqService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
@@ -12,6 +13,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -34,8 +37,8 @@ public class MqServiceImpl implements MqService, ApplicationRunner, RabbitTempla
     @Override
     public void convertAndSend(String exchangeName, String queueName, Object object){
         rabbitTemplate.setConfirmCallback(this);
-        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-        log.info("发送消息id={}", correlationData.getId());
+        CorrelationData correlationData = new CorrelationData(StringUtils.getSerialNumber());
+        log.info("convertAndSend发送消息id={}", correlationData.getId());
         rabbitTemplate.convertAndSend(exchangeName, queueName, object, correlationData);
     }
 
@@ -52,8 +55,8 @@ public class MqServiceImpl implements MqService, ApplicationRunner, RabbitTempla
         rabbitAdmin.declareBinding(BindingBuilder.bind(queue).to(exchange).with(queueName));
 
         rabbitTemplate.setConfirmCallback(this);
-        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-        log.info("发送消息id={}", correlationData.getId());
+        CorrelationData correlationData = new CorrelationData(StringUtils.getSerialNumber());
+        log.info("declareOfConvertAndSend发送消息id={}", correlationData.getId());
         rabbitTemplate.convertAndSend(exchangeName, queueName, object, correlationData);
     }
 
@@ -94,7 +97,7 @@ public class MqServiceImpl implements MqService, ApplicationRunner, RabbitTempla
 
     //创建一个队列
     private Queue getQueue(String queueName){
-        return new Queue(queueName);
+        return new Queue(queueName, true);//传入ture持久化队列
     }
 
     @Override
@@ -102,10 +105,14 @@ public class MqServiceImpl implements MqService, ApplicationRunner, RabbitTempla
         log.info("---------- 正在初始化MQ交换机和队列 ---------");
         DirectExchange upExchange = this.getDirectExchange(MqConstants.EXCHANGE_UP);
         DirectExchange downExchange = this.getDirectExchange(MqConstants.EXCHANGE_DOWN);
+        DirectExchange deadExchange = this.getDirectExchange(MqConstants.EXCHANGE_DEAD);
         this.declareExchange(upExchange);
         this.declareExchange(downExchange);
+        this.declareExchange(deadExchange);
+        Queue queueDead = this.getQueue(MqConstants.QUEUE_DEAD);
         Queue queue1 = this.getQueue(MqConstants.QUEUE_USER);
         Queue queue2 = this.getQueue(MqConstants.QUEUE_USER);
+        this.declareQueue(queueDead);
         this.declareQueue(queue1);
         this.declareQueue(queue2);
         log.info("---------- 初始化MQ交换机和队列完成 ---------");
@@ -125,6 +132,7 @@ public class MqServiceImpl implements MqService, ApplicationRunner, RabbitTempla
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String queue) {
         String content = new String(message.getBody());
+        //做消息重发处理，或者是转存数据库记录
         log.info("消息发送到queue失败，content={},replyCode={}, replyText={}, exchange={},queue={}", content, replyCode, replyText,exchange,queue);
     }
 }

@@ -12,8 +12,12 @@ public class MqConstants {
 
     public static final String EXCHANGE_DOWN = "down.exchange";//下行交换机
 
+    public static final String EXCHANGE_DEAD = "dead.exchange";//死信交换机
+
     public static final String QUEUE_USER = "user.queue";//用户队列
 
     public static final String QUEUE_TEST = "test.queue";//测试队列
+
+    public static final String QUEUE_DEAD = "dead.queue";//死信队列
 
 }
