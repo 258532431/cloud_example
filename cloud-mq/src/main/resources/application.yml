@@ -2,24 +2,24 @@ spring:
   profiles:
     active: #spring.profiles.active#
   application:
-    name: cloud-mq  #·şÎñÃû³Æ
+    name: cloud-mq  #æœåŠ¡åç§°
 
 server:
-  port: 8640 #Ä¬ÈÏ¶Ë¿Ú£¬×ÓÅäÖÃ¶Ë¿Ú»á¸²¸Ç´Ë¶Ë¿Ú
+  port: 8640 #é»˜è®¤ç«¯å£ï¼Œå­é…ç½®ç«¯å£ä¼šè¦†ç›–æ­¤ç«¯å£
 
 eureka:
   instance:
-    #status-page-url-path: /actuator/info         #×´Ì¬Ò³ÃæµÄURL£¬Ïà¶ÔÂ·¾¶£¬Ä¬ÈÏÊ¹ÓÃ HTTP ·ÃÎÊ£¬Èç¹ûĞèÒªÊ¹ÓÃ HTTPSÔòĞèÒªÊ¹ÓÃ¾ø¶ÔÂ·¾¶ÅäÖÃ
-    #health-check-url-path: /actuator/health      #½¡¿µ¼ì²éÒ³ÃæµÄURL£¬Ïà¶ÔÂ·¾¶£¬Ä¬ÈÏÊ¹ÓÃ HTTP ·ÃÎÊ£¬Èç¹ûĞèÒªÊ¹ÓÃ HTTPSÔòĞèÒªÊ¹ÓÃ¾ø¶ÔÂ·¾¶ÅäÖÃ
-    lease-renewal-interval-in-seconds: 5   #¶¨Òå·şÎñĞøÔ¼ÈÎÎñ£¨ĞÄÌø£©µÄµ÷ÓÃ¼ä¸ô£¬µ¥Î»£ºÃë
-    lease-expiration-duration-in-seconds: 10   #¶¨Òå·şÎñÊ§Ğ§µÄÊ±¼ä£¬µ¥Î»£ºÃë
+    #status-page-url-path: /actuator/info         #çŠ¶æ€é¡µé¢çš„URLï¼Œç›¸å¯¹è·¯å¾„ï¼Œé»˜è®¤ä½¿ç”¨ HTTP è®¿é—®ï¼Œå¦‚æœéœ€è¦ä½¿ç”¨ HTTPSåˆ™éœ€è¦ä½¿ç”¨ç»å¯¹è·¯å¾„é…ç½®
+    #health-check-url-path: /actuator/health      #å¥åº·æ£€æŸ¥é¡µé¢çš„URLï¼Œç›¸å¯¹è·¯å¾„ï¼Œé»˜è®¤ä½¿ç”¨ HTTP è®¿é—®ï¼Œå¦‚æœéœ€è¦ä½¿ç”¨ HTTPSåˆ™éœ€è¦ä½¿ç”¨ç»å¯¹è·¯å¾„é…ç½®
+    lease-renewal-interval-in-seconds: 5   #å®šä¹‰æœåŠ¡ç»­çº¦ä»»åŠ¡ï¼ˆå¿ƒè·³ï¼‰çš„è°ƒç”¨é—´éš”ï¼Œå•ä½ï¼šç§’
+    lease-expiration-duration-in-seconds: 10   #å®šä¹‰æœåŠ¡å¤±æ•ˆçš„æ—¶é—´ï¼Œå•ä½ï¼šç§’
 
-# µ÷ÕûÈÕÖ¾¼¶±ğ£¬´òÓ¡SQLÓï¾ä
+# è°ƒæ•´æ—¥å¿—çº§åˆ«ï¼Œæ‰“å°SQLè¯­å¥
 logging:
   level:
     com.cloud: DEBUG
 
-# ¿çÓòÇëÇóÅäÖÃ
+# è·¨åŸŸè¯·æ±‚é…ç½®
 management:
   endpoints:
     web:
@@ -29,27 +29,27 @@ management:
         allowed-origins: "*"
         allowed-methods: "*"
 
-#ÇëÇóºÍÏìÓ¦GZIPÑ¹ËõÖ§³Ö
+#è¯·æ±‚å’Œå“åº”GZIPå‹ç¼©æ”¯æŒ
 feign:
   hystrix:
-    enabled: true  # hystrixÈÛ¶ÏÅäÖÃ
+    enabled: true  # hystrixç†”æ–­é…ç½®
   httpclient:
     enabled: false
   okhttp:
     enabled: true
   compression:
     request:
-      enabled: true   # ÅäÖÃÇëÇóGZIPÑ¹Ëõ
-      mime-types: text/xml,application/xml,application/json  # ÅäÖÃÑ¹ËõÖ§³ÖµÄMIME TYPE
-      min-request-size: 2048  # ÅäÖÃÑ¹ËõÊı¾İ´óĞ¡µÄÏÂÏŞ
+      enabled: true   # é…ç½®è¯·æ±‚GZIPå‹ç¼©
+      mime-types: text/xml,application/xml,application/json  # é…ç½®å‹ç¼©æ”¯æŒçš„MIME TYPE
+      min-request-size: 2048  # é…ç½®å‹ç¼©æ•°æ®å¤§å°çš„ä¸‹é™
     response:
-      enabled: true  # ÅäÖÃÏìÓ¦GZIPÑ¹Ëõ
+      enabled: true  # é…ç½®å“åº”GZIPå‹ç¼©
 
-# hystrixÅäÖÃ
+# hystrixé…ç½®
 hystrix:
   threadpool:
     default:
-      core-size: 500  #²¢·¢Ö´ĞĞµÄ×î´óÏß³ÌÊı£¬Ä¬ÈÏ10
+      core-size: 500  #å¹¶å‘æ‰§è¡Œçš„æœ€å¤§çº¿ç¨‹æ•°ï¼Œé»˜è®¤10
   command:
     default:
       execution:
@@ -57,9 +57,9 @@ hystrix:
           enabled: true
         isolation:
           thread:
-            timeoutInMilliseconds: 120000  #ÃüÁîÖ´ĞĞ³¬Ê±Ê±¼ä£¬Ä¬ÈÏ1000ms
+            timeoutInMilliseconds: 120000  #å‘½ä»¤æ‰§è¡Œè¶…æ—¶æ—¶é—´ï¼Œé»˜è®¤1000ms
 
-# Î´µÇÂ¼ĞèÀ¹½ØÂ·¾¶£¬¶à¸öµÄ»°ÒÔ¶ººÅ·Ö¸ô
+# æœªç™»å½•éœ€æ‹¦æˆªè·¯å¾„ï¼Œå¤šä¸ªçš„è¯ä»¥é€—å·åˆ†éš”
 filter-path: /**
-# Î´µÇÂ¼²»ĞèÒªÀ¹½ØµÄÂ·¾¶£¬¶à¸öµÄ»°ÒÔ¶ººÅ·Ö¸ô
+# æœªç™»å½•ä¸éœ€è¦æ‹¦æˆªçš„è·¯å¾„ï¼Œå¤šä¸ªçš„è¯ä»¥é€—å·åˆ†éš”
 #excludes-filter-path: /base/login

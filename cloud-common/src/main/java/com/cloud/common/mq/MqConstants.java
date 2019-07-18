@@ -8,10 +8,12 @@ package com.cloud.common.mq;
  */
 public class MqConstants {
 
-    public static final String EXCHANGE_UP_SUFFIX = "up.exchange";//上行交换机后缀
+    public static final String EXCHANGE_UP = "up.exchange";//上行交换机
 
-    public static final String EXCHANGE_DOWN_SUFFIX = "down.exchange";//下行交换机后缀
+    public static final String EXCHANGE_DOWN = "down.exchange";//下行交换机
 
-    public static final String QUEUE_USER_SUFFIX = "user.queue";//用户队列后缀
+    public static final String QUEUE_USER = "user.queue";//用户队列
+
+    public static final String QUEUE_TEST = "test.queue";//测试队列
 
 }

@@ -28,13 +28,27 @@ public class RabbitMqController extends BaseController{
     @Resource
     private MqService mqSendService;
 
+    @RequestMapping(value = "/declareOfSendUser", method = RequestMethod.POST)
+    @ApiOperation(value = "初始化交换机和队列并发送用户数据", notes = "")
+    @ApiImplicitParam(name = "content", value = "消息体（json格式）", dataType = "String", paramType = "query", required = true)
+    public ResponseMessage declareOfSendUser(@RequestParam String content){
+        mqSendService.declareOfConvertAndSend(MqConstants.EXCHANGE_UP, MqConstants.QUEUE_USER, content);
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);
+    }
+
     @RequestMapping(value = "/sendUser", method = RequestMethod.POST)
-    @ApiOperation(value = "发送用户数据", notes = "")
+    @ApiOperation(value = "发送用户数据", notes = "交换机和队列在系统系统时初始化")
     @ApiImplicitParam(name = "content", value = "消息体（json格式）", dataType = "String", paramType = "query", required = true)
     public ResponseMessage sendUser(@RequestParam String content){
-        String exchangeName = mqSendService.getUpExchangeName(null);
-        String queueName = MqConstants.QUEUE_USER_SUFFIX;
-        mqSendService.declareOfConvertAndSend(exchangeName, queueName, content);
+        mqSendService.convertAndSend(MqConstants.EXCHANGE_UP, MqConstants.QUEUE_USER, content);
+        return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);
+    }
+
+    @RequestMapping(value = "/sendTest", method = RequestMethod.POST)
+    @ApiOperation(value = "发送测试数据", notes = "交换机和队列在系统系统时初始化")
+    @ApiImplicitParam(name = "content", value = "消息体（json格式）", dataType = "String", paramType = "query", required = true)
+    public ResponseMessage sendTest(@RequestParam String content){
+        mqSendService.convertAndSend(MqConstants.EXCHANGE_UP, MqConstants.QUEUE_TEST, content);
         return new ResponseMessage(ResponseCodeEnum.RETURN_CODE_100200);
     }
 

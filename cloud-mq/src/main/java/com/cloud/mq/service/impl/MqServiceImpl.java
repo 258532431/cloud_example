@@ -1,15 +1,18 @@
 package com.cloud.mq.service.impl;
 
 import com.cloud.common.mq.MqConstants;
-import com.cloud.common.utils.StringUtils;
 import com.cloud.mq.service.MqService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.support.CorrelationData;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * @program: cloud_example
@@ -17,8 +20,9 @@ import java.util.HashMap;
  * @author: yangchenglong
  * @create: 2019-07-17 16:16
  */
+@Slf4j
 @Service
-public class MqServiceImpl implements MqService {
+public class MqServiceImpl implements MqService, ApplicationRunner, RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback{
 
     @Resource
     private RabbitTemplate rabbitTemplate;
@@ -26,13 +30,16 @@ public class MqServiceImpl implements MqService {
     @Resource
     private RabbitAdmin rabbitAdmin;
 
-    //发送消息
+    //发送消息, 有确认
     @Override
     public void convertAndSend(String exchangeName, String queueName, Object object){
-        rabbitTemplate.convertAndSend(exchangeName, queueName, object);
+        rabbitTemplate.setConfirmCallback(this);
+        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+        log.info("发送消息id={}", correlationData.getId());
+        rabbitTemplate.convertAndSend(exchangeName, queueName, object, correlationData);
     }
 
-    //声明交换机和队列，并发送消息
+    //声明交换机和队列，并发送消息, 有确认
     @Override
     public void declareOfConvertAndSend(String exchangeName, String queueName, Object object) {
         //声明交换机
@@ -43,7 +50,11 @@ public class MqServiceImpl implements MqService {
         this.declareQueue(queue);
         //使用BindingBuilder绑定交换机和队列
         rabbitAdmin.declareBinding(BindingBuilder.bind(queue).to(exchange).with(queueName));
-        rabbitTemplate.convertAndSend(exchangeName, queueName, object);
+
+        rabbitTemplate.setConfirmCallback(this);
+        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+        log.info("发送消息id={}", correlationData.getId());
+        rabbitTemplate.convertAndSend(exchangeName, queueName, object, correlationData);
     }
 
     //申明交换机
@@ -86,46 +97,34 @@ public class MqServiceImpl implements MqService {
         return new Queue(queueName);
     }
 
-    /**
-     * @Author: yangchenglong on 2019/7/17
-     * @Description: 获取上行交换机名称
-     * update by:
-     * @Param: exchangePrefix：交换机名称前缀
-     * @return:
-     */
     @Override
-    public String getUpExchangeName(String exchangePrefix){
-        if(StringUtils.isBlank(exchangePrefix)){
-            return MqConstants.EXCHANGE_UP_SUFFIX;
+    public void run(ApplicationArguments args){
+        log.info("---------- 正在初始化MQ交换机和队列 ---------");
+        DirectExchange upExchange = this.getDirectExchange(MqConstants.EXCHANGE_UP);
+        DirectExchange downExchange = this.getDirectExchange(MqConstants.EXCHANGE_DOWN);
+        this.declareExchange(upExchange);
+        this.declareExchange(downExchange);
+        Queue queue1 = this.getQueue(MqConstants.QUEUE_USER);
+        Queue queue2 = this.getQueue(MqConstants.QUEUE_USER);
+        this.declareQueue(queue1);
+        this.declareQueue(queue2);
+        log.info("---------- 初始化MQ交换机和队列完成 ---------");
+    }
+
+    //如果消息没有到exchange,则confirm回调,ack=false，如果消息到达exchange,则confirm回调,ack=true
+    @Override
+    public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+        if (ack) {
+            log.info("消息发送确认成功, 消息id={}", correlationData.getId());
+        } else {
+            log.info("消息发送确认成功, 消息id={},原因={}", correlationData.getId(), cause);
         }
-        return exchangePrefix + "." + MqConstants.EXCHANGE_UP_SUFFIX;
     }
 
-    /**
-     * @Author: yangchenglong on 2019/7/17
-     * @Description: 获取下行交换机名称
-     * update by:
-     * @Param: exchangePrefix：交换机名称前缀
-     * @return:
-     */
+    //exchange到queue成功,则不回调return，exchange到queue失败,则回调return(需设置mandatory=true,否则不回回调,消息就丢了)
     @Override
-    public String getDownExchangeName(String exchangePrefix){
-        if(StringUtils.isBlank(exchangePrefix)){
-            return MqConstants.EXCHANGE_DOWN_SUFFIX;
-        }
-        return exchangePrefix + "." + MqConstants.EXCHANGE_DOWN_SUFFIX;
+    public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String queue) {
+        String content = new String(message.getBody());
+        log.info("content={},replyCode={}, replyText={}, exchange={},queue={}", content, replyCode, replyText,exchange,queue);
     }
-
-    /**
-     * @Author: yangchenglong on 2019/7/17
-     * @Description:
-     * update by:
-     * @Param: queuePrefix：队列名前缀，queueSufix：队列名后缀
-     * @return:
-     */
-    @Override
-    public String getQueueName(String queuePrefix, String queueSufix){
-        return queuePrefix + "." + queueSufix;
-    }
-
 }

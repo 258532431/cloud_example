@@ -12,10 +12,4 @@ public interface MqService {
 
     void declareOfConvertAndSend(String exchangeName, String queueName, Object object);
 
-    String getUpExchangeName(String exchangePrefix);
-
-    String getDownExchangeName(String exchangePrefix);
-
-    String getQueueName(String queuePrefix, String queueSufix);
-
 }
