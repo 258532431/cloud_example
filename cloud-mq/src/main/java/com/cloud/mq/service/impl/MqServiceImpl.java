@@ -115,9 +115,9 @@ public class MqServiceImpl implements MqService, ApplicationRunner, RabbitTempla
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         if (ack) {
-            log.info("消息发送确认成功, 消息id={}", correlationData.getId());
+            log.info("消息发送到exchange确认成功, 消息id={}", correlationData.getId());
         } else {
-            log.info("消息发送确认成功, 消息id={},原因={}", correlationData.getId(), cause);
+            log.info("消息发送exchange确认失败, 消息id={},原因={}", correlationData.getId(), cause);
         }
     }
 
@@ -125,6 +125,6 @@ public class MqServiceImpl implements MqService, ApplicationRunner, RabbitTempla
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String queue) {
         String content = new String(message.getBody());
-        log.info("content={},replyCode={}, replyText={}, exchange={},queue={}", content, replyCode, replyText,exchange,queue);
+        log.info("消息发送到queue失败，content={},replyCode={}, replyText={}, exchange={},queue={}", content, replyCode, replyText,exchange,queue);
     }
 }
