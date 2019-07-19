@@ -3,7 +3,10 @@ package com.cloud.common.excel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.poi.hssf.usermodel.HSSFDataValidationHelper;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
@@ -269,6 +272,42 @@ public class ExportExcelUtils {
         style.setBorderTop(CellStyle.BORDER_THIN);
         style.setTopBorderColor(IndexedColors.BLACK.getIndex());
         return style;
+    }
+
+    /**
+     * @Author: yangchenglong on 2019/7/19
+     * @Description: 创建用作下拉列表的sheet
+     * update by:
+     * @Param: wb：主sheet, datas：下拉列表数据, selectSheetName：下拉sheet名称
+     * @return:
+     */
+    public static void createSelectSheet(Workbook wb, String[] datas, String selectSheetName) {
+        // 创建下拉列表值存储工作表
+        Sheet sheet = wb.createSheet(selectSheetName);
+        // 循环往该sheet中设置添加下拉列表的值
+        for (int i = 0; i < datas.length; i++) {
+            Row row = sheet.createRow(i);
+            Cell cell = row.createCell((int) 0);
+            cell.setCellValue(datas[i]);
+        }
+    }
+
+    /**
+     * @Author: yangchenglong on 2019/7/19
+     * @Description: 设置并引用其他Sheet作为绑定下拉列表数据
+     * update by:
+     * @Param: wb：主sheet, strFormula：下拉sheet数据区域（用下拉sheet名称+!$A$1:$A$+data.length）, firstRow：下拉框所在开始行，endRow：下拉框所在结束行（一般是data.length）,
+     *          firstCol：下拉框所在开始列，endCol：下拉框所在结束列
+     * @return:
+     */
+    public static DataValidation setDataValidation(Workbook wb, String strFormula, int firstRow, int endRow, int firstCol, int endCol, String selectSheetName) {
+        // String formula = "selectSheetName!$A$1:$A$59" ， 表示A列1-59行作为下拉列表来源数据
+        CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
+        DataValidationHelper dvHelper = new HSSFDataValidationHelper((HSSFSheet) wb.getSheet(selectSheetName));
+        DataValidationConstraint formulaListConstraint = dvHelper.createFormulaListConstraint(strFormula);
+        DataValidation dataValidation = dvHelper.createValidation(formulaListConstraint, regions);
+
+        return dataValidation;
     }
 
 }
