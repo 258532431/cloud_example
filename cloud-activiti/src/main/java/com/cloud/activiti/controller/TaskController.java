@@ -8,6 +8,7 @@ import com.cloud.common.enums.ActivitiTaskStatusEnum;
 import com.cloud.common.enums.ResponseCodeEnum;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.user.entity.User;
+import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -48,6 +49,7 @@ public class TaskController extends BaseController{
         return user;
     }
 
+    @LcnTransaction
     @ApiOperation(value = "启动任务流程", notes = "")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "processDefinitionKey", value = "流程图KEY(模型KEY)", dataType = "String", paramType = "query", required = true),
@@ -58,6 +60,8 @@ public class TaskController extends BaseController{
     @RequestMapping(value = "/startTask", method = RequestMethod.POST)
     public ResponseMessage startTask(@RequestParam String processDefinitionKey, @RequestParam String businessKey, @RequestParam String businessType,
                                      @RequestParam String variablesJson) {
+        int i = 1/0;//模拟异常
+
         //设置认证信息
         String userCode = this.getSessionUser().getUserCode();//用户code唯一标识
         identityService.setAuthenticatedUserId(userCode);

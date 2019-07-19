@@ -1,0 +1,63 @@
+#开发环境
+server:
+  port: 8450
+
+spring:
+  profiles:
+    active: dev #对应maven多环境配置 打包：clean install -Pdev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/tx-manager?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update  #第一次运行项目，初始化用create创建表，以后用none或者update
+  security:
+    basic:
+      path: /actuator   #多个的话以逗号分隔，默认为[/**]
+    user:
+      name: admin             #配置注册中心账户
+      password: 123456        #配置注册中心密码
+  redis:   #redis集群
+    cluster:
+      # 各 Redis 节点信息
+      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385
+      # 执行命令超时时间
+      command-timeout: 15000
+  #  redis:    #redis单机版
+  #    database: 3
+  #    host: 127.0.0.1
+  #    port: 6379
+  #    password: 123456
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+
+tx-lcn:
+  manager:
+    admin-key: 123456  # TM后台登陆密码，默认值为codingapi
+    host: 127.0.0.1  # TxManager Host Ip
+    port: 8070  # TxClient连接请求端口
+    heart-time: 15000  # 心跳检测时间(ms)
+    dtx-time: 30000 # 分布式事务执行总时间
+    netty.attr-delay-time: 10000  #参数延迟删除时间单位ms
+    concurrent-level: 128  #事务处理并发等级，默认为机器核心数5倍
+    seq-len: 12 # 雪花算法的sequence位长度，默认为12位
+    ex-url-enabled: false  # 异常回调开关。开启时请制定ex-url
+#    ex-url: /provider/email-to/258532431@qq.com  # 事务异常通知（任何http协议地址。未指定协议时，为TM提供内置功能接口）。默认是邮件通知
+
+eureka:
+  port: 8400
+  instance:
+    hostname: 127.0.0.1              #设置当前实例的主机名称
+    prefer-ip-address: true         #是否将IP注册到服务注册中心
+    status-page-url: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/actuator/info         #状态页面的URL，绝对路径
+    health-check-url: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/actuator/health      #健康检查页面的URL，绝对路径
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${eureka.port}/eureka/  #服务注册中心地址

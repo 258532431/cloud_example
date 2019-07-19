@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: #spring.profiles.active#
+  application:
+    name: cloud-txlcn  #服务名称
+
+server:
+  port: 8650 #默认端口，子配置端口会覆盖此端口
+
+eureka:
+  instance:
+    #status-page-url-path: /actuator/info         #状态页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
+    #health-check-url-path: /actuator/health      #健康检查页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
+    lease-renewal-interval-in-seconds: 5   #定义服务续约任务（心跳）的调用间隔，单位：秒
+    lease-expiration-duration-in-seconds: 10   #定义服务失效的时间，单位：秒
+
+# 调整日志级别，打印SQL语句
+logging:
+  level:
+    com.cloud: DEBUG
+#    com.codingapi: DEBUG
+
+# 开启日志
+#tx-lcn:
+#  logger:
+#    enabled: true

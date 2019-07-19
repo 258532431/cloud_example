@@ -198,6 +198,15 @@
             <artifactId>activiti-spring</artifactId>
             <version>${activiti.version}</version>
         </dependency>
+        <!-- LCN客户端 -->
+        <dependency>
+            <groupId>com.codingapi.txlcn</groupId>
+            <artifactId>txlcn-tc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.codingapi.txlcn</groupId>
+            <artifactId>txlcn-txmsg-netty</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
