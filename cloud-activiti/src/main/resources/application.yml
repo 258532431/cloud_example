@@ -18,7 +18,7 @@ eureka:
 logging:
   level:
     com.cloud: DEBUG
-    org.activiti.engine.impl.persistence.entity: DEBUG  # 打印activiti的sql
+#    org.activiti.engine.impl.persistence.entity: DEBUG  # 打印activiti的sql
 
 # 跨域请求配置
 management:
