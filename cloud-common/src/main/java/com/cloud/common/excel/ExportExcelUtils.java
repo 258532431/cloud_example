@@ -3,12 +3,12 @@ package com.cloud.common.excel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.poi.hssf.usermodel.HSSFDataValidationHelper;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFDataValidationHelper;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -303,7 +303,7 @@ public class ExportExcelUtils {
     public static DataValidation setDataValidation(Workbook wb, String strFormula, int firstRow, int endRow, int firstCol, int endCol, String selectSheetName) {
         // String formula = "selectSheetName!$A$1:$A$59" ， 表示A列1-59行作为下拉列表来源数据
         CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
-        DataValidationHelper dvHelper = new HSSFDataValidationHelper((HSSFSheet) wb.getSheet(selectSheetName));
+        DataValidationHelper dvHelper = new XSSFDataValidationHelper((XSSFSheet) wb.getSheet(selectSheetName));
         DataValidationConstraint formulaListConstraint = dvHelper.createFormulaListConstraint(strFormula);
         DataValidation dataValidation = dvHelper.createValidation(formulaListConstraint, regions);
 
