@@ -296,8 +296,8 @@ public class ExportExcelUtils {
      * @Author: yangchenglong on 2019/7/19
      * @Description: 设置并引用其他Sheet作为绑定下拉列表数据
      * update by:
-     * @Param: wb：主sheet, strFormula：下拉sheet数据区域（用下拉sheet名称+!$A$1:$A$+data.length）, firstRow：下拉框所在开始行，endRow：下拉框所在结束行（一般是data.length）,
-     *          firstCol：下拉框所在开始列，endCol：下拉框所在结束列
+     * @Param: wb：主sheet, strFormula：下拉sheet数据区域（用下拉sheet名称+!$A$1:$A$+data.length）, firstRow：要显示下拉框的开始行，endRow：要显示下拉框的结束行,
+     *          firstCol：要显示下拉框的开始列，endCol：要显示下拉框的结束列
      * @return:
      */
     public static DataValidation setDataValidation(Workbook wb, String strFormula, int firstRow, int endRow, int firstCol, int endCol, String selectSheetName) {
