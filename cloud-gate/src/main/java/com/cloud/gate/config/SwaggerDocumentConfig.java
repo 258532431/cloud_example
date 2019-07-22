@@ -24,6 +24,7 @@ public class SwaggerDocumentConfig implements SwaggerResourcesProvider {
         resources.add(swaggerResource("用户服务API", "/user/v2/api-docs", "1.0"));
         resources.add(swaggerResource("工作流服务API", "/activiti/v2/api-docs", "1.0"));
         resources.add(swaggerResource("消息队列服务API", "/mq/v2/api-docs", "1.0"));
+        resources.add(swaggerResource("团队合作服务API", "/teambition/v2/api-docs", "1.0"));
         /* 自动映射API
         List<SwaggerResource> resources = new ArrayList<>();
         List<Route> routes = routeLocator.getRoutes();

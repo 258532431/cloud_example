@@ -1,0 +1,95 @@
+#开发环境
+server:
+  port: 8460
+
+spring:
+  profiles:
+    active: dev #对应maven多环境配置 打包：clean install -Pdev
+  datasource:
+    name: test
+    url: jdbc:mysql://127.0.0.1:3306/cloud_teambition?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource   # 使用druid数据源
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      filters: stat,wall   #属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：监控统计用的filter:stat日志用的filter:log4j防御sql注入的filter:wall
+      maxActive: 20   #最大连接池数量
+      initialSize: 3  #初始化时建立物理连接的个数
+      maxWait: 60000   #获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁
+      minIdle: 3       #最小连接池数量
+      timeBetweenEvictionRunsMillis: 60000  #有两个含义：1、Destroy线程会检测连接的间隔时间，2、testWhileIdle的判断依据，详细看testWhileIdle属性的说明
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL  #用来检测连接是否有效的sql，要求是一个查询语句。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用
+      testWhileIdle: true  #建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+      testOnBorrow: false  #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      testOnReturn: false  #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      poolPreparedStatements: false  #是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭
+      maxOpenPreparedStatements: -1  #要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+  security:
+    basic:
+      path: /actuator   #多个的话以逗号分隔，默认为[/**]
+    user:
+      name: admin             #配置注册中心账户
+      password: 123456        #配置注册中心密码
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: "/cloud-dev"
+    publisher-confirms: true  #开启发送确认, 必须要设置true才能进行消息的回调
+    publisher-returns: true   #开启发送失败退回
+    listener:
+      type: simple
+      simple:
+        acknowledge-mode: manual  #采用手动确认机制
+        prefetch: 1 #消费者每次从队列获取的消息数量
+        retry:
+          enabled: true  #是否重试
+          max-attempts: 3 #重试次数
+          initial-interval: 5000ms  #第一次与第二次投递尝试的时间间隔
+        default-requeue-rejected: false  #重试次数超过上面的设置时是否重新进队（false时不会进队需要写相应代码将该消息加入死信队列）
+  redis:   #redis集群
+    cluster:
+      # 各 Redis 节点信息
+      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385
+      # 执行命令超时时间
+      command-timeout: 15000
+      # 重试次数
+      max-attempts: 5
+      # 跨集群执行命令时要遵循的最大重定向数量
+      max-redirects: 3
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 16
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 8
+      # 连接池中的最小空闲连接
+      min-idle: 0
+      # 是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
+      test-on-borrow: true
+#  redis:    #redis单机版
+#    database: 3
+#    host: 127.0.0.1
+#    port: 6379
+#    password: 123456
+#    lettuce:
+#      pool:
+#        max-active: -1  # 连接池最大连接数（使用负值表示没有限制）
+#        max-wait: -1ms  # 连接池最大阻塞等待时间（使用负值表示没有限制)
+#        max-idle: 8  # 连接池中的最大空闲连接
+#        min-idle: 0  # 连接池中的最小空闲连接
+
+eureka:
+  port: 8400
+  instance:
+    hostname: 127.0.0.1              #设置当前实例的主机名称
+    prefer-ip-address: true         #是否将IP注册到服务注册中心
+    status-page-url: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/actuator/info         #状态页面的URL，绝对路径
+    health-check-url: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/actuator/health      #健康检查页面的URL，绝对路径
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${eureka.port}/eureka/  #服务注册中心地址
+
