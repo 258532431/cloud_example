@@ -7,7 +7,6 @@ import com.cloud.common.entity.ResponseMessage;
 import com.cloud.common.enums.ResponseCodeEnum;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.user.constant.UserConstants;
-import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -35,7 +34,6 @@ import javax.servlet.http.HttpServletResponse;
 @EnableFeignClients
 @EnableCircuitBreaker //开启断路器功能
 @EnableTransactionManagement   //启用事务管理
-@EnableDistributedTransaction  //LCN分布式事务参与方
 @Slf4j
 @ComponentScan({"org.activiti.rest.diagram", "com.cloud.activiti"})
 public class CloudActivitiApplication implements WebMvcConfigurer {

@@ -7,7 +7,6 @@ import com.cloud.user.entity.Leave;
 import com.cloud.user.server.feign.ActivitiFeign;
 import com.cloud.user.server.mapper.LeaveMapper;
 import com.cloud.user.server.service.LeaveService;
-import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +22,6 @@ import java.util.Map;
  * @create: 2019-05-31 16:03
  */
 @Service
-@Transactional
 public class LeaveServiceImpl extends BaseServiceImpl<Leave> implements LeaveService {
 
     @Resource
@@ -32,7 +30,7 @@ public class LeaveServiceImpl extends BaseServiceImpl<Leave> implements LeaveSer
     @Resource
     private ActivitiFeign activitiFeign;
 
-    @LcnTransaction
+    @Transactional
     @Override
     public int insertSelective(Leave leave) {
         int result = leaveMapper.insertSelective(this.setEntity(leave));

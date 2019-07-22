@@ -6,7 +6,6 @@ import com.cloud.common.enums.ResponseCodeEnum;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.user.constant.UserConstants;
 import com.cloud.user.server.utils.RedisUtils;
-import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +32,6 @@ import javax.servlet.http.HttpServletResponse;
 @EnableFeignClients
 @EnableCircuitBreaker //开启断路器功能
 @EnableTransactionManagement   //启用事务管理
-@EnableDistributedTransaction  //LCN分布式事务参与方
 @MapperScan({"com.cloud.user.server.mapper"})
 @Slf4j
 public class CloudUserServerApplication implements WebMvcConfigurer {
