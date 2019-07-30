@@ -134,13 +134,14 @@ public class RedisUtils {
      */
     public boolean lock(String key, String value){
         ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
-        if(ops.setIfAbsent(key, value)){//分布式锁 如果不存在KEY就保存value并返回1，如果存在就返回0
+        if(ops.setIfAbsent(key, value)){//如果key值不存在，则返回 true，且设置 value
             return true;
         }
-        //如果锁超时
+        ////获取key的值，判断是是否超时
         String currentValue = stringRedisTemplate.opsForValue().get(key);
         if(!StringUtils.isBlank(currentValue) && Long.parseLong(currentValue) < System.currentTimeMillis()){
-            //获取上一个锁的时间
+            //获得之前的key值，同时设置当前的传入的value。这个地方可能几个线程同时过来，但是redis本身天然是单线程的，所以getAndSet方法还是会安全执行，
+            //首先执行的线程，此时curVal当然和oldVal值相等，因为就是同一个值，之后该线程set了自己的value，后面的线程就取不到锁了
             String oldValue  = stringRedisTemplate.opsForValue().getAndSet(key, value);
             if(!StringUtils.isEmpty(oldValue) && oldValue.equals(currentValue)){
                 return true;
