@@ -14,7 +14,7 @@
 4、zuul路由转发（zuul默认使用ribbon做负载均衡）        
 5、feign服务接口调用，hystrix熔断机制，ribbon负载均衡   
 6、swagger api接口展示（dev环境地址：http://127.0.0.1:8410/swagger-ui.html）       
-7、tx-lcn分布式事务https://www.txlcn.org/zh-cn/docs/start.html             
+7、tx-lcn分布式事务(会导致系统性能下降，建议通过中间件和补偿机制实现事务)https://www.txlcn.org/zh-cn/docs/start.html             
 8、activiti工作流(调用swagger接口创建新模型会自动建表)        
 
 # redis单机配置     
